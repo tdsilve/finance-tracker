@@ -11,6 +11,8 @@ This application helps to manage the income and expenses of the user.
     - ExpressJS
     - MongoDB (Mongoose)
    
-    Note: The information was saved by using a HTTP restful API. 
+ ## How to run this API?
+ 1. Run `npm install` to install all dependencies.
+ 3. Run `npm start` to start the app.
 
 
