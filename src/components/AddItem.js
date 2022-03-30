@@ -1,12 +1,16 @@
 import React from 'react'
 
 export default function AddItem() {
+  function handleSubmit(e){
+    e.preventDefault();
+  }
+
   return (
       
-      <form className='p-3 '>
+      <form className='p-3 ' onSubmit = {handleSubmit}>
       <h2 className='text-center mt-2'>Add a Transaction</h2>
         <div className='form-group'>
-          <label className='mb-2'>Type:</label>
+          <label className='mb-2'>Type of Transaction:</label>
           <select className='form-select'>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
@@ -31,7 +35,7 @@ export default function AddItem() {
           <input type='number'className='form-control' required></input>
         </div>
         <div className='text-center'>
-          <button className='btn btn-primary mt-3'>Save</button>
+          <input type="submit" value="Save" className='btn btn-primary mt-3'/>
         </div>
         
       </form>

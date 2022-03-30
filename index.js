@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-const path = require('path');
 
 //Set up express app
 const app = express();
@@ -11,7 +10,7 @@ mongoose.connect('mongodb://localhost/transactions');
 mongoose.Promise = global.Promise;
 
 //Connect to front end
-app.use(express.static('public'));
+app.use('/static', express.static(__dirname + '/public'));
 app.use(bodyParser.json())
 
 /*Set '/api'as the first parameter and import routes from api.js*/
