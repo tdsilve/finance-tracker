@@ -5,6 +5,10 @@ const mongoose = require('mongoose');
 //Set up express app
 const app = express();
 
+
+const cors = require('cors');
+app.use(cors());
+
 //Connect to mongodb
 mongoose.connect('mongodb://localhost/transactions');
 mongoose.Promise = global.Promise;

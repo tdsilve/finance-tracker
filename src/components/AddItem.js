@@ -1,9 +1,40 @@
-import React from 'react'
+import React, {useState} from 'react';
 
 export default function AddItem() {
-  function handleSubmit(e){
+  const defaultValues = {
+    empty: '',
+    type: 'income',
+    booleanDefault:false,
+    category: 'salary'
+  };
+
+  const [value, setValue] = useState(defaultValues.empty);
+  const [description, setDescription] = useState(defaultValues.empty);
+  const [type, setType] = useState(defaultValues.type);
+  const [category, setCategory] = useState(defaultValues.category);
+  const [isPending, setIsPending] = useState(defaultValues.booleanDefault);
+  
+  const handleSubmit =  (e) =>{
     e.preventDefault();
-  }
+    const userInput = {type, category, description, value};
+    
+    setIsPending(true);
+
+    fetch('http://localhost:5001/api/transactions', {
+     method: 'POST',
+     headers: {'Content-type': "application/json"},
+     body: JSON.stringify(userInput)
+   }).then(res => {
+     console.log(res);
+     //Set values to default
+     setValue(defaultValues.empty);
+     setDescription(defaultValues.empty);
+     setType(defaultValues.type);
+     setCategory(defaultValues.category);
+     setIsPending(defaultValues.booleanDefault);
+   });
+   
+  };
 
   return (
       
@@ -11,33 +42,33 @@ export default function AddItem() {
       <h2 className='text-center mt-2'>Add a Transaction</h2>
         <div className='form-group'>
           <label className='mb-2'>Type of Transaction:</label>
-          <select className='form-select'>
+          <select className='form-select' value={type} onChange={(e) => setType(e.target.value)}>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
         </div>
         <div className='mt-3 form-group'>
           <label className='mb-2'>Category:</label>
-          <select className='form-select'>
-            <option value="income">Salary</option>
-            <option value="expense">Food</option>
-            <option value="expense">Transport</option>
-            <option value="expense">House</option>
-            <option value="expense">Other</option>
+          <select className='form-select' value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="salary">Salary</option>
+            <option value="food">Food</option>
+            <option value="transport">Transport</option>
+            <option value="house">House</option>
+            <option value="other">Other</option>
           </select>
         </div>
         <div className='mt-3 form-group'>
           <label className='mb-2'>Description:</label>
-          <input type='text' className='form-control' required></input>
+          <input type='text' className='form-control' required value={description} onChange={(e) => setDescription(e.target.value)}></input>
         </div>
         <div className='mt-3 form-group'>
           <label className='mb-2'>Value:</label>
-          <input type='number'className='form-control' required></input>
+          <input type='number'className='form-control' required value={value} onChange={(e) => setValue(+e.target.value)}></input>
         </div>
         <div className='text-center'>
-          <input type="submit" value="Save" className='btn btn-primary mt-3'/>
+        {!isPending && <button type="submit" className='btn btn-primary mt-3'>Add Transaction</button>}
+        {isPending && <button type="submit" className='btn btn-primary mt-3' disabled>Adding...</button>}
         </div>
-        
       </form>
   )
 }

@@ -2,6 +2,11 @@ const express = require("express");
 const Transactions = require("../modules/transactions");
 const router = express.Router();
 
+const { application } = require("express");
+
+
+
+
 //get a list of transactions
 router.get("/transactions", function (req, res, next) {
   // res.send({ type: "GET" });
