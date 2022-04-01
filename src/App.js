@@ -1,15 +1,17 @@
 import AddItem from "./components/AddItem";
 import Balance from "./components/Balance";
-import Table from "./components/Table";
+import Data from './components/Data';
+
 
 function App() {
   return (
-    <div className="container p-3 justify-content-center">
+  <div className="container p-3 justify-content-center">
       <h1 className='text-center'>My Finance Planner</h1>
         <Balance/>
         <AddItem/>
-        <Table/>
+        <Data/> 
     </div>
+  
   );
 }
 

@@ -32,7 +32,7 @@ export default function AddItem() {
      setType(defaultValues.type);
      setCategory(defaultValues.category);
      setIsPending(defaultValues.booleanDefault);
-   });
+   }).catch(error => console.log(error));
    
   };
 
@@ -66,6 +66,7 @@ export default function AddItem() {
           <input type='number'className='form-control' required value={value} onChange={(e) => setValue(+e.target.value)}></input>
         </div>
         <div className='text-center'>
+         {/* Disable the button if it is processing the request, and enable otherwise */}
         {!isPending && <button type="submit" className='btn btn-primary mt-3'>Add Transaction</button>}
         {isPending && <button type="submit" className='btn btn-primary mt-3' disabled>Adding...</button>}
         </div>

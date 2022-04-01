@@ -43,4 +43,8 @@ input[type=number] {
   }
   thead{
     border-bottom: 1px solid #333;
+    text-transform: uppercase;
+  }
+  tbody{
+    text-transform: capitalize;
   }
