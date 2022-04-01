@@ -7,9 +7,17 @@ const { application } = require("express");
 //get a list of transactions
 router.get("/transactions/", function (req, res, next) {
   // res.send({ type: "GET" });
+  // const queryParam = req.query; 
+  // console.log(queryParam);
   Transactions.find({}).then(function(transactions){
     res.send(transactions);
   })
+});
+
+router.post("/transactions/filter", function (req, res) {
+  res.send(req.params);
+  
+  // Transactions.find({})
 });
 
 //get a new transaction
