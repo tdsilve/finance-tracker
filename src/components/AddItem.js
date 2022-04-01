@@ -17,7 +17,6 @@ export default function AddItem() {
   const handleSubmit =  (e) =>{
     e.preventDefault();
     const userInput = {type, category, description, value};
-    
     setIsPending(true);
 
     fetch('http://localhost:5001/api/transactions', {

@@ -35,10 +35,13 @@ function TableBody({columns, database}){
   for (let key in database){
     let content = []
     columns.map((column) => content.push(database[key][column]));
+    //Display a positive expense
+    if (database[key]['type'] === 'expense' && database[key]['value'] > 0){
+      database[key]['value'] *= -1;
+    }
     contents.push(content);
   }
 
-  console.log(contents);
   return (
     <tbody className='table-hover text-black'>
       {contents.map((row, index) => <tr key={index}>{row.map((data) => <td>{data}</td>)}</tr>)}
@@ -62,4 +65,6 @@ function isFirstCharracterALetter(value){
   //Return true if the first character of value is a character, false otherwise
   return (/[a-zA-Z]/).test(value[0]);
 }
+
+
 

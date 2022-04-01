@@ -21,6 +21,7 @@ export default function Data() {
         <h6>Filter</h6>
         <input type="text" value={q} onChange={(e) => setQ(e.target.value)}/>
       </div>
+     {/* <Table data={data}/> */}
      <div>
       <Table database={data}/>
      </div>
