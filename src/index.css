@@ -48,3 +48,11 @@ input[type=number] {
   tbody{
     text-transform: capitalize;
   }
+   
+  /* Set first and last column of table to display none */
+   th:first-child,
+   th:last-child,
+   td:first-child,
+   td:last-child{
+    display: none;
+  }

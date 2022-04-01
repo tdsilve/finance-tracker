@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function Table({database}) {
 
-  const columns = filterKeys(database[0]);
-
+ const columns = setColumns(database[0]);
+// OBS: the first and last columns are set to display none in index.css
   return (
     <div className='d-flex align-items-center flex-column mt-3'>
       <table className='table table-striped text-center'>
@@ -49,17 +49,15 @@ function TableBody({columns, database}){
   )
 }
 
-function filterKeys(data){
-  //Receives an object and return an array of keys. The first letter must be a character. 
-
+function setColumns(data){
+  //Receive an object and return a list of keys
   const arrayOfKeys = [];
   for (let key in data){
-    if (isFirstCharracterALetter(key)){
-      arrayOfKeys.push(key);
-    }
+    arrayOfKeys.push(key);
   }
   return arrayOfKeys;
 }
+
 
 function isFirstCharracterALetter(value){
   //Return true if the first character of value is a character, false otherwise
