@@ -34,6 +34,7 @@ app.listen(5001, function(){
 
 app.get('/', function(req, res){
   console.log('Ready!');
+  res.render('/', {qs: req.query});
   res.send({name: 'Ready!'});
 })
 

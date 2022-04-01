@@ -18,7 +18,6 @@ export default function AddItem() {
     e.preventDefault();
     const userInput = {type, category, description, value};
     setIsPending(true);
-
     fetch('http://localhost:5001/api/transactions', {
      method: 'POST',
      headers: {'Content-type': "application/json"},
@@ -35,9 +34,10 @@ export default function AddItem() {
    
   };
 
+
   return (
       
-      <form className='p-3 ' onSubmit = {handleSubmit}>
+      <form className='p-3 bg-grey' onSubmit = {handleSubmit}>
       <h2 className='text-center mt-2'>Add a Transaction</h2>
         <div className='form-group'>
           <label className='mb-2'>Type of Transaction:</label>

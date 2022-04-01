@@ -4,11 +4,8 @@ const router = express.Router();
 
 const { application } = require("express");
 
-
-
-
 //get a list of transactions
-router.get("/transactions", function (req, res, next) {
+router.get("/transactions/", function (req, res, next) {
   // res.send({ type: "GET" });
   Transactions.find({}).then(function(transactions){
     res.send(transactions);

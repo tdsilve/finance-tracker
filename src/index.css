@@ -36,10 +36,12 @@ input[type=number] {
   }
 
   form{
-    --clr: 203;
-    background-color: rgb(var(--clr),var(--clr),var(--clr));
     color: #333;
     margin: 0 auto;
+  }
+  .bg-grey{
+    --clr: 203;
+    background-color: rgb(var(--clr),var(--clr),var(--clr));
   }
   thead{
     border-bottom: 1px solid #333;
