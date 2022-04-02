@@ -39,29 +39,29 @@ input[type=number] {
     color: #333;
     margin: 0 auto;
   }
-
   .bg-grey{
     --clr: 203;
     background-color: rgb(var(--clr),var(--clr),var(--clr));
   }
   thead{
-    border-bottom: 1px solid #333;
     text-transform: uppercase;
   }
   tbody{
     text-transform: capitalize;
   }
-   
-  /* Set first and last column of table to display none */
-   th:first-child,
-   th:last-child,
-   td:first-child,
-   td:last-child{
-    display: none;
+  tbody tr:hover{
+    background-color: rgb(158, 158, 158);
   }
-
+   
   .atention{
     font-size: 2rem;
     text-align: center;
     color: #f00;
   }
+
+  a{
+    text-decoration: none;
+    cursor: pointer;
+
+  }
+ 

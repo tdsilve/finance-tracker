@@ -1,18 +1,15 @@
 import React from 'react'
 import '../index.css';
 
-
-
 export default function Balance({data}) {
 
-  const bankBalance = getBalance(data, 'income');
+  let bankBalance = getBalance(data, 'income');
   let expenses = getBalance(data, 'expense') * -1;
-
   let remain = bankBalance + expenses;
 
   return (
     <div className='d-flex flex-wrap m-3 text-center balances-bg-color text-white'>
-        <BalanceDisplay title={'Income'} value={bankBalance}/>
+        <BalanceDisplay title={'Income'} value={bankBalance} className="bg-danger"/>
         <BalanceDisplay title={'Expenses'} value={expenses}/>
         <BalanceDisplay title={'Remain'} value={remain}/>
     </div>
@@ -28,14 +25,14 @@ function BalanceDisplay(props){
   )
 }
 
-
 function getBalance(data, result){
-  let aux = 0
+  //Update the value of balance and expenses
+  let total = 0
   for(let key in data){
     if (data[key].type === result)
     {
-      aux+= data[key].value
+      total+= data[key].value
     }
   }
-  return aux;
+  return total;
 }

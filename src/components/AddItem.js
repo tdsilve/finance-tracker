@@ -23,7 +23,7 @@ export default function AddItem() {
      headers: {'Content-type': "application/json"},
      body: JSON.stringify(userInput)
    }).then(res => {
-     console.log(res);
+    //  console.log(res);
      //Set values to default
      setValue(defaultValues.empty);
      setDescription(defaultValues.empty);
@@ -33,7 +33,6 @@ export default function AddItem() {
    }).catch(error => console.log(error));
    
   };
-
 
   return (
       

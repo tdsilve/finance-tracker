@@ -5,60 +5,56 @@ const router = express.Router();
 const { application } = require("express");
 
 //get a list of transactions
-router.get("/transactions", function (req, res, next) {
-  
+// router.get("/transactions/", function (req, res, next) {
+//   let query = {value: 100};
+//   Transactions.find({query}).then(function(transactions){
+//     res.send(transactions);
+//   })
+// });
 
-  Transactions.find({}).then(function(transactions){
+//TODO
+router.get("/transactions/", function (req, res, next) {
+  let query = {...req.query};
+  Transactions.find(query).then(function (transactions) {
     res.send(transactions);
-    // res.send(req.query)
-  })
+    // Transactions.find(query).then(function(transactions){
+    //   res.send(resultBd);
+  });
 });
-
-router.get('/transactions/:id', function(req, res, next){
-  const value = req.params.id;
-  Transactions.find({}).then(function(transactions){
-    res.send(transactions);
-  // Transactions.find(query).then(function(transactions){
-  //   res.send(resultBd);
-  })
-  
-})
-
+ 
 router.post("/transactions/filter", function (req, res) {
   res.send(req.params);
-  
-  // Transactions.find({})
 });
 
 //get a new transaction
 router.post("/transactions", function (req, res, next) {
-  // console.log(req.body);
-  Transactions.create(req.body).then(function(transaction){
-    res.send(transaction);
-  }).catch(next);
-  // res.send({ type: "POST", name: req.body.name, rank: req.body.rank })
+  Transactions.create(req.body)
+    .then(function (transaction) {
+      res.send(transaction);
+    })
+    .catch(next);
 });
 
 //update database
 router.put("/transactions/:id", function (req, res, next) {
-  Transactions.findByIdAndUpdate({_id: req.params.id}, req.body).then(function(transaction){
-    //Find the updated information
-    Transactions.findOne({_id: req.params.id}).then(function(transaction){
-       //Send the updated information
+  Transactions.findByIdAndUpdate({ _id: req.params.id }, req.body).then(
+    function (transaction) {
+      //Find the updated information
+      Transactions.findOne({ _id: req.params.id }).then(function (transaction) {
+        //Send the updated information
         res.send(transaction);
-    })
-   
-  });
-  // res.send({ type: "PUT" });
+      });
+    }
+  );
 });
 
 //delete a transaction from database
 router.delete("/transactions/:id", function (req, res, next) {
-  // console.log(req.params.id)
-  Transactions.findByIdAndRemove({_id: req.params.id}).then(function(transaction){
+  Transactions.findByIdAndRemove({ _id: req.params.id }).then(function (
+    transaction
+  ) {
     res.send(transaction);
   });
-  // res.send({ type: "DELETE" });
 });
 
 //Export routers
