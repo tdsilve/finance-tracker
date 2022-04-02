@@ -39,6 +39,7 @@ input[type=number] {
     color: #333;
     margin: 0 auto;
   }
+
   .bg-grey{
     --clr: 203;
     background-color: rgb(var(--clr),var(--clr),var(--clr));
@@ -57,4 +58,10 @@ input[type=number] {
    td:first-child,
    td:last-child{
     display: none;
+  }
+
+  .atention{
+    font-size: 2rem;
+    text-align: center;
+    color: #f00;
   }

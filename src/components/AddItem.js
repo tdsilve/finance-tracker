@@ -38,16 +38,16 @@ export default function AddItem() {
   return (
       
       <form className='p-3 bg-grey' onSubmit = {handleSubmit}>
-      <h2 className='text-center mt-2'>Add a Transaction</h2>
+      <h2 className='text-center'>Add a Transaction</h2>
         <div className='form-group'>
-          <label className='mb-2'>Type of Transaction:</label>
+          <label className='m-2'>Type of Transaction:</label>
           <select className='form-select' value={type} onChange={(e) => setType(e.target.value)}>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
         </div>
-        <div className='mt-3 form-group'>
-          <label className='mb-2'>Category:</label>
+        <div className='mb-2 form-group'>
+          <label className='m-2'>Category:</label>
           <select className='form-select' value={category} onChange={(e) => setCategory(e.target.value)}>
             <option value="salary">Salary</option>
             <option value="food">Food</option>
@@ -56,13 +56,13 @@ export default function AddItem() {
             <option value="other">Other</option>
           </select>
         </div>
-        <div className='mt-3 form-group'>
+        <div className='form-group'>
           <label className='mb-2'>Description:</label>
           <input type='text' className='form-control' required value={description} onChange={(e) => setDescription(e.target.value)}></input>
         </div>
-        <div className='mt-3 form-group'>
-          <label className='mb-2'>Value:</label>
-          <input type='number'className='form-control' required value={value} onChange={(e) => setValue(+e.target.value)}></input>
+        <div className='form-group'>
+          <label className='m-2'>Value:</label>
+          <input type='number'className='form-control' required value={value} onChange={(e) => setValue(e.target.value)}></input>
         </div>
         <div className='text-center'>
          {/* Disable the button if it is processing the request, and enable otherwise */}

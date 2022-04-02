@@ -5,14 +5,24 @@ const router = express.Router();
 const { application } = require("express");
 
 //get a list of transactions
-router.get("/transactions/", function (req, res, next) {
-  // res.send({ type: "GET" });
-  // const queryParam = req.query; 
-  // console.log(queryParam);
+router.get("/transactions", function (req, res, next) {
+  
+
   Transactions.find({}).then(function(transactions){
     res.send(transactions);
+    // res.send(req.query)
   })
 });
+
+router.get('/transactions/:id', function(req, res, next){
+  const value = req.params.id;
+  Transactions.find({}).then(function(transactions){
+    res.send(transactions);
+  // Transactions.find(query).then(function(transactions){
+  //   res.send(resultBd);
+  })
+  
+})
 
 router.post("/transactions/filter", function (req, res) {
   res.send(req.params);

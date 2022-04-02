@@ -4,6 +4,11 @@ export default function Table({database}) {
 
  const columns = setColumns(database[0]);
 
+  if(isTableEmpty(database)){
+    return <p className='text-center mt-4 bg-danger p-3 text-white'>NO DATA!</p>
+  }
+ 
+
   return (
     <div className='d-flex align-items-center flex-column mt-3'>
       <table className='table table-striped text-center'>
@@ -35,7 +40,7 @@ function TableBody({columns, database}){
   for (let key in database){
     let content = []
     columns.map((column) => content.push(database[key][column]));
-    //Display a positive expense
+    //Display a negative expense
     if (database[key]['type'] === 'expense' && database[key]['value'] > 0){
       database[key]['value'] *= -1;
     }
@@ -56,4 +61,8 @@ function setColumns(data){
     arrayOfKeys.push(key);
   }
   return arrayOfKeys;
+}
+
+function isTableEmpty(database){
+  return !database.length;
 }
