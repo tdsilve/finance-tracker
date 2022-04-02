@@ -4,28 +4,19 @@ const router = express.Router();
 
 const { application } = require("express");
 
-//get a list of transactions
-// router.get("/transactions/", function (req, res, next) {
-//   let query = {value: 100};
-//   Transactions.find({query}).then(function(transactions){
-//     res.send(transactions);
-//   })
-// });
-
-//TODO
 router.get("/transactions/", function (req, res, next) {
   let query = {...req.query};
+  //Set description to lowercase
+  if (req.query.description){
+    req.query.description = req.query.description.toLocaleLowerCase();
+  }
+  console.log(req.query);
   Transactions.find(query).then(function (transactions) {
     res.send(transactions);
-    // Transactions.find(query).then(function(transactions){
-    //   res.send(resultBd);
   });
 });
  
-router.post("/transactions/filter", function (req, res) {
-  res.send(req.params);
-});
-
+ 
 //get a new transaction
 router.post("/transactions", function (req, res, next) {
   Transactions.create(req.body)
