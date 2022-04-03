@@ -7,7 +7,7 @@ const path = "http://localhost:5001/api/transactions?";
 export default function Filter() {
   const [queryDescription, setQueryDescription] = useState('');
   const [queryValue, setQueryValue] = useState('');
-  const [queryCategory, setQueryCategory] = useState('salary');
+  const [queryCategory, setQueryCategory] = useState('');
   const [data, setData] = useState([]);
 
   function handleSubmit(e){
@@ -39,6 +39,7 @@ export default function Filter() {
       <input type="number" value={queryValue} onChange={(e) => setQueryValue(e.target.value)}  className='form-control'/>
       <label className='m-2'>Category:</label>
       <select className='form-select' value={queryCategory} onChange={(e) => setQueryCategory(e.target.value)}>
+        <option value="">Category</option>
         <option value="salary">Salary</option>
         <option value="food">Food</option>
         <option value="transport">Transport</option>
