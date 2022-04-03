@@ -30,13 +30,14 @@ This application helps to manage the income and expenses of the user. The transa
  ### Errors
 This API raise exceptions for many reasons, such as missing required field, network unavailability, etc.
  
- For example: There are 4 required fields: type, categories, escription and value, if one of them is missing the response will be: 
+ For example, there are 4 required fields: type, categories, escription and value, if one of them is missing the response will be: 
  
  ```
  {
     "error": "transactions validation failed: value: Number field required, description: Description field required, category: Category field required, "NAME OF THE REQUIRED FIELD": Type field required"
 }
 ```
+
 
 ### Parameters
 This API has the following parameters:
@@ -78,7 +79,50 @@ The API has no required parameters and the user can request information by input
       }
       
 ```
+Example request:
+GET
 
+http://localhost:5001/api/transactions?value=50&category=food
 
+Response:
 
+```
+[
+    {
+        "_id": "6248e768b8c138906eb279a7",
+        "type": "expense",
+        "category": "food",
+        "description": "ifood",
+        "value": 50,
+        "__v": 0
+    }
+]
+```
+
+ ## Add a new information
+ POST
+ 
+ http://localhost:5001/api/transactions
+ 
+ User input
+ ```
+    {
+        "type": "income",
+        "category": "house",
+        "description": "rent",
+        "value": 1000
+    }
+ ```
+ Result:
+ ```
+ {
+    "type": "income",
+    "category": "house",
+    "description": "rent",
+    "value": 1000,
+    "_id": "6248fbc7351cfdb8c6b1ab5d",
+    "__v": 0
+}
+ ```
+ 
  
