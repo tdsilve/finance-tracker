@@ -1,5 +1,4 @@
 import React from 'react'
-import '../index.css';
 
 export default function Balance({data}) {
 
@@ -8,17 +7,17 @@ export default function Balance({data}) {
   let remain = bankBalance + expenses;
 
   return (
-    <div className='d-flex flex-wrap m-3 text-center balances-bg-color text-white'>
-        <BalanceDisplay title={'Income'} value={bankBalance} className="bg-danger"/>
-        <BalanceDisplay title={'Expenses'} value={expenses}/>
-        <BalanceDisplay title={'Remain'} value={remain}/>
+    <div className='d-flex flex-wrap m-3 text-center text-white'>
+        <BalanceDisplay title={'Income'} value={bankBalance} class="bg-success"/>
+        <BalanceDisplay title={'Expenses'} value={expenses} class="bg-danger"/>
+        <BalanceDisplay title={'Remain'} value={remain} class="bg-primary"/>
     </div>
   )
 }
 
 function BalanceDisplay(props){
   return (
-    <div className='card-body m-1'>
+    <div className={`card-body m-1 p-2 ${props.class}`}>
       <h2 className='card-title'>{props.title}:</h2>
       <span className='card-text'>${props.value}</span>
     </div>

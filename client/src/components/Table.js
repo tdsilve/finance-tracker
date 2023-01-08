@@ -20,7 +20,6 @@ export default function Table({database}) {
 }
 
 function TableHead({columns, database}){
-  //Return table's head
   return(
         <tr>
             {columns.map((column, index) => <th className='text-capitalize' key={index}>{column}</th>)}
@@ -41,7 +40,7 @@ function TableBody({columns, database}){
   }
   return (
     <tbody className='table-hover text-black'>
-      {contents.map((row, index) => <tr key={index}>{row.map((data, index) => <td key={index}>{data}</td>)}</tr>)}
+      {contents.map((row, index) => <tr className='text-capitalize' key={index}>{row.map((data, index) => <td key={index}>{data}</td>)}</tr>)}
     </tbody>
   )
 }
@@ -55,7 +54,6 @@ function setColumns(data){
     {
       columnsName.push(key);
     }
-   
   }
   return columnsName;
 }

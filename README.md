@@ -21,7 +21,7 @@ This application helps to manage the income and expenses of the user. The transa
     Note: In your browser, navigate to: http://localhost:3000/ 
 
  ## How to run the backend with nodemon?
- 1. Run `npm run dev`.
+ 1. Run `npm run start`.
 
  ## About the API
  ### API Reference
@@ -124,5 +124,3 @@ Response:
     "__v": 0
 }
  ```
- 
- 

@@ -23,10 +23,9 @@ export default function Filter() {
     if (queryDescription){
       endpoint += `&description=${queryDescription}`;
     }
-    console.log(endpoint);
     axios.get(endpoint).then(res => {setData(res.data)})
       .catch(error => console.log(error)); 
-     
+
   }
   return (
     <div className='m-4'>
