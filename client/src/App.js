@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <div className="App">
-        <Router>
+      <Router>
       <Navbar/>
       <h1 className='text-center'>My Personal Finance Tracker</h1>
      <Routes>

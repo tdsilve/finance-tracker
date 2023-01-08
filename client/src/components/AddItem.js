@@ -23,7 +23,6 @@ export default function AddItem() {
      headers: {'Content-type': "application/json"},
      body: JSON.stringify(userInput)
    }).then(res => {
-    //  console.log(res);
      //Set values to default
      setValue(defaultValues.empty);
      setDescription(defaultValues.empty);
@@ -35,7 +34,6 @@ export default function AddItem() {
   };
 
   return (
-      
       <form className='p-3 bg-grey' onSubmit = {handleSubmit}>
       <h2 className='text-center'>Add a Transaction</h2>
         <div className='form-group'>

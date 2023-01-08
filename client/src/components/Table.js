@@ -14,9 +14,7 @@ export default function Table({database}) {
           <TableHead database={database} columns={columns}/>
         </thead>
           <TableBody database={database} columns={columns}/>
-
       </table>
-  
     </div>  
   )
 }
@@ -25,7 +23,7 @@ function TableHead({columns, database}){
   //Return table's head
   return(
         <tr>
-            {columns.map((column, index) => <th key={index}>{column}</th>)}
+            {columns.map((column, index) => <th className='text-capitalize' key={index}>{column}</th>)}
         </tr> 
   )
 }
