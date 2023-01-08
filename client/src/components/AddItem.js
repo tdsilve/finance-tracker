@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {useState} from 'react';
 
 export default function AddItem() {
@@ -18,10 +19,11 @@ export default function AddItem() {
     e.preventDefault();
     const userInput = {type, category, description, value};
     setIsPending(true);
-    fetch('http://localhost:5001/api/transactions', {
-     method: 'POST',
-     headers: {'Content-type': "application/json"},
-     body: JSON.stringify(userInput)
+    axios.post('http://localhost:5001/api/transactions', {
+     value: value,
+     description: description,
+     type: type,
+     category: category
    }).then(res => {
      //Set values to default
      setValue(defaultValues.empty);
