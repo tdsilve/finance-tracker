@@ -9,7 +9,7 @@
         - Add login/auth 
 
     -> Front:
-        - Change Rext to Next
+        - Change React to Next
         - Add Typescript
         - Improve code file system
         - Add login/auth
