@@ -5,11 +5,15 @@
     -> Server:
         - Add typescript
         - Update node
+        - Add user data
+        - Add login/auth 
 
     -> Front:
         - Change Rext to Next
         - Add Typescript
         - Improve code file system
+        - Add login/auth
+        - Add finance data for each user
 
 This application helps to manage the income and expenses of the user. The transactions are saved on the backend using a HTTP restful API. 
 
