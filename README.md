@@ -1,5 +1,16 @@
 # Personal Finance Tracker
 
+# Updating this project:
+
+    -> Server:
+        - Add typescript
+        - Update node
+
+    -> Front:
+        - Change Rext to Next
+        - Add Typescript
+        - Improve code file system
+
 This application helps to manage the income and expenses of the user. The transactions are saved on the backend using a HTTP restful API. 
 
 ## Info
