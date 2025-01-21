@@ -4,6 +4,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import router from "./router";
 import dotenv from 'dotenv';
+import 'module-alias/register';
+
 
 // Load environment variables from .env file
 dotenv.config();

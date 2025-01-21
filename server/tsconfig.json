@@ -2,9 +2,14 @@
     "compilerOptions": {
         "module": "node16",
         "moduleResolution": "Node16",
-        "baseUrl": "src",
+        "baseUrl": ".",
         "outDir": "dist",
-        "sourceMap": true
+        "sourceMap": true,
+        "paths": {
+          "~/*": [
+            "src/*"
+          ]
+        },
     },
     "include": [
         "src/**/*.ts",
@@ -12,10 +17,5 @@
       ],
       "exclude": [
         "node_modules"
-      ],
-      "paths": {
-      "~/*": [
-        "./src/*"
       ]
-    }
 }
