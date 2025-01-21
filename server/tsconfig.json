@@ -1,21 +1,19 @@
 {
-    "compilerOptions": {
-        "module": "node16",
-        "moduleResolution": "Node16",
-        "baseUrl": ".",
-        "outDir": "dist",
-        "sourceMap": true,
-        "paths": {
-          "~/*": [
-            "src/*"
-          ]
-        },
-    },
-    "include": [
-        "src/**/*.ts",
-        "**/*.ts",
-      ],
-      "exclude": [
-        "node_modules"
-      ]
+  "compilerOptions": {
+    "module": "node16",
+    "moduleResolution": "Node16",
+    "baseUrl": "./src",
+    "outDir": "dist",
+    "sourceMap": true,
+    "paths": {
+      "/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

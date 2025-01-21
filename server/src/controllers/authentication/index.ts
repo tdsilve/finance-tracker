@@ -2,7 +2,6 @@ import express from "express";
 import { createUser, getUserByEmail } from "../../db/model/users";
 import { authentication, random } from "../../db/helpers";
 import { SESSION_TOKEN } from "../../const";
-import {merge} from "lodash"
 
 
 export const register = async (req: express.Request, res: express.Response) => {
@@ -49,11 +48,12 @@ export const login = async (req: express.Request, res: express.Response) => {
         const salt = random();
         user.authentication.sessionToken = authentication(salt, user._id.toString());
         await user.save();
-        res.cookie(SESSION_TOKEN, user.authentication.sessionToken, {httpOnly: true});
-        return res.status(200).json({message: "User logged in"});
+        res.cookie(SESSION_TOKEN, user.authentication.sessionToken, { domain: "localhost", path: '/'});
+        return res.status(200).json(user);
 
     } catch (error) {
         console.log("login error: ", error);
         return res.status(500).json({ message: "Could not login user" });
     }
 }
+

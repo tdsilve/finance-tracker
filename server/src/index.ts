@@ -4,7 +4,6 @@ import cors from "cors";
 import mongoose from "mongoose";
 import router from "./router";
 import dotenv from 'dotenv';
-import 'module-alias/register';
 
 
 // Load environment variables from .env file
@@ -33,4 +32,4 @@ mongoose.connect(MONGO_URL).then(() => {
     console.log("MongoDB error: ", err);
 })
 
-app.use("/", router())
+app.use("/", router());
