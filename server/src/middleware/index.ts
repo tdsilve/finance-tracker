@@ -1,7 +1,7 @@
 import express from "express"
 import { getUserBySessionToken } from "../db/model/users";
 import { SESSION_TOKEN } from "../const";
-import { get, identity, merge } from "lodash";
+import { get, merge } from "lodash";
 
 export const isAuthenticated = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {

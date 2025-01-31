@@ -1,7 +1,8 @@
 import express from "express";
-import { createUser, getUserByEmail } from "../../db/model/users";
+import { createUser, getUserByEmail, getUserBySessionToken, updateUserById } from "../../db/model/users";
 import { authentication, random } from "../../db/helpers";
 import { SESSION_TOKEN } from "../../const";
+import { get } from "lodash";
 
 
 export const register = async (req: express.Request, res: express.Response) => {
@@ -48,7 +49,7 @@ export const login = async (req: express.Request, res: express.Response) => {
         const salt = random();
         user.authentication.sessionToken = authentication(salt, user._id.toString());
         await user.save();
-        res.cookie(SESSION_TOKEN, user.authentication.sessionToken, { domain: "localhost", path: '/'});
+        res.cookie(SESSION_TOKEN, user.authentication.sessionToken, { domain: process.env.domain, path: '/'});
         return res.status(200).json(user);
 
     } catch (error) {
@@ -56,4 +57,35 @@ export const login = async (req: express.Request, res: express.Response) => {
         return res.status(500).json({ message: "Could not login user" });
     }
 }
+
+export const logout = async (req: express.Request, res: express.Response) => {
+    try {
+  
+        
+        const sessionToken = req.cookies[SESSION_TOKEN];
+        if (!sessionToken) {
+            return res.status(404).json({ message: "No session token found" });
+        }
+
+        // Get user ID from middleware or session
+        const userId = get(req, "user._id");
+        if (!userId) {
+            return res.status(401).json({ message: "Unauthorized: No user found" });
+        }
+
+        res.clearCookie(SESSION_TOKEN, {
+            domain: process.env.DOMAIN, // Ensure DOMAIN is set correctly
+            path: "/",
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production", // Only secure in production
+            sameSite: "strict",
+        });
+
+        return res.status(200).json({ message: "Logged out successfully" });
+
+    } catch (error) {
+        console.error("Logout error:", error);
+        return res.status(500).json({ message: "Could not logout user" });
+    }
+};
 
