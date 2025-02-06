@@ -65,6 +65,16 @@ const props = {
   },
 };
 
+type FlexProps = {
+  inline?: boolean;
+  full?: boolean;
+  col?: boolean;
+  gap?: keyof typeof props.gap;
+  items?: keyof typeof props.items;
+  justify?: keyof typeof props.justify;
+  wrap?: BooleanStringToBoolean<keyof typeof props.wrap>;
+} & React.ComponentProps<"div">
+
 
 export const Flex = ({
   inline,
@@ -75,15 +85,7 @@ export const Flex = ({
   justify,
   wrap,
   ...divProps
-}: {
-  inline?: boolean;
-  full?: boolean;
-  col?: boolean;
-  gap?: keyof typeof props.gap;
-  items?: keyof typeof props.items;
-  justify?: keyof typeof props.justify;
-  wrap?: BooleanStringToBoolean<keyof typeof props.wrap>;
-} & React.ComponentProps<"div">) => {
+}: FlexProps) => {
   return (
     <div
       {...divProps}
