@@ -2,6 +2,7 @@ import { SignInMainImage } from "~/components/auth/sign-in/SignInMainImage";
 import { SignInForm } from "~/components/auth/sign-in/SignInForm";
 import { Heading } from "~/components/generic/Heading";
 import { Logo } from "~/components/generic/Logo";
+import Link from "next/link";
 
 export default function SignInPage() {
   return (
@@ -20,6 +21,7 @@ export default function SignInPage() {
           </p>
         </div>
         <SignInForm />
+        <div className="text-sm text-center w-full"><span className="font-thin">Don't have an account?</span> <Link href="/sign-up" className="font-bold text-primary-500">Sign up</Link></div>
       </div>
     </>
   );

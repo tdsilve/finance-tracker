@@ -15,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SignInSchema } from "~/model/schemas";
 import { Button } from "~/components/ui/button";
 import { Flex } from "~/components/generic/Flex";
+import { SignIn } from "~/model/types";
 
 export const SignInForm = () => {
   const form = useForm({
@@ -25,10 +26,14 @@ export const SignInForm = () => {
       password: "",
     },
   });
+
+  const onSubmit = (data: SignIn) => {
+    console.log(data);
+  }
   return (
 
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(console.log)} >
+      <form onSubmit={form.handleSubmit(onSubmit)} >
       <Flex col>
         <FormField
           control={form.control}
@@ -37,7 +42,7 @@ export const SignInForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} required/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -50,7 +55,7 @@ export const SignInForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} required/>
               </FormControl>
               <FormMessage />
             </FormItem>
