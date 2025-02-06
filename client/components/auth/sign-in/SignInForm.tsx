@@ -16,8 +16,10 @@ import { SignInSchema } from "~/model/schemas";
 import { Button } from "~/components/ui/button";
 import { Flex } from "~/components/generic/Flex";
 import { SignIn } from "~/model/types";
+import { useSingInMutation } from "~/api/mutation/useSigninMutation";
 
 export const SignInForm = () => {
+  const {mutate} = useSingInMutation();
   const form = useForm({
     mode: "onChange",
     resolver: zodResolver(SignInSchema),
@@ -29,6 +31,7 @@ export const SignInForm = () => {
 
   const onSubmit = (data: SignIn) => {
     console.log(data);
+    mutate(data);
   }
   return (
 
