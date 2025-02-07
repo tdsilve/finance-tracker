@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky",
-    "precommit": "yarn lint-staged"
+    "precommit": "yarn lint-staged",
+    "format": "prettier --write ."
   },
   "lint-staged": {
     "**/*{.js,.ts,.tsx}": [

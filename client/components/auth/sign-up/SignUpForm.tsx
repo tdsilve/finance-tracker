@@ -10,7 +10,7 @@ import { FormFieldWrapper } from "~/components/generic/form/FormFields";
 import { useSignUp } from "~/hooks/auth/useSignUp";
 
 export const SignUpForm = () => {
-  const {form, onSubmit, isPending} = useSignUp();
+  const { form, onSubmit, isPending } = useSignUp();
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>

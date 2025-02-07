@@ -1,8 +1,8 @@
-import '@tanstack/react-query'
-import { HTTPError } from './lib/error'
+import "@tanstack/react-query";
+import { HTTPError } from "./lib/error";
 
-declare module '@tanstack/react-query' {
+declare module "@tanstack/react-query" {
   interface Register {
-    defaultError: HTTPError
+    defaultError: HTTPError;
   }
 }

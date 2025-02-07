@@ -12,15 +12,15 @@ export default {
       colors: {
         primary: {
           DEFAULT: "#407BFF",
-          100: "#c6d9ff",  
-          200: "#93b3ff",      
-          300: "#6090ff",      
-          400: "#407bff",      
-          500: "#0066cc",  
-          600: "#0059b3",      
-          700: "#004c99",      
-          800: "#003f80",     
-          900: "#003266", 
+          100: "#c6d9ff",
+          200: "#93b3ff",
+          300: "#6090ff",
+          400: "#407bff",
+          500: "#0066cc",
+          600: "#0059b3",
+          700: "#004c99",
+          800: "#003f80",
+          900: "#003266",
           foreground: "#fff",
         },
         destructive: {
@@ -36,9 +36,7 @@ export default {
           900: "#2a0c10",
           foreground: "#fff",
         },
-      
       },
-    
     },
   },
   plugins: [require("tailwindcss-animate")],

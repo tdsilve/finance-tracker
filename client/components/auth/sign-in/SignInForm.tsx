@@ -9,7 +9,7 @@ import { FormFieldWrapper } from "~/components/generic/form/FormFields";
 import { useSignIn } from "~/hooks/auth/useSignIn";
 
 export const SignInForm = () => {
-  const {form, onSubmit, isPending} = useSignIn();
+  const { form, onSubmit, isPending } = useSignIn();
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -27,7 +27,9 @@ export const SignInForm = () => {
             renderInput={(field) => <Input {...field} type="password" />}
           />
 
-          <Button type="submit" disabled={isPending} loading={isPending}>Sign in</Button>
+          <Button type="submit" disabled={isPending} loading={isPending}>
+            Sign in
+          </Button>
         </Flex>
       </form>
     </Form>

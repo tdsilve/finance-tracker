@@ -83,7 +83,16 @@ type GridProps = {
   placeItems?: keyof typeof props.placeItems;
 } & React.ComponentProps<"div">;
 
-export const Grid = ({ cols, col, rows, gap, justify, items, placeItems, ...divProps }: GridProps) => {
+export const Grid = ({
+  cols,
+  col,
+  rows,
+  gap,
+  justify,
+  items,
+  placeItems,
+  ...divProps
+}: GridProps) => {
   return (
     <div
       {...divProps}
@@ -92,11 +101,11 @@ export const Grid = ({ cols, col, rows, gap, justify, items, placeItems, ...divP
         col && "grid-flow-col",
         cols && props.cols[cols],
         rows && props.rows[rows],
-        gap !=null && props.gap[gap],
+        gap != null && props.gap[gap],
         justify && props.justify[justify],
         items && props.items[items],
         placeItems && props.placeItems[placeItems],
-        divProps.className
+        divProps.className,
       )}
     />
   );
