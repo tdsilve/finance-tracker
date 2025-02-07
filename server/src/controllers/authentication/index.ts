@@ -52,7 +52,12 @@ export const login = async (req: express.Request, res: express.Response) => {
         const salt = random();
         user.authentication.sessionToken = authentication(salt, user._id.toString());
         await user.save();
-        res.cookie(SESSION_TOKEN, user.authentication.sessionToken, { domain: process.env.domain, path: '/'});
+        res.cookie(SESSION_TOKEN, user.authentication.sessionToken, {  
+            // domain: process.env.DOMAIN, // Ensure DOMAIN is set correctly
+            path: "/",
+            httpOnly: true,
+            // secure: process.env.NODE_ENV === "production", // Only secure in production
+            sameSite: "lax",});
         return res.status(200).json(user);
 
     } catch (error) {
@@ -77,11 +82,11 @@ export const logout = async (req: express.Request, res: express.Response) => {
         }
 
         res.clearCookie(SESSION_TOKEN, {
-            domain: process.env.DOMAIN, // Ensure DOMAIN is set correctly
+            // domain: process.env.DOMAIN, // Ensure DOMAIN is set correctly
             path: "/",
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // Only secure in production
-            sameSite: "strict",
+            // secure: process.env.NODE_ENV === "production", // Only secure in production
+            sameSite: "lax",
         });
 
         return res.status(200).json({ message: "Logged out successfully" });
