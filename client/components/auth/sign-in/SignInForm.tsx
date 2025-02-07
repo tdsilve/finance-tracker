@@ -1,70 +1,33 @@
 "use client";
 import React from "react";
-// import { Button } from "~/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
+
+import { Form } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SignInSchema } from "~/model/schemas";
 import { Button } from "~/components/ui/button";
 import { Flex } from "~/components/generic/Flex";
-import { SignIn } from "~/model/types";
-import { useSingInMutation } from "~/api/mutation/useSigninMutation";
+import { FormFieldWrapper } from "~/components/generic/form/FormFields";
+import { useSignIn } from "~/hooks/auth/useSignIn";
 
 export const SignInForm = () => {
-  const {mutate} = useSingInMutation();
-  const form = useForm({
-    mode: "onChange",
-    resolver: zodResolver(SignInSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
-  const onSubmit = (data: SignIn) => {
-    console.log(data);
-    mutate(data);
-  }
+  const {form, onSubmit, isPending} = useSignIn();
   return (
-
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} >
-      <Flex col>
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input {...field} required/>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input {...field} required/>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" >Sign in</Button>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <Flex col>
+          <FormFieldWrapper
+            control={form.control}
+            name="email"
+            label="Email"
+            renderInput={(field) => <Input {...field} />}
+          />
+          <FormFieldWrapper
+            control={form.control}
+            name="password"
+            label="Password"
+            renderInput={(field) => <Input {...field} type="password" />}
+          />
+
+          <Button type="submit" disabled={isPending} loading={isPending}>Sign in</Button>
         </Flex>
       </form>
     </Form>

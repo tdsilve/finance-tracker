@@ -6,7 +6,6 @@ import { toString } from "~/utils/string";
 
 const props = {
   gap: {
-    px: "gap-px",
     0: "gap-0",
     0.5: "gap-0.5",
     1: "gap-1",
@@ -57,7 +56,7 @@ const props = {
     around: "justify-around",
     evenly: "justify-evenly",
   },
-  wrap:  {
+  wrap: {
     true: "flex-wrap",
     wrap: "flex-wrap",
     reverse: "flex-wrap-reverse",
@@ -73,8 +72,7 @@ type FlexProps = {
   items?: keyof typeof props.items;
   justify?: keyof typeof props.justify;
   wrap?: BooleanStringToBoolean<keyof typeof props.wrap>;
-} & React.ComponentProps<"div">
-
+} & React.ComponentProps<"div">;
 
 export const Flex = ({
   inline,
@@ -97,7 +95,7 @@ export const Flex = ({
         items && props.items[items],
         justify && props.justify[justify],
         wrap && props.wrap[toString(wrap)],
-        divProps.className
+        divProps.className,
       )}
     />
   );

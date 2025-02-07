@@ -16,6 +16,9 @@ export const register = async (req: express.Request, res: express.Response) => {
         if (existingUser){
             return res.status(400).json({ message: "User already exists" });
         }
+        if (password.length < 5) {
+            return res.status(400).json({ message: "Password must be at least 5 characters long" });
+        }
         const salt = random();
         if (!salt) {
             return res.status(500).json({ message: "No salt" });

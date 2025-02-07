@@ -1,83 +1,42 @@
 "use client";
 import React from "react";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
+import { Form } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SignUpSchema } from "~/model/schemas";
 import { Button } from "~/components/ui/button";
 import { Flex } from "~/components/generic/Flex";
-import { SignUp } from "~/model/types";
-import { useSingUpMutation } from "~/api/mutation/useSignUpMutation";
+import { FormFieldWrapper } from "~/components/generic/form/FormFields";
+
+import { useSignUp } from "~/hooks/auth/useSignUp";
 
 export const SignUpForm = () => {
-  const { mutate } = useSingUpMutation();
-  const form = useForm({
-    mode: "onChange",
-    resolver: zodResolver(SignUpSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      username: "",
-    },
-  });
-
-  const onSubmit = (data: SignUp) => {
-    console.log(data);
-    mutate(data);
-  };
+  const {form, onSubmit, isPending} = useSignUp();
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Flex col>
-          <FormField
+          <FormFieldWrapper
             control={form.control}
             name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input {...field} required />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="Email"
+            renderInput={(field) => <Input {...field} />}
           />
-          <FormField
+          <FormFieldWrapper
             control={form.control}
             name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input {...field} required />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="Password"
+            renderInput={(field) => <Input {...field} type="password" />}
           />
-          <FormField
+
+          <FormFieldWrapper
             control={form.control}
             name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input {...field} required />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="Username"
+            renderInput={(field) => <Input {...field} />}
           />
-          <Button type="submit">Sign up</Button>
+          <Button type="submit" disabled={isPending} loading={isPending}>
+            Sign up
+          </Button>
         </Flex>
       </form>
     </Form>

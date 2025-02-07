@@ -5,6 +5,8 @@ export type SignIn = z.infer<typeof SignInSchema>;
 export type SignUp = z.infer<typeof SignUpSchema>;
 export type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
+// type helpers
+
 export type TrueStringToBoolean<T> = T extends "true"
   ? Exclude<T, "true"> | true
   : T;
