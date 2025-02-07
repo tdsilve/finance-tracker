@@ -14,6 +14,7 @@
     "@types/lodash": "^4.17.14",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^22.10.6",
+    "@types/nodemailer": "^6.4.17",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^4.21.2",
@@ -25,6 +26,7 @@
     "dotenv": "^16.4.7",
     "lodash": "^4.17.21",
     "mongodb": "^6.12.0",
-    "mongoose": "^8.9.5"
+    "mongoose": "^8.9.5",
+    "nodemailer": "^6.10.0"
   }
 }
