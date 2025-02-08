@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import { SendResetPasswordEmail } from "~/model/types";
+import { RecoverPassword } from "~/model/types";
 import { HTTPError, getMessageFromHTTPError } from "~/lib/error";
 import toast from "react-hot-toast";
 
-export const useSendResetPasswordEmailMutation = () =>
+export const useRecoverPasswordMutation = () =>
   useMutation({
-    mutationFn: async (data: SendResetPasswordEmail) => {
+    mutationFn: async (data: RecoverPassword) => {
       const response = await fetch(
         "http://localhost:8000/auth/send-reset-password-email",
         {

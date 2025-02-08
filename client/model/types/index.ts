@@ -7,7 +7,6 @@ import {
 
 export type SignIn = z.infer<typeof SignInSchema>;
 export type SignUp = z.infer<typeof SignUpSchema>;
-export type SendResetPasswordEmail = { email: string };
 export type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 export type RecoverPassword = z.infer<typeof RecoverPasswordSchema>;
 

@@ -3,10 +3,10 @@ import React from "react";
 import { RecoverPasswordSchema } from "~/model/schemas";
 import { RecoverPassword } from "~/model/types";
 import { useForm } from "react-hook-form";
-import { useSendResetPasswordEmailMutation } from "~/api/mutation/useSendResetPasswordEmailMutation";
+import { useRecoverPasswordMutation } from "~/api/mutation/useRecoverPasswordMutation";
 
 export const useRecoverPassword = (onSuccess?: (val: boolean) => void) => {
-  const { mutate, isPending, isSuccess } = useSendResetPasswordEmailMutation();
+  const { mutate, isPending, isSuccess } = useRecoverPasswordMutation();
   const form = useForm({
     mode: "onChange",
     resolver: zodResolver(RecoverPasswordSchema),
@@ -19,6 +19,6 @@ export const useRecoverPassword = (onSuccess?: (val: boolean) => void) => {
 
   React.useEffect(() => {
     onSuccess?.(isSuccess);
-  }, [isSuccess]);
+  }, [isSuccess, onSuccess]);
   return { form, onSubmit, isPending, isSuccess };
 };

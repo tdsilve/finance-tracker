@@ -5,17 +5,6 @@ import { useRecoverPassword } from "~/hooks/auth/useRecoverPassword";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { Flex } from "~/components/generic/Flex";
-import Image from "next/image";
-import CheckIcon from "~/assets/images/svg/check.svg";
-import { Header } from "../Header";
-import Link from "next/link";
-import {
-  Control,
-  FieldValues,
-  Path,
-  ControllerRenderProps,
-  UseFormReturn,
-} from "react-hook-form";
 
 type RecoverPasswordFormProps = {
   onSuccess: (val: boolean) => void;
@@ -24,8 +13,7 @@ type RecoverPasswordFormProps = {
 export const RecoverPasswordForm = ({
   onSuccess,
 }: RecoverPasswordFormProps) => {
-  const { form, onSubmit, isPending, isSuccess } =
-    useRecoverPassword(onSuccess);
+  const { form, onSubmit, isPending } = useRecoverPassword(onSuccess);
 
   return (
     <Form {...form}>
