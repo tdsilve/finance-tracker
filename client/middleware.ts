@@ -1,11 +1,17 @@
 import { NextResponse, NextRequest } from "next/server";
 
-const publicRoutes = ["/sign-in", "/sign-up", "/recover-password", "/reset-password"];
+const publicRoutes = [
+  "/sign-in",
+  "/sign-up",
+  "/recover-password",
+  "/reset-password",
+];
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get("sessionToken")?.value;
   const isAuthenticated = !!token;
   const { pathname, origin } = req.nextUrl;
+
   const isPublicRoute = publicRoutes.find((route) =>
     pathname.startsWith(route),
   );

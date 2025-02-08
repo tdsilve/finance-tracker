@@ -177,7 +177,7 @@ export const resetPassword = async (
     if (!token || !password) {
       return res.status(400).json({ message: "Missing requirements" });
     }
-    console.log(token);
+
     const user = await getUserBySessionToken(token);
     if (!user) {
       return res.status(404).json({ message: "User does not exist" });

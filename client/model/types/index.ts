@@ -3,12 +3,14 @@ import {
   RecoverPasswordSchema,
   SignInSchema,
   SignUpSchema,
+  ResetPasswordSchema,
 } from "~/model/schemas";
 
 export type SignIn = z.infer<typeof SignInSchema>;
 export type SignUp = z.infer<typeof SignUpSchema>;
 export type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 export type RecoverPassword = z.infer<typeof RecoverPasswordSchema>;
+export type ResetPassword = z.infer<typeof ResetPasswordSchema>;
 
 // type helpers
 

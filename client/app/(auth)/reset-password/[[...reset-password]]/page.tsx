@@ -1,16 +1,12 @@
+// "use client";
 import React from "react";
-import { Flex } from "~/components/generic/Flex";
-import { Logo } from "~/components/generic/Logo";
+import { ResetPassword } from "~/components/auth/reset-password/ResetPassword";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 export default async function RecoverPasswordPage(props: {
   searchParams: SearchParams;
 }) {
-  const params = (await props.searchParams).token;
+  const token = (await props.searchParams).token as string;
 
-  return (
-    <Flex col gap={4} items="center" justify="center" className="w-full h-full">
-      <Logo />
-    </Flex>
-  );
+  return <ResetPassword token={token} />;
 }
