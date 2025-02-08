@@ -6,24 +6,21 @@ import { Header } from "../Header";
 import { ErrorAlert } from "~/components/generic/alert/ErrorAlert";
 import Link from "next/link";
 import { PrimaryLink } from "~/components/generic/link/PrimaryLink";
+import { useRouter } from "next/navigation";
 
-type ResetPasswordProps = { token: string };
+type ResetPasswordProps = { token?: string };
 
 export const ResetPassword = ({ token }: ResetPasswordProps) => {
+  const router = useRouter();
+  React.useEffect(() => {
+    if (!token) {
+      router.replace("/sign-in");
+      return;
+    }
+  }, [token]);
+
   if (!token) {
-    return (
-      <ErrorAlert
-        message="Invalid or expired reset link. Please request a new one."
-        action={
-          <div>
-            Or go back to{" "}
-            <Link href="/sign-in" className="underline">
-              sign in
-            </Link>
-          </div>
-        }
-      />
-    );
+    return null;
   }
   return (
     <Flex col gap={4}>
