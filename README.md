@@ -1,11 +1,13 @@
 # Personal Finance Tracker
 
-# Updating this project:
+## Main goal
+The goal of this project is to build a Personal Finance Tracker that helps users manage their income and expenses while allowing me, as a frontend developer, to gain hands-on experience with backend development, including authentication, API design, and database management.
+
+## Updating this project:
 
     -> Server:
         - Add typescript
         - Update node
-        - Add user data
         - Add login/auth 
 
     -> Front:
@@ -13,7 +15,6 @@
         - Add Typescript
         - Improve code file system
         - Add login/auth
-        - Add finance data for each user
 
 This application helps to manage the income and expenses of the user. The transactions are saved on the backend using a HTTP restful API. 
 
@@ -23,119 +24,18 @@ This application helps to manage the income and expenses of the user. The transa
 
 
 - Fronend: 
-    - React:
+    - Nextjs 15
+    - Node 18
 
 - Backend: 
     - ExpressJS
     - MongoDB (Mongoose)
 
  ## How to run this APP?
- 1. Run `npm install` to install all dependencies.
- 2. Run `npm start` to start the app.
-
-    Note: In your browser, navigate to: http://localhost:3000/ 
-
- ## How to run the backend with nodemon?
- 1. Run `npm run start`.
+ 1. On client folder, run `yarn install` to install all dependencies and `yarn dev` to start the client.
+ 2. On server folder, run `yarn install` to install all dependencies and `yarn start` to start the server.
 
  ## About the API
  ### API Reference
  The Personal Finance Tracker API is organized around REST. It has a resource-oriented URLs, accept form request body, return JSON response, and uses standard HTTP response to indicate the success or failure of an API request.
- 
- ### Errors
-This API raise exceptions for many reasons, such as missing required field, network unavailability, etc.
- 
- For example, there are 4 required fields: type, categories, escription and value, if one of them is missing the response will be: 
- 
- ```
- {
-    "error": "transactions validation failed: value: Number field required, description: Description field required, category: Category field required, "NAME OF THE REQUIRED FIELD": Type field required"
-}
-```
 
-
-### Parameters
-This API has the following parameters:
-```
-{
-    type:{
-        type: String,
-        required: [true, 'Type field required']
-      },
-      category:{
-        type: String,
-        required: [true, 'Category field required']
-      },
-      description:{
-        type: String,
-        required: [true, 'Description field required']
-      },
-      value:{
-        type: Number,
-        required: [true, 'Number field required']
-      }
-
-}
-```
-Those parameters are required in order to insert a new information. 
-
-### Search 
-The API has no required parameters and the user can request information by inputing the following fields:
-
-```
-     category:{
-        type: String
-      },
-      description:{
-        type: String
-      },
-      value:{
-        type: Number
-      }
-      
-```
-Example request:
-GET
-
-http://localhost:5001/api/transactions?value=50&category=food
-
-Response:
-
-```
-[
-    {
-        "_id": "6248e768b8c138906eb279a7",
-        "type": "expense",
-        "category": "food",
-        "description": "ifood",
-        "value": 50,
-        "__v": 0
-    }
-]
-```
-
- ## Add a new information
- POST
- 
- http://localhost:5001/api/transactions
- 
- User input
- ```
-    {
-        "type": "income",
-        "category": "house",
-        "description": "rent",
-        "value": 1000
-    }
- ```
- Result:
- ```
- {
-    "type": "income",
-    "category": "house",
-    "description": "rent",
-    "value": 1000,
-    "_id": "6248fbc7351cfdb8c6b1ab5d",
-    "__v": 0
-}
- ```
