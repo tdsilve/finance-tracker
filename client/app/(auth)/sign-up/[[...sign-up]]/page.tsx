@@ -1,7 +1,5 @@
 import { SignUpForm } from "~/components/auth/sign-up/SignUpForm";
 
-import Link from "next/link";
-
 import { Header } from "~/components/auth/Header";
 import { PrimaryLink } from "~/components/generic/link/PrimaryLink";
 

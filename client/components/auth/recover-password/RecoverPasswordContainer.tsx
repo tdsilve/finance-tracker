@@ -1,14 +1,10 @@
+"use client";
 import React from "react";
-import { Form } from "~/components/ui/form";
-import { FormFieldWrapper } from "~/components/generic/form/FormFields";
-import { useRecoverPassword } from "~/hooks/auth/useRecoverPassword";
-import { Input } from "~/components/ui/input";
-import { Button } from "~/components/ui/button";
 import { Flex } from "~/components/generic/Flex";
 import Image from "next/image";
 import CheckIcon from "~/assets/images/svg/check.svg";
 import { Header } from "../Header";
-import Link from "next/link";
+
 import { RecoverPasswordForm } from "./RecoverPasswordForm";
 import { PrimaryLink } from "~/components/generic/link/PrimaryLink";
 
