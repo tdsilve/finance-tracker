@@ -1,6 +1,6 @@
 import React from "react";
 
-import { cn } from "~/lib/utils";
+import { cn } from "~/lib/css";
 import { BooleanStringToBoolean } from "~/model/types";
 import { toString } from "~/utils/string";
 

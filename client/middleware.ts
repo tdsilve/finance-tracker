@@ -16,8 +16,17 @@ export function middleware(req: NextRequest) {
     pathname.startsWith(route),
   );
 
+  if (pathname.startsWith("/reset-password")) {
+    const token = req.nextUrl.searchParams.get("token");
+    if (!token) {
+      return NextResponse.redirect(new URL("/sign-in", origin));
+    }
+  }
+
   if (!isAuthenticated && !isPublicRoute) {
     return NextResponse.redirect(new URL("/sign-in", origin));
+  } else if (isAuthenticated && isPublicRoute) {
+    return NextResponse.redirect(new URL("/", origin));
   }
 
   return NextResponse.next();

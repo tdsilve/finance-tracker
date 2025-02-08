@@ -24,6 +24,9 @@ export default function Layout({
         gap={4}
         className="w-full max-w-md mx-auto lg:mx-0"
       >
+        <div className="text-center text-2xl font-bold text-primary-500 lg:hidden mx-auto">
+          <Logo width="80" height="80" />
+        </div>
         {children}
       </Flex>
     </Grid>

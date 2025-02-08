@@ -2,6 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { SignIn } from "~/model/types";
 import { HTTPError, getMessageFromHTTPError } from "~/lib/error";
 import toast from "react-hot-toast";
+import { fta } from "~/api/finance-tracker-api";
+import { TypedBody } from "~/lib/api/types";
 
 type SingInMutationProps = {
   onSuccess?: () => void;
@@ -9,20 +11,7 @@ type SingInMutationProps = {
 
 export const useSingInMutation = (props?: SingInMutationProps) =>
   useMutation({
-    mutationFn: async (data: SignIn) => {
-      const response = await fetch("http://localhost:8000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-      });
-      const res = await response.json();
-      if (!response.ok) {
-        throw new HTTPError(response.statusText, response.status, res);
-      }
-    },
+    mutationFn: async (data: SignIn) => await fta.signIn(data),
     onError: (error) => {
       toast.error(getMessageFromHTTPError(error));
     },
