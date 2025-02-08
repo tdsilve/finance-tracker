@@ -1,8 +1,12 @@
-import crypto from 'crypto';
+import crypto from "crypto";
 
-export const random = () => crypto.randomBytes(128).toString('base64');
-export const authentication = (salt: string, password: string) => crypto.createHmac("sha256", [salt, password].join('/')).update(process.env.secret).digest('hex');
-export const getHtmlRecoverPassword = (resetLink: string) =>  `
+export const random = () => crypto.randomBytes(128).toString("base64");
+export const authentication = (salt: string, password: string) =>
+  crypto
+    .createHmac("sha256", [salt, password].join("/"))
+    .update(process.env.secret)
+    .digest("hex");
+export const getHtmlRecoverPassword = (resetLink: string) => `
 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
     <h2 style="color: #2C3E50;">Password Reset Request</h2>
     <p>Hello,</p>
@@ -19,4 +23,4 @@ export const getHtmlRecoverPassword = (resetLink: string) =>  `
     <p style="font-size: 12px; word-break: break-word;">${resetLink}</p>
     <p style="font-size: 12px; color: #7F8C8D;">Best regards, <br>Finance Tracker Support Team</p>
 </div>
-`
+`;
