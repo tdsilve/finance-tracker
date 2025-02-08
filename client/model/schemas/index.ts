@@ -18,3 +18,11 @@ export const SignUpSchema = z.object({
     .min(5, { message: "Must be 5 or more characters long" }),
   username: z.string().trim().min(1, { message: "Username is required" }),
 });
+
+export const RecoverPasswordSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Please, provide a valid email" }),
+});

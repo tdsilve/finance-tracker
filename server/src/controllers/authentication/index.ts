@@ -98,7 +98,7 @@ export const logout = async (req: express.Request, res: express.Response) => {
     }
 };
 
-export const resetPassword = async (req: express.Request, res: express.Response) => {
+export const sendResetPasswordEmail = async (req: express.Request, res: express.Response) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail', 
         auth: {
@@ -115,7 +115,7 @@ export const resetPassword = async (req: express.Request, res: express.Response)
         }
         const user = await getUserByEmail(email);
         if (!user) {
-            return res.status(404).json({ message: "User not found by email" });
+            return res.status(404).json({ message: "Email not found" });
         }
 
         const salt = random();

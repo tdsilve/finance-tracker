@@ -3,6 +3,7 @@ import { SignUpForm } from "~/components/auth/sign-up/SignUpForm";
 import Link from "next/link";
 
 import { Header } from "~/components/auth/Header";
+import { PrimaryLink } from "~/components/generic/link/PrimaryLink";
 
 export default function SignUpPage() {
   return (
@@ -15,9 +16,7 @@ export default function SignUpPage() {
 
       <div className="text-sm text-center w-full">
         <span className="font-thin">Already have an account?</span>{" "}
-        <Link href="/sign-in" className="font-bold text-primary-500">
-          Sign in
-        </Link>
+        <PrimaryLink href="/sign-in">Sign in</PrimaryLink>
       </div>
     </>
   );
