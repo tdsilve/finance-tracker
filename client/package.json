@@ -6,24 +6,25 @@
     "dev": "next dev ",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "yarn eslint --fix",
     "prepare": "husky",
     "precommit": "yarn lint",
     "format": "prettier --write ."
   },
   "lint-staged": {
     "**/*{.js,.ts,.tsx}": [
-      "prettier --write",
       "eslint --fix"
     ]
   },
   "dependencies": {
+    "@eslint/compat": "^1.2.6",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@tanstack/react-query": "^5.66.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "eslint-plugin-tailwindcss": "^3.18.0",
     "lucide-react": "^0.473.0",
     "next": "15.1.6",
     "react": "^18.0.0",
@@ -44,6 +45,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.5",
     "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-import": "^2.31.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
     "pinst": "^3.0.0",

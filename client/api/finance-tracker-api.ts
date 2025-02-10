@@ -1,13 +1,12 @@
 import { createApi } from "~/lib/api/api";
 import { SignIn } from "~/model/types";
 import { toJson } from "~/lib/api/helpers";
+import { Endpoints } from "~/lib/api/types";
 
 export class FinanceTrackerApi {
-  api = createApi({
-    host: process.env.host!,
-    headers: {
-      Accept: "application/json",
-    },
+  api = createApi<Endpoints>({
+    host: "http://localhost:8000",
+    headers: {},
   });
 
   async signIn(data: SignIn) {

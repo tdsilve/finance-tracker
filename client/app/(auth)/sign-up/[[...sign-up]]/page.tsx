@@ -12,7 +12,7 @@ export default function SignUpPage() {
         <SignUpForm />
       </div>
 
-      <div className="text-sm text-center w-full">
+      <div className="w-full text-center text-sm">
         <span className="font-thin">Already have an account?</span>{" "}
         <PrimaryLink href="/sign-in">Sign in</PrimaryLink>
       </div>

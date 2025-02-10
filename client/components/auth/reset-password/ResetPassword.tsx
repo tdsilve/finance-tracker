@@ -32,7 +32,7 @@ export const ResetPassword = ({ token }: ResetPasswordProps) => {
         subtitle="Enter your new password below to securely regain access to your account."
       />
       <ResetPasswordForm token={token} />
-      <div className="text-sm text-center">
+      <div className="text-center text-sm">
         Go back to
         <PrimaryLink href="/sign-in" className="mx-1">
           sign in

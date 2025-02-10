@@ -17,11 +17,11 @@ export default function SignInPage() {
 
       <Link
         href="/recover-password"
-        className="w-full text-end text-primary-500 text-sm"
+        className="w-full text-end text-sm text-primary-500"
       >
         Forgot password?
       </Link>
-      <div className="text-sm text-center w-full">
+      <div className="w-full text-center text-sm">
         <span className="font-thin">Don&apos;t have an account?</span>{" "}
         <PrimaryLink href="/sign-up">Sign up</PrimaryLink>
       </div>

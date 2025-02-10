@@ -1,17 +1,17 @@
 import { HTTPError } from "../error";
-import { TypedBody } from "./types";
+import { HttpMethod, TypedBody, SpecPathsOf, SpecEndpointValue } from "./types";
 
-export const createApi = ({
+export const createApi = <Spec>({
   host,
   headers,
 }: {
   host: string;
   headers: HeadersInit;
 }) => {
-  return new Api(host, headers);
+  return new Api<Spec>(host, headers);
 };
 
-class Api {
+class Api<Spec> {
   private host: string;
   private headers: HeadersInit;
 
@@ -20,16 +20,17 @@ class Api {
     this.headers = headers;
   }
 
-  private async request<T>(
-    ep: string,
+  private async request<M extends HttpMethod, P extends SpecPathsOf<Spec, M>>(
+    method: M,
+    path: P,
     options: RequestInit,
     body?: TypedBody,
-  ): Promise<T> {
+  ) {
     const response = await fetch(
-      `${this.host}${ep}`,
+      `${this.host}${path}`,
 
       {
-        method: options.method,
+        method: method,
         headers: {
           ...this.headers,
           ...options.headers,
@@ -47,46 +48,37 @@ class Api {
     if (!response.ok) {
       throw new HTTPError(response.statusText, response.status, data);
     }
-    return data;
+    return data as SpecEndpointValue<Spec, `${M} ${P}`>;
   }
 
-  public async post<T>(ep: string, body: TypedBody): Promise<T> {
-    return this.request<T>(
-      ep,
-      {
-        method: "POST",
-      },
-      body,
-    );
+  async post<P extends SpecPathsOf<Spec, "POST">>(path: P, body: TypedBody) {
+    return this.request("POST", path, {}, body);
   }
 
-  public get<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint, {
-      method: "GET",
-      headers: this.headers,
-    });
+  async get<P extends SpecPathsOf<Spec, "GET">>(path: P, body: TypedBody) {
+    return this.request("GET", path, {}, body);
   }
-  public put<T>(endpoint: string, body: TypedBody): Promise<T> {
-    return this.request<T>(
-      endpoint,
-      {
-        method: "PUT",
-        headers: this.headers,
-      },
-      body,
-    );
-  }
+  // public put<T>(path: string, body: TypedBody): Promise<T> {
+  //   return this.request(
+  //     "PUT",
+  //     path,
+  //     {
+  //       headers: this.headers,
+  //     },
+  //     body,
+  //   );
+  // }
 
-  public delete<T>(endpoint: string, body: TypedBody): Promise<T> {
-    return this.request<T>(
-      endpoint,
-      {
-        method: "DELETE",
-        headers: this.headers,
-      },
-      body,
-    );
-  }
+  // public delete<T>(path: string, body: TypedBody): Promise<T> {
+  //   return this.request(
+  //     "DELETE",
+  //     path,
+  //     {
+  //       headers: this.headers,
+  //     },
+  //     body,
+  //   );
+  // }
 
   public setHeaders(newHeaders: HeadersInit): void {
     this.headers = { ...this.headers, ...newHeaders };

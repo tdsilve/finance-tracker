@@ -1,9 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { SignIn } from "~/model/types";
-import { HTTPError, getMessageFromHTTPError } from "~/lib/error";
+import { getMessageFromHTTPError } from "~/lib/error";
 import toast from "react-hot-toast";
 import { fta } from "~/api/finance-tracker-api";
-import { TypedBody } from "~/lib/api/types";
 
 type SingInMutationProps = {
   onSuccess?: () => void;

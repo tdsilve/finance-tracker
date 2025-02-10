@@ -17,7 +17,7 @@ export const ErrorAlert = ({ message, onClose, action }: ErrorAlertProps) => {
     <Flex
       justify="between"
       items="center"
-      className="w-full max-w-md p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg "
+      className="w-full max-w-md rounded-lg border border-red-400 bg-red-100 p-4 text-red-700 "
     >
       <div className="text-sm font-medium">
         <div>{message}</div>
@@ -30,7 +30,7 @@ export const ErrorAlert = ({ message, onClose, action }: ErrorAlertProps) => {
             setVisible(false);
             onClose();
           }}
-          className="text-red-700 hover:text-red-900 transition"
+          className="text-red-700 transition hover:text-red-900"
         >
           <RiCloseLine size={20} />
         </button>
