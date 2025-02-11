@@ -1,6 +1,6 @@
-import { SignUpForm } from "~/components/auth/sign-up/SignUpForm";
+import { SignUpForm } from "~/components/auth/sign-up/sign-up-form";
 
-import { Header } from "~/components/auth/Header";
+import { Header } from "~/components/auth/header";
 import { PrimaryLink } from "~/components/generic/link/PrimaryLink";
 
 export default function SignUpPage() {

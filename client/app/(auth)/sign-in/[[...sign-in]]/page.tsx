@@ -1,6 +1,6 @@
-import { SignInForm } from "~/components/auth/sign-in/SignInForm";
+import { SignInForm } from "~/components/auth/sign-in/sign-in-form";
 import Link from "next/link";
-import { Header } from "~/components/auth/Header";
+import { Header } from "~/components/auth/header";
 import { PrimaryLink } from "~/components/generic/link/PrimaryLink";
 
 export default function SignInPage() {

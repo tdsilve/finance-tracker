@@ -1,5 +1,5 @@
 import React from "react";
-import { ResetPassword } from "~/components/auth/reset-password/ResetPassword";
+import { ResetPassword } from "~/components/auth/reset-password/reset-password";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 export default async function RecoverPasswordPage(props: {

@@ -3,9 +3,9 @@ import React from "react";
 import { Flex } from "~/components/generic/Flex";
 import Image from "next/image";
 import CheckIcon from "~/assets/images/svg/check.svg";
-import { Header } from "../Header";
+import { Header } from "../header";
 
-import { RecoverPasswordForm } from "./RecoverPasswordForm";
+import { RecoverPasswordForm } from "./recorver-password-form";
 import { PrimaryLink } from "~/components/generic/link/PrimaryLink";
 
 const BottomLink = () => {

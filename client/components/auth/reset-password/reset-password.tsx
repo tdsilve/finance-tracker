@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { ResetPasswordForm } from "./ResetPasswordForm";
+import { ResetPasswordForm } from "./reset-password-form";
 import { Flex } from "~/components/generic/Flex";
-import { Header } from "../Header";
+import { Header } from "../header";
 import { ErrorAlert } from "~/components/generic/alert/ErrorAlert";
 import { PrimaryLink } from "~/components/generic/link/PrimaryLink";
 
