@@ -5,7 +5,9 @@ import { BooleanStringToBoolean } from "~/model/types";
 import { toString } from "~/utils/string";
 
 const props = {
+  
   gap: {
+    px: "gap-px",
     0: "gap-0",
     0.5: "gap-0.5",
     1: "gap-1",

@@ -1,6 +1,6 @@
 import React from "react";
-import { Flex } from "~/components/generic/Flex";
-import { Heading } from "~/components/generic/Heading";
+import { Flex } from "~/components/generic/flex";
+import { Heading } from "~/components/generic/heading";
 
 type HeaderProps = {
   title: string;

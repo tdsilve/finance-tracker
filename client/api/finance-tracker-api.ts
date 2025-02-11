@@ -13,7 +13,7 @@ export class FinanceTrackerApi {
     return await this.api.post("/auth/login", toJson(data));
   }
 
-  async sendResetPasswordEmail(data: {email: string}) {
+  async sendResetPasswordEmail(data: { email: string }) {
     return await this.api.post("/auth/send-reset-password-email", toJson(data));
   }
 

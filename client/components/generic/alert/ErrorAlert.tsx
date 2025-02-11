@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { RiCloseLine } from "react-icons/ri";
-import { Flex } from "../Flex";
+import { Flex } from "../flex";
 
 type ErrorAlertProps = {
   message: string;

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Flex } from "~/components/generic/Flex";
+import { Flex } from "~/components/generic/flex";
 import { FormFieldWrapper } from "~/components/generic/form/FormFields";
 import { Button } from "~/components/ui/button";
 import { Form } from "~/components/ui/form";

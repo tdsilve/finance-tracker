@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Flex } from "~/components/generic/Flex";
+import { Flex } from "~/components/generic/flex";
 import Image from "next/image";
 import CheckIcon from "~/assets/images/svg/check.svg";
 import { Header } from "../header";

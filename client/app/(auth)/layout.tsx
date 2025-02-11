@@ -1,6 +1,6 @@
-import { Grid } from "~/components/generic/Grid";
-import { Logo } from "~/components/generic/Logo";
-import { Flex } from "~/components/generic/Flex";
+import { Grid } from "~/components/generic/grid";
+import { Logo } from "~/components/generic/logo";
+import { Flex } from "~/components/generic/flex";
 
 export default function Layout({
   children,

@@ -23,6 +23,7 @@ export const Logo = ({ width = "100", height = "100" }: LogoProps) => {
           width="19.199"
           height="47.813"
           fill="#407BFF"
+          stroke="#fff"
         />
         <circle
           cx="73.6"
@@ -30,6 +31,7 @@ export const Logo = ({ width = "100", height = "100" }: LogoProps) => {
           r="24.199"
           transform="translate(-14.855 67.125) rotate(-45)"
           fill="#407BFF"
+          stroke="#fff"
         />
         <circle
           cx="73.6"

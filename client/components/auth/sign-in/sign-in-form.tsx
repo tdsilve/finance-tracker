@@ -4,7 +4,7 @@ import React from "react";
 import { Form } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import { Flex } from "~/components/generic/Flex";
+import { Flex } from "~/components/generic/flex";
 import { FormFieldWrapper } from "~/components/generic/form/FormFields";
 import { useSignIn } from "~/hooks/auth/useSignIn";
 

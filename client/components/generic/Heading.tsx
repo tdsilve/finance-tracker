@@ -6,7 +6,12 @@ type HeadingProps = {
   tag?: HeadingTag;
   children?: React.ReactNode;
 } & React.HTMLAttributes<HTMLHeadingElement>;
-export const Heading = ({ tag = "h1", children, ...props }: HeadingProps) => {
+export const Heading = ({
+  tag = "h1",
+  children,
+  className,
+  ...props
+}: HeadingProps) => {
   const Head = tag;
   return (
     <Head
@@ -17,6 +22,7 @@ export const Heading = ({ tag = "h1", children, ...props }: HeadingProps) => {
         tag === "h4" && "text-xl font-semibold",
         tag === "h5" && "text-lg font-semibold",
         tag === "h6" && "text-base font-semibold",
+        className,
       )}
       {...props}
     >

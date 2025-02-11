@@ -4,7 +4,7 @@ import { FormFieldWrapper } from "~/components/generic/form/FormFields";
 import { useRecoverPassword } from "~/hooks/auth/useRecoverPassword";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import { Flex } from "~/components/generic/Flex";
+import { Flex } from "~/components/generic/flex";
 
 type RecoverPasswordFormProps = {
   onSuccess: (val: boolean) => void;

@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid } from "~/components/generic/Grid";
+import { Grid } from "~/components/generic/grid";
 
 export default function Loading() {
   return (
