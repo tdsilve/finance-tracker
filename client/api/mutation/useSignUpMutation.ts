@@ -10,7 +10,7 @@ type SingUpMutationProps = {
 
 export const useSingUpMutation = (props?: SingUpMutationProps) =>
   useMutation({
-    mutationFn: async (data: SignUp) => fta.signUp(data),
+    mutationFn: (data: SignUp) => fta.signUp(data),
     onError: (error) => {
       toast.error(getMessageFromHTTPError(error));
     },

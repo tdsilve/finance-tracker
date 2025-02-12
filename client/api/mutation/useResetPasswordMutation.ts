@@ -8,7 +8,7 @@ import { fta } from "../finance-tracker-api";
 export const useResetPasswordMutation = () => {
   const router = useRouter();
   return useMutation({
-    mutationFn: async (data: ResetPassword) => fta.resetPassword(data),
+    mutationFn: (data: ResetPassword) => fta.resetPassword(data),
     onSuccess: () => {
       toast.success("Password reset successfully");
       router.push("/sign-in");

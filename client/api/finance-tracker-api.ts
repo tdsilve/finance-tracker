@@ -5,7 +5,7 @@ import { Endpoints } from "~/lib/api/types";
 
 export class FinanceTrackerApi {
   api = createApi<Endpoints>({
-    host: "http://localhost:8000",
+    host: process.env.NEXT_PUBLIC_API_URL!,
     headers: {},
   });
 

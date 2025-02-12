@@ -4,17 +4,22 @@ import toast from "react-hot-toast";
 import { getMessageFromHTTPError } from "~/lib/error";
 import { fta } from "../finance-tracker-api";
 import { useRouter } from "next/navigation";
+import { deleteCookies } from "~/api/server-actions/delete-cookies";
 
-
-export const useLogoutMutation = () =>{
+export const useLogoutMutation = () => {
   const router = useRouter();
- return useMutation({
-    mutationFn: async (data: Logout) => fta.logout(data),
+  return useMutation({
+    mutationFn: (data: Logout) => fta.logout(data),
     onError: (error) => {
       toast.error(getMessageFromHTTPError(error));
     },
-    onSuccess: () => {
-      router.push("/sign-in");
-    }
-  })
+    onSuccess: async () => {
+      try {
+        await deleteCookies();
+        router.push("/sign-in");
+      } catch () {
+        // toast.error(getMessageFromHTTPError(error));
+      }
+    },
+  });
 };

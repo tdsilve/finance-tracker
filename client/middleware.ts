@@ -8,7 +8,7 @@ const publicRoutes = [
 ];
 
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get("sessionToken")?.value;
+  const token = req.cookies.get(process.env.SESSION_TOKEN_NAME!)?.value;
   const isAuthenticated = !!token;
   const { pathname, origin } = req.nextUrl;
 

@@ -1,18 +1,17 @@
-"use client"
-import { Button } from "~/components/ui/button"
+"use client";
+import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-
   DropdownMenuSeparator,
-
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu"
-import { UserAvatar } from "./UserAvatar"
+} from "~/components/ui/dropdown-menu";
+import { UserAvatar } from "./UserAvatar";
+import { useLogoutMutation } from "~/api/mutation/useLogoutMutation";
 
-import React from 'react'
+import React from "react";
 
 const menuItems = [
   {
@@ -20,34 +19,33 @@ const menuItems = [
   },
   {
     label: "Log out",
-  }
-]
+  },
+];
 
-export const UserButton = () =>{
+export const UserButton = () => {
+  const { mutate: logout } = useLogoutMutation();
 
- 
+  const handleLogout = () => {
+    // logout();
+    
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={"rounded-full-fit"}><UserAvatar name="Thais" profileImage=""/></Button>
+        <Button variant={"rounded-full-fit"}>
+          <UserAvatar name="Thais" profileImage="" />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-fit bg-white">
-  
-  
         <DropdownMenuGroup>
-          {menuItems.map(({label}) => (
+          {menuItems.map(({ label }) => (
             <DropdownMenuItem key={label}>
-              <button>{label}</button>
+              <button onClick={handleLogout}>{label}</button>
             </DropdownMenuItem>
           ))}
-         
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-       
-          
-           
-      
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};

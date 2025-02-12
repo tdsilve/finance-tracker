@@ -6,8 +6,7 @@ import { fta } from "../finance-tracker-api";
 
 export const useRecoverPasswordMutation = () =>
   useMutation({
-    mutationFn: async (data: RecoverPassword) =>
-      fta.sendResetPasswordEmail(data),
+    mutationFn: (data: RecoverPassword) => fta.sendResetPasswordEmail(data),
     onError: (error) => {
       toast.error(getMessageFromHTTPError(error));
     },
