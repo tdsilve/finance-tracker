@@ -8,9 +8,15 @@
     "start": "next start",
     "lint": "yarn eslint --fix",
     "prepare": "husky",
-    "precommit": "yarn lint",
+    "pre-commit": "yarn lint",
     "format": "prettier --write ."
   },
+  "husky": {
+  "hooks": {
+    "pre-commit": "yarn precommit",
+    "pre-push": "yarn format"
+  }
+},
   "lint-staged": {
     "**/*{.js,.ts,.tsx}": [
       "eslint --fix"
