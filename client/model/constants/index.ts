@@ -6,24 +6,24 @@ export const PASSWORD_MIN = {
 };
 
 export const routes: Route[] = [
-    {
-        label: 'Dashboard',
-        href: '/'
-    },
-    {
-        label: 'Transactions',
-        href: '/transactions'
-    },
-    {
-        label: 'Accounts',
-        href: '/accounts'
-    },
-    {
-        label: 'Categories',
-        href: '/categories'
-    },
-    {
-        label: 'Settings',
-        href: '/settings'
-    }
-]
+  {
+    label: "Dashboard",
+    href: "/",
+  },
+  {
+    label: "Transactions",
+    href: "/transactions",
+  },
+  {
+    label: "Accounts",
+    href: "/accounts",
+  },
+  {
+    label: "Categories",
+    href: "/categories",
+  },
+  {
+    label: "Settings",
+    href: "/settings",
+  },
+];

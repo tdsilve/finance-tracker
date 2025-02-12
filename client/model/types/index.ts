@@ -9,25 +9,25 @@ import {
 export type Route = {
   label: string;
   href: string;
-}
+};
 export type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-  /**
-   * --------------------------------
-   *              API Types
-   * --------------------------------
-   **/
+/**
+ * --------------------------------
+ *              API Types
+ * --------------------------------
+ **/
 
 export type SignIn = z.infer<typeof SignInSchema>;
 export type SignUp = z.infer<typeof SignUpSchema>;
 export type RecoverPassword = z.infer<typeof RecoverPasswordSchema>;
 export type ResetPassword = z.infer<typeof ResetPasswordSchema>;
 
- /**
-   * --------------------------------
-   *              Helper Types
-   * --------------------------------
-   **/
+/**
+ * --------------------------------
+ *              Helper Types
+ * --------------------------------
+ **/
 
 export type TrueStringToBoolean<T> = T extends "true"
   ? Exclude<T, "true"> | true
