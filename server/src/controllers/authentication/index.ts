@@ -83,7 +83,13 @@ export const login = async (req: express.Request, res: express.Response) => {
       // secure: process.env.NODE_ENV === "production", // Only secure in production
       sameSite: "lax",
     });
-    return res.status(200).json(user);
+    return res.status(200).json({
+      email: user.email,
+      username: user.username,
+      authentication: {
+        sessionToken: user.authentication.sessionToken,
+      },
+    });
   } catch (error) {
     console.log("login error: ", error);
     return res.status(500).json({ message: "Could not login user" });
