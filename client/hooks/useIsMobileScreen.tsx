@@ -1,6 +1,11 @@
+"use client";
 import { useWindowSize } from "usehooks-ts";
 
-export const useIsMobileScreen = (val: number = 786) => {
-  const { width } = useWindowSize();
-  return width <= val;
+export const useIsMobileScreen = (breakPoint: number = 786) => {
+  const { width } = useWindowSize({
+    initializeWithValue: false
+  });
+
+  return !!width && width <= breakPoint;
+
 };

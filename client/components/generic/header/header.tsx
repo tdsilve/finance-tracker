@@ -2,6 +2,7 @@ import React from "react";
 import { Flex } from "../flex";
 import { HeaderLogo } from "./header-logo";
 import { Navigation } from "./navigation/navigation";
+import { UserButton } from "../user/UserButton";
 
 export const Header = () => {
   return (
@@ -12,6 +13,7 @@ export const Header = () => {
             <HeaderLogo />
             <Navigation />
           </Flex>
+          <UserButton />
         </Flex>
       </div>
     </header>
