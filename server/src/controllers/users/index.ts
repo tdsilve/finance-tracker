@@ -2,7 +2,7 @@ import express from "express";
 
 import {
   deleteUserById,
-  getUserById,
+  getUserByEmail,
   getUsers,
   updateUserById,
 } from "../../db/model/users";
@@ -51,3 +51,17 @@ export const updateUser = async (
     return res.status(500).json({ message: `Error: ${error}` });
   }
 };
+
+export const getMe = async (req: express.Request, res: express.Response) => {
+  try {
+ 
+    const {email} = req.body;
+    if (!email) return res.status(400).json({ message: "Missing email" });
+    const user = await getUserByEmail(email);
+    if (!user) return res.status(404).json({ message: "User not found" });
+    return res.status(200).json({email: user.email, username: user.username, id: user._id});
+  } catch (error) {
+    console.log("updateUser error", error);
+    return res.status(500).json({ message: `Error: ${error}` });
+  }
+}
