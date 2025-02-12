@@ -17,7 +17,7 @@ export const useLogoutMutation = () => {
       try {
         await deleteCookies();
         router.push("/sign-in");
-      } catch () {
+      } catch (e) {
         // toast.error(getMessageFromHTTPError(error));
       }
     },
