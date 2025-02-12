@@ -11,9 +11,9 @@ type UserAvatarProps = {
 
 export const UserAvatar = ({ name, profileImage }: UserAvatarProps) => {
   return (
-    <Avatar className="p-2 w-12 h-12  shadow-[0_0_5px_1px_rgba(255,255,255,0.3)]  ">
+    <Avatar className="size-12 p-2 shadow-[0_0_5px_1px_rgba(255,255,255,0.3)]  ">
     <AvatarImage src={profileImage} alt="Profile Image" />
-    <AvatarFallback className="text-white p-2 text-xs">{name}</AvatarFallback>
+    <AvatarFallback className="p-2 text-xs text-white">{name}</AvatarFallback>
   </Avatar>
   )
 }

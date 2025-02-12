@@ -1,25 +1,31 @@
+"use client"
 import { Button } from "~/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
+
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
+
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
 import { UserAvatar } from "./UserAvatar"
 
+import React from 'react'
+
 const menuItems = [
-  
+  {
+    label: "Profile",
+  },
+  {
+    label: "Log out",
+  }
 ]
 
 export const UserButton = () =>{
+
+ 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,26 +35,12 @@ export const UserButton = () =>{
   
   
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            {/* <User /> */}
-            <span>Profile</span>
-     
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            {/* <CreditCard /> */}
-            <span>Billing</span>
-
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            {/* <Settings /> */}
-            <span>Settings</span>
-
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-
-            <span>Keyboard shortcuts</span>
-
-          </DropdownMenuItem>
+          {menuItems.map(({label}) => (
+            <DropdownMenuItem key={label}>
+              <button>{label}</button>
+            </DropdownMenuItem>
+          ))}
+         
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
        

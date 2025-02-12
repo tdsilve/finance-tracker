@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        "rounded-full-fit": "bg-transparent hover:bg-transparent focus-visible:ring-offset-0 focus-visible:ring-0 shadow-none w-fit h-fit p-0 rounded-full"
+        "rounded-full-fit": "size-fit rounded-full bg-transparent p-0 shadow-none hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
       },
       size: {
         default: "h-10 px-4 py-2",

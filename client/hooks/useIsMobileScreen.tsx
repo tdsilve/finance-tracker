@@ -1,6 +1,6 @@
 "use client";
 import { useWindowSize } from "usehooks-ts";
-import React from 'react'
+
 
 export const useIsMobileScreen = (breakPoint: number = 786) => {
 
