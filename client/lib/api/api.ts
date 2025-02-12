@@ -58,27 +58,14 @@ class Api<Spec> {
   async get<P extends SpecPathsOf<Spec, "GET">>(path: P, body: TypedBody) {
     return this.request("GET", path, {}, body);
   }
-  // public put<T>(path: string, body: TypedBody): Promise<T> {
-  //   return this.request(
-  //     "PUT",
-  //     path,
-  //     {
-  //       headers: this.headers,
-  //     },
-  //     body,
-  //   );
-  // }
 
-  // public delete<T>(path: string, body: TypedBody): Promise<T> {
-  //   return this.request(
-  //     "DELETE",
-  //     path,
-  //     {
-  //       headers: this.headers,
-  //     },
-  //     body,
-  //   );
-  // }
+  async put<P extends SpecPathsOf<Spec, "PUT">>(path: P, body: TypedBody) {
+    return this.request("PUT", path, {}, body);
+  }
+
+  async delete<P extends SpecPathsOf<Spec, "DELETE">>(path: P, body: TypedBody) {
+    return this.request("DELETE", path, {}, body);
+  }
 
   public setHeaders(newHeaders: HeadersInit): void {
     this.headers = { ...this.headers, ...newHeaders };
