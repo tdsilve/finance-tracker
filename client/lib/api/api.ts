@@ -51,7 +51,7 @@ class Api<Spec> {
     return data as SpecEndpointValue<Spec, `${M} ${P}`>;
   }
 
-  async post<P extends SpecPathsOf<Spec, "POST">>(path: P, body: TypedBody) {
+  async post<P extends SpecPathsOf<Spec, "POST">>(path: P, body?: TypedBody) {
     return this.request("POST", path, {}, body);
   }
 

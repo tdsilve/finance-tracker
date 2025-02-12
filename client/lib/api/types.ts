@@ -4,7 +4,7 @@ export type Endpoints = {
   "POST /auth/send-reset-password-email": Message;
   "POST /auth/reset-password": Message;
   "POST /auth/register": Message;
-  "POST /auth/login": Message | User;
+  "POST /auth/login": User;
   "POST /auth/logout": Message;
 };
 

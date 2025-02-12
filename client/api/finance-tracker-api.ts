@@ -1,5 +1,5 @@
 import { createApi } from "~/lib/api/api";
-import { Logout, ResetPassword, SignIn, SignUp } from "~/model/types";
+import { ResetPassword, SignIn, SignUp } from "~/model/types";
 import { toJson } from "~/lib/api/helpers";
 import { Endpoints } from "~/lib/api/types";
 
@@ -25,8 +25,8 @@ export class FinanceTrackerApi {
     return await this.api.post("/auth/register", toJson(data));
   }
 
-  async logout(data: Logout) {
-    return await this.api.post("/auth/logout", toJson(data));
+  async logout() {
+    return await this.api.post("/auth/logout");
   }
 }
 

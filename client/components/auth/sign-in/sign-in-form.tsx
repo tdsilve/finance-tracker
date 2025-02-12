@@ -12,13 +12,13 @@ export const SignInForm = () => {
   const { form, onSubmit, isPending } = useSignIn();
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="on">
         <Flex col>
           <FormFieldWrapper
             control={form.control}
             name="email"
             label="Email"
-            renderInput={(field) => <Input {...field} />}
+            renderInput={(field) => <Input {...field} autoComplete="email" />}
           />
           <FormFieldWrapper
             control={form.control}

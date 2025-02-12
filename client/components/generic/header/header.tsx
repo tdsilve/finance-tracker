@@ -2,7 +2,8 @@ import React from "react";
 import { Flex } from "../flex";
 import { HeaderLogo } from "./header-logo";
 import { Navigation } from "./navigation/navigation";
-import { UserButton } from "../user/UserButton";
+import { UserButtonAndMenu } from "../user/user-button-and-menu";
+import { WelcomeMessage } from "./welcome-message";
 
 export const Header = () => {
   return (
@@ -13,8 +14,9 @@ export const Header = () => {
             <HeaderLogo />
             <Navigation />
           </Flex>
-          <UserButton />
+          <UserButtonAndMenu />
         </Flex>
+        <WelcomeMessage/>
       </div>
     </header>
   );
