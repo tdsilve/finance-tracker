@@ -1,5 +1,5 @@
 "use client";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { getMessageFromHTTPError, HTTPError } from "~/lib/error";
 import { fta } from "../finance-tracker-api";
@@ -7,6 +7,7 @@ import { fta } from "../finance-tracker-api";
 import { handleDeleteCookiesAndRedirect } from "~/utils/auth";
 
 export const useLogoutMutation = () => {
+  const client = useQueryClient();
   return useMutation({
     mutationFn: () => {
       return fta.logout();
@@ -17,6 +18,7 @@ export const useLogoutMutation = () => {
     onSuccess: async () => {
       try {
         await handleDeleteCookiesAndRedirect();
+        client.clear();
       } catch (error) {
         toast.error(getMessageFromHTTPError(error as HTTPError));
       }

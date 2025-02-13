@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev ",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "yarn eslint --fix ",
     "prepare": "husky",
     "pre-commit": "yarn lint",
-    "format": "yarn eslint --fix && prettier --write ."
+    "format": "yarn lint --fix && prettier --write ."
   },
   "lint-staged": {
     "**/*{.js,.ts,.tsx}": [
@@ -29,7 +29,7 @@
     "clsx": "^2.1.1",
     "eslint-plugin-tailwindcss": "^3.18.0",
     "lucide-react": "^0.473.0",
-    "next": "15.1.6",
+    "next": "15.1.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.54.2",

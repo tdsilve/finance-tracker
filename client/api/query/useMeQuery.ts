@@ -5,12 +5,15 @@ import toast from "react-hot-toast";
 import { getMessageFromHTTPError, HTTPError, HTTPErrorCode } from "~/lib/error";
 
 import { handleDeleteCookiesAndRedirect } from "~/utils/auth";
+import { userStore } from "~/store/user";
 
 export const useMeQuery = () => {
+  const setUser = userStore((state) => state.setUser);
   const query = useQuery({
     queryKey: ["me"],
     queryFn: () => fta.me(),
-    refetchInterval: 1000 * 60 * 60 * 24,
+    staleTime: 5 * 60 * 1000, // 5 minutes before data is considered stale
+
   });
   React.useEffect(() => {
     if (query.error) {
@@ -19,7 +22,10 @@ export const useMeQuery = () => {
       }
       toast.error(getMessageFromHTTPError(query.error as HTTPError));
     }
-  }, [query.error]);
+    if (query.isSuccess && query.data) {
+      setUser(query.data);
+    }
+  }, [query.error, query.data, query.isSuccess, setUser]);
 
   return query;
 };

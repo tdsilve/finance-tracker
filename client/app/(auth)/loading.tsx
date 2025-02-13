@@ -1,14 +1,11 @@
 "use client";
 
-import { Grid } from "~/components/generic/grid";
+import { GridAbsoluteItemsCentered } from "~/components/generic/layout/grid-absolute-place-items-centered";
 
 export default function Loading() {
   return (
-    <Grid
-      className="absolute right-0 top-0 z-40 h-screen w-screen bg-white"
-      placeItems="center"
-    >
-      <Loading />
-    </Grid>
+    <GridAbsoluteItemsCentered> <Loading /></GridAbsoluteItemsCentered>
+     
+
   );
 }

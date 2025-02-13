@@ -1,14 +1,15 @@
+
 import { Header } from "~/components/generic/header/header";
 
-export default function Layout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+import { AuthedProvider } from "~/provider/authed-provider";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <Header />
-      <main className="px-3 py-4 lg:px-14">{children}</main>
-    </div>
+    <AuthedProvider>
+
+        <Header />
+        <main className="px-3 py-4 lg:px-14">{children}</main>
+
+      </AuthedProvider>
   );
 }
