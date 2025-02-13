@@ -100,7 +100,7 @@ export const logout = async (req: express.Request, res: express.Response) => {
   try {
     const sessionToken = req.cookies[SESSION_TOKEN];
     if (!sessionToken) {
-      return res.status(404).json({ message: "No session token found" });
+      return res.status(401).json({ message: "No session token found" });
     }
 
     // Get user ID from middleware or session

@@ -3,18 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { getMessageFromHTTPError, HTTPError } from "~/lib/error";
 import { fta } from "../finance-tracker-api";
-import { useRouter } from "next/navigation";
-import { deleteCookies } from "~/api/server-actions/delete-cookies";
 
+import { handleDeleteCookiesAndRedirect } from "~/utils/auth";
 
 export const useLogoutMutation = () => {
-  const router = useRouter();
-
-
-
   return useMutation({
     mutationFn: () => {
-
       return fta.logout();
     },
     onError: (error) => {
@@ -22,9 +16,7 @@ export const useLogoutMutation = () => {
     },
     onSuccess: async () => {
       try {
-  
-        await deleteCookies();
-        router.push("/sign-in");
+        await handleDeleteCookiesAndRedirect();
       } catch (error) {
         toast.error(getMessageFromHTTPError(error as HTTPError));
       }

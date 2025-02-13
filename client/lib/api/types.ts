@@ -1,3 +1,4 @@
+import { User } from "~/model/types";
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
 export type Endpoints = {
@@ -6,14 +7,10 @@ export type Endpoints = {
   "POST /auth/register": Message;
   "POST /auth/login": User;
   "POST /auth/logout": Message;
+  "GET /users/me": User;
 };
 
 export type Message = { message: string };
-
-export type User = {
-  email: string;
-  username: string;
-};
 
 export type RequestOptions = RequestInit & {
   query?: Record<string, string | boolean | number>;

@@ -28,6 +28,10 @@ export class FinanceTrackerApi {
   async logout() {
     return await this.api.post("/auth/logout");
   }
+
+  async me() {
+    return await this.api.get("/users/me");
+  }
 }
 
 export const fta = new FinanceTrackerApi();

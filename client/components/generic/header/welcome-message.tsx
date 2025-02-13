@@ -1,14 +1,18 @@
-
-import React from 'react'
-import { Heading } from '../heading'
-
+"use client";
+import React from "react";
+import { Heading } from "../heading";
+import { useMeQuery } from "~/api/query/useMeQuery";
 
 export const WelcomeMessage = () => {
-    //todo add username
+
   return (
-    <div className='text-white space-y-2'>
-        <Heading>Welcome</Heading> 
-        <p className='text-sm lg:text-base'>This is your financial overview report</p>
+    <div className="space-y-2 text-white">
+      <Heading>
+        Welcome Back 👋
+      </Heading>
+      <p className="text-sm lg:text-base">
+        This is your financial overview report
+      </p>
     </div>
-  )
-}
+  );
+};

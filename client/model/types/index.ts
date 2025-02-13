@@ -22,6 +22,11 @@ export type SignIn = z.infer<typeof SignInSchema>;
 export type SignUp = z.infer<typeof SignUpSchema>;
 export type RecoverPassword = z.infer<typeof RecoverPasswordSchema>;
 export type ResetPassword = z.infer<typeof ResetPasswordSchema>;
+export type User = {
+  email: string;
+  username: string;
+  id?: string;
+};
 
 /**
  * --------------------------------

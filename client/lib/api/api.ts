@@ -55,7 +55,7 @@ class Api<Spec> {
     return this.request("POST", path, {}, body);
   }
 
-  async get<P extends SpecPathsOf<Spec, "GET">>(path: P, body: TypedBody) {
+  async get<P extends SpecPathsOf<Spec, "GET">>(path: P, body?: TypedBody) {
     return this.request("GET", path, {}, body);
   }
 
@@ -63,7 +63,10 @@ class Api<Spec> {
     return this.request("PUT", path, {}, body);
   }
 
-  async delete<P extends SpecPathsOf<Spec, "DELETE">>(path: P, body: TypedBody) {
+  async delete<P extends SpecPathsOf<Spec, "DELETE">>(
+    path: P,
+    body: TypedBody,
+  ) {
     return this.request("DELETE", path, {}, body);
   }
 

@@ -11,12 +11,12 @@ export const isAuthenticated = async (
   try {
     const sessionToken = req.cookies[SESSION_TOKEN];
     if (!sessionToken) {
-      return res.status(404).json({ message: "No sessionToken found" });
+      return res.status(401).json({ message: "No sessionToken found" });
     }
     const existingUser = await getUserBySessionToken(sessionToken);
     if (!existingUser) {
       return res
-        .status(404)
+        .status(401)
         .json({ message: "No user found with this session token" });
     }
     merge(req, { user: existingUser });
@@ -24,7 +24,7 @@ export const isAuthenticated = async (
     return next();
   } catch (error) {
     console.log("isAuthenticated error:", error);
-    return res.status(400).json({ message: `Authentication error: ${error}` });
+    return res.status(401).json({ message: `Authentication error: ${error}` });
   }
 };
 
@@ -44,6 +44,6 @@ export const isOwner = async (
     next();
   } catch (error) {
     console.log("isOwner error:", error);
-    return res.status(400).json({ message: `isOwner error: ${error}` });
+    return res.status(401).json({ message: `isOwner error: ${error}` });
   }
 };

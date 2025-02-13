@@ -8,7 +8,9 @@ export default function Layout({
   return (
     <div>
       <Header />
-      <main className="px-3 lg:px-14"> {children}</main>
+      <main className="px-3 lg:px-14 py-4"> 
+        {children}
+        </main>
     </div>
   );
 }

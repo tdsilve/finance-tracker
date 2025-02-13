@@ -16,7 +16,7 @@ export const Header = () => {
           </Flex>
           <UserButtonAndMenu />
         </Flex>
-        <WelcomeMessage/>
+        <WelcomeMessage />
       </div>
     </header>
   );

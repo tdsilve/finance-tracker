@@ -11,8 +11,6 @@
     "pre-commit": "yarn lint",
     "format": "prettier --write ."
   },
-  
-
   "lint-staged": {
     "**/*{.js,.ts,.tsx}": [
       "eslint --fix"

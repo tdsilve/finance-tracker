@@ -6,5 +6,9 @@ import { Button } from "~/components/ui/button";
 export const LogoutButton = () => {
   const { mutate: logout } = useLogoutMutation();
 
-  return <Button onClick={() => logout()}>Logout</Button>;
+  return (
+    <Button onClick={() => logout()} variant={"ghost"}>
+      Logout
+    </Button>
+  );
 };

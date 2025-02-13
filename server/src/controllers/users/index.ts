@@ -1,8 +1,9 @@
 import express from "express";
+import { SESSION_TOKEN } from "../../const";
 
 import {
   deleteUserById,
-  getUserByEmail,
+  getUserBySessionToken,
   getUsers,
   updateUserById,
 } from "../../db/model/users";
@@ -54,10 +55,9 @@ export const updateUser = async (
 
 export const getMe = async (req: express.Request, res: express.Response) => {
   try {
- 
-    const {email} = req.body;
-    if (!email) return res.status(400).json({ message: "Missing email" });
-    const user = await getUserByEmail(email);
+    const sessionToken = req.cookies[SESSION_TOKEN];
+    if (!sessionToken) return res.status(401).json({ message: "Missing token" });
+    const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
     return res.status(200).json({email: user.email, username: user.username, id: user._id});
   } catch (error) {
