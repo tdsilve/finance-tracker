@@ -2,17 +2,17 @@
 import React from "react";
 import { useMeQuery } from "~/api/query/useMeQuery";
 
-import { Loading } from "../components/generic/loading/loading";
+import { Loading } from "../loading/loading";
 import { useDebounce } from "~/hooks/useDebounce";
 import { GridAbsoluteItemsCentered } from "~/components/generic/layout/grid-absolute-place-items-centered";
 
-export const AuthedProvider = ({
+export const ProtectedLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
   const me = useMeQuery();
-  const debounce = useDebounce({ value: me.isLoading, delay: 1000 });
+  const debounce = useDebounce({ value: me.isLoading, delay: 500 });
   if (debounce)
     return (
       <GridAbsoluteItemsCentered>
