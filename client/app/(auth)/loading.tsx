@@ -4,7 +4,8 @@ import { GridAbsoluteItemsCentered } from "~/components/generic/layout/grid-abso
 
 export default function Loading() {
   return (
-    <GridAbsoluteItemsCentered> <Loading /></GridAbsoluteItemsCentered>
+    <>hey</>
+    // <GridAbsoluteItemsCentered> <Loading /></GridAbsoluteItemsCentered>
      
 
   );
