@@ -1,6 +1,4 @@
 import { Grid } from "~/components/generic/grid";
-import { Logo } from "~/components/generic/logo";
-import { Flex } from "~/components/generic/flex";
 
 export default function Layout({
   children,
