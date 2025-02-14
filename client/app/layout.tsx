@@ -4,8 +4,6 @@ import "./globals.css";
 import { QueryProvider } from "~/provider/query-provider";
 import { Toaster } from "react-hot-toast";
 
-
-
 export const metadata: Metadata = {
   title: "Finance Tracker",
 };
@@ -17,9 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={"antialiased"}
-      >
+      <body className={"antialiased"}>
         <Toaster position="top-center" />
         <QueryProvider>{children}</QueryProvider>
       </body>

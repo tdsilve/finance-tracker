@@ -13,7 +13,6 @@ export const useMeQuery = () => {
     queryKey: ["me"],
     queryFn: () => fta.me(),
     staleTime: 5 * 60 * 1000, // 5 minutes before data is considered stale
-
   });
   React.useEffect(() => {
     if (query.error) {

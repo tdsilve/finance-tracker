@@ -4,13 +4,11 @@ import { getMessageFromHTTPError } from "~/lib/error";
 import toast from "react-hot-toast";
 import { fta } from "~/api/finance-tracker-api";
 
-
 type SingInMutationProps = {
   onSuccess?: (data?: User) => void;
 };
 
 export const useSingInMutation = (props?: SingInMutationProps) => {
-
   return useMutation({
     mutationFn: (data: SignIn) => fta.signIn(data),
     onError: (error) => {

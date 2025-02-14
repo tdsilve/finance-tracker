@@ -3,7 +3,6 @@ import React from "react";
 import { Heading } from "../heading";
 import { userStore } from "~/store/user";
 
-
 export const WelcomeMessage = () => {
   const user = userStore((state) => state.user);
 

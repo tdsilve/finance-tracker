@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "../Logo";
+import { Logo } from "../logo";
 import { Heading } from "../heading";
 import { Flex } from "../flex";
 
