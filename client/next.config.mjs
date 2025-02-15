@@ -1,17 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (
-    config,
-    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
-  ) => {
+  webpack: (config, { dev }) => {
     if (config.cache && !dev) {
       config.cache = Object.freeze({
-        type: 'memory',
-      })
+        type: "memory",
+      });
     }
-    // Important: return the modified config
-    return config
+
+    return config;
   },
-}
- 
-export default nextConfig
+};
+
+export default nextConfig;

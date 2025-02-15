@@ -4,6 +4,7 @@ import {
   SignInSchema,
   SignUpSchema,
   ResetPasswordSchema,
+  NewAccountSchema,
 } from "~/model/schemas";
 
 export type Route = {
@@ -27,6 +28,7 @@ export type User = {
   username: string;
   id?: string;
 };
+export type NewAccount = z.infer<typeof NewAccountSchema>;
 
 /**
  * --------------------------------

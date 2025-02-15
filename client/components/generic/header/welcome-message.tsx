@@ -4,7 +4,7 @@ import { Heading } from "../heading";
 import { userStore } from "~/store/user";
 
 export const WelcomeMessage = () => {
-  const user = userStore((state) => state.user);
+  const { user } = userStore();
 
   return (
     <div className="space-y-2 text-white">

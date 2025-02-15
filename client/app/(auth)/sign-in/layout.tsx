@@ -10,7 +10,9 @@ export default function SignInLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthLayout image={<Image src={image} alt="logo" width={500} height={500} />}>
+    <AuthLayout
+      image={<Image src={image} alt="logo" width={500} height={500} />}
+    >
       {children}
     </AuthLayout>
   );

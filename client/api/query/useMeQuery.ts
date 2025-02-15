@@ -8,7 +8,7 @@ import { handleDeleteCookiesAndRedirect } from "~/utils/auth";
 import { userStore } from "~/store/user";
 
 export const useMeQuery = () => {
-  const setUser = userStore((state) => state.setUser);
+  const { setUser } = userStore();
   const query = useQuery({
     queryKey: ["me"],
     queryFn: () => fta.me(),
