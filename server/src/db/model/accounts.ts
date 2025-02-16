@@ -7,8 +7,22 @@ export const UserAccountsModel = mongoose.model(
   UserAccountsSchema,
 );
 
-export const getAccounts = (id: string) =>
-  UserAccountsModel.findOne({ userId: id });
+export const getAccounts = async (id: string, fieldsSearch?: string) => {
+  const userAccounts = await UserAccountsModel.findOne({ userId: id });
+
+  if (!userAccounts) {
+    return null;
+  };
+
+  if (fieldsSearch) {
+    userAccounts.accounts = userAccounts.accounts.filter((account) =>
+    sanitizeStringToCompare(account.name).includes(sanitizeStringToCompare(fieldsSearch))
+    );
+  }
+
+  return userAccounts;
+};
+
 export const createAccount = async ({
   userId,
   name,
@@ -32,7 +46,7 @@ export const createAccount = async ({
     await userAccounts.save();
   } catch (error) {
     console.error("Error creating account:", error);
-    throw new Error("Could not create account");
+    throw new Error(error.message);
   }
 };
 

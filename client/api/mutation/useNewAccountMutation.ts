@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { fta } from "../finance-tracker-api";
 import toast from "react-hot-toast";
 import { MutationCallbacks } from "~/model/types";
+import { getMessageFromHTTPError } from "~/lib/error";
 
 
 export const useNewAccountMutation = ({ onSuccess}: MutationCallbacks ) => {
@@ -14,7 +15,8 @@ export const useNewAccountMutation = ({ onSuccess}: MutationCallbacks ) => {
       onSuccess?.();
     },
     onError: (error) => {
-      toast.error(error.message);
+      const message = getMessageFromHTTPError(error);
+      toast.error(message);
     },
   });
 

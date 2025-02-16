@@ -2,6 +2,7 @@
 // see: https://stackoverflow.com/a/37511463
 export const sanitizeStringToCompare = (str: string) => {
   return str
+     .trim()
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");

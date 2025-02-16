@@ -15,27 +15,31 @@ export const getAccountsFromUser = async (
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
+    const fieldsSearch = req.query.fieldsSearch as string || "";
     const sessionToken = req.cookies[SESSION_TOKEN];
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const userAccounts = await getAccounts(user._id.toString());
+    const userAccounts = await getAccounts(user._id.toString(), fieldsSearch);
     if (!userAccounts) {
       return res.status(404).json({ message: "No accounts found" });
     }
     const startIndex = (page - 1) * limit;
+   
     const paginatedAccounts = userAccounts.accounts.slice(startIndex, startIndex + limit);
+
+    const total = Math.ceil(userAccounts.accounts.length / limit)
 
     return res.status(200).json({
       totalAccounts: userAccounts.accounts.length,
-      totalPages: Math.ceil(userAccounts.accounts.length / limit),
+      totalPages: total,
       currentPage: page,
       content: paginatedAccounts,
-      last: page === userAccounts.accounts.length / limit,
+      last: page >= total,
     });
 
   } catch (error) {
     console.log("getAccountsFromUser error", error);
-    return res.status(500).json({ message: `Error: ${error}` });
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -58,7 +62,7 @@ export const registerAccount = async (
     return res.status(200).json({ message: "Account created successfully" });
   } catch (error) {
     console.log("registerAccount error", error);
-    return res.status(500).json({ message: `Error: ${error}` });
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -82,7 +86,7 @@ export const deleteAccount = async (
     return res.status(200).json({ message: "Accounts deleted successfully" });
   } catch (error) {
     console.log("deleteAccount error", error);
-    return res.status(500).json({ message: `Error: ${error}` });
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -103,6 +107,6 @@ export const updateAccount = async (
     return res.status(200).json({ message: "Account updated" });
   } catch (error) {
     console.log("updateAccount error", error);
-    return res.status(500).json({ message: `Error: ${error}` });
+    return res.status(500).json({ message: error });
   }
 };

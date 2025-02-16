@@ -45,7 +45,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: "User created" });
   } catch (error) {
     console.log("register error: ", error);
-    return res.status(500).json({ message: "Could not register user" });
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -92,7 +92,7 @@ export const login = async (req: express.Request, res: express.Response) => {
     });
   } catch (error) {
     console.log("login error: ", error);
-    return res.status(500).json({ message: "Could not login user" });
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -120,7 +120,7 @@ export const logout = async (req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.error("Logout error:", error);
-    return res.status(500).json({ message: "Could not logout user" });
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -169,9 +169,7 @@ export const sendResetPasswordEmail = async (
     return res.status(200).json({ message: "Password reset email sent" });
   } catch (error) {
     console.error("sendResetPasswordEmail error:", error);
-    return res
-      .status(500)
-      .json({ message: "Could not send email to reset password" });
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -201,6 +199,6 @@ export const resetPassword = async (
     return res.status(200).json({ message: "Password reset successfully" });
   } catch (error) {
     console.error("resetPassword error:", error);
-    return res.status(500).json({ message: "Could not reset user's password" });
+    return res.status(500).json({ message: error });
   }
 };
