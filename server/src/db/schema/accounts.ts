@@ -1,14 +1,27 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-export const AccountsSchema = new mongoose.Schema({
-  userId: { type: String, required: true },
-  accounts:  {
-    type: [String], // Store an array of account names
+const AccountSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+});
+
+export const UserAccountsSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  accounts: {
+    type: [AccountSchema],
     validate: {
-      validator: function (accounts: string[]) {
-        return new Set(accounts).size === accounts.length; // Ensure unique names
+      validator: function (value) {
+        const names = value.map((account) => account.name);
+        return names.length === new Set(names).size;
       },
-      message: "Account names must be unique.",
+      message: "Account names must be unique within a user.",
     },
-  }
+  },
 });

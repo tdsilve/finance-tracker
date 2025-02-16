@@ -52,7 +52,7 @@ export const register = async (req: express.Request, res: express.Response) => {
 export const login = async (req: express.Request, res: express.Response) => {
   try {
     const { email, password } = req.body;
-   
+
     if (!email || !password) {
       return res.status(400).json({ message: "Could not login user" });
     }

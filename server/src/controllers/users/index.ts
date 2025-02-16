@@ -43,6 +43,7 @@ export const updateUser = async (
 ) => {
   try {
     const { id } = req.params;
+    if (!id) return res.status(400).json({ message: "Missing id" });
     const { username } = req.body;
     if (!username) return res.status(400).json({ message: "Missing username" });
     const updatedUser = await updateUserById(id, { username });
@@ -56,12 +57,15 @@ export const updateUser = async (
 export const getMe = async (req: express.Request, res: express.Response) => {
   try {
     const sessionToken = req.cookies[SESSION_TOKEN];
-    if (!sessionToken) return res.status(401).json({ message: "Missing token" });
+    if (!sessionToken)
+      return res.status(401).json({ message: "Missing token" });
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    return res.status(200).json({email: user.email, username: user.username, id: user._id});
+    return res
+      .status(200)
+      .json({ email: user.email, username: user.username, id: user._id });
   } catch (error) {
     console.log("updateUser error", error);
     return res.status(500).json({ message: `Error: ${error}` });
   }
-}
+};
