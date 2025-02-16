@@ -13,14 +13,26 @@ export const getAccountsFromUser = async (
   res: express.Response,
 ) => {
   try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
     const sessionToken = req.cookies[SESSION_TOKEN];
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const accounts = await getAccounts(user._id.toString());
-    if (!accounts) {
+    const userAccounts = await getAccounts(user._id.toString());
+    if (!userAccounts) {
       return res.status(404).json({ message: "No accounts found" });
     }
-    return res.status(200).json(accounts);
+    const startIndex = (page - 1) * limit;
+    const paginatedAccounts = userAccounts.accounts.slice(startIndex, startIndex + limit);
+
+    return res.status(200).json({
+      totalAccounts: userAccounts.accounts.length,
+      totalPages: Math.ceil(userAccounts.accounts.length / limit),
+      currentPage: page,
+      content: paginatedAccounts,
+      last: page === userAccounts.accounts.length / limit,
+    });
+
   } catch (error) {
     console.log("getAccountsFromUser error", error);
     return res.status(500).json({ message: `Error: ${error}` });

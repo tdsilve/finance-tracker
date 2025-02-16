@@ -32,6 +32,20 @@ export class FinanceTrackerApi {
   async me() {
     return await this.api.get("/users/me");
   }
+
+  async getAccounts(page: number = 1, limit: number = 10, fieldsSearch: string = "") {
+    return await this.api.get("/accounts", undefined, {
+      query: {
+        page,
+        limit,
+        fieldsSearch
+      }
+    });
+  }
+
+  async createAccount( name: string ) {
+    return await this.api.post("/accounts", toJson({name}));
+  }
 }
 
 export const fta = new FinanceTrackerApi();

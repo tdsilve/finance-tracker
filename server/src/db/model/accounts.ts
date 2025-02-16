@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { UserAccountsSchema } from "../schema/accounts";
+import { sanitizeStringToCompare } from "../../utils/string";
 
 export const UserAccountsModel = mongoose.model(
   "UserAccounts",
@@ -21,7 +22,7 @@ export const createAccount = async ({
       UserAccountsModel.create({ userId, accounts: [{ name }] });
     }
     const accountExists = userAccounts.accounts.some(
-      (account) => account.name === name,
+      (account) => sanitizeStringToCompare(account.name) === sanitizeStringToCompare(name),
     );
     if (accountExists) {
       throw new Error("Account with this name already exists");

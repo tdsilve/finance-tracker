@@ -1,5 +1,5 @@
 import { HTTPError } from "../error";
-import { HttpMethod, TypedBody, SpecPathsOf, SpecEndpointValue } from "./types";
+import { HttpMethod, TypedBody, SpecPathsOf, SpecEndpointValue, RequestOptions } from "./types";
 
 export const createApi = <Spec>({
   host,
@@ -23,7 +23,7 @@ class Api<Spec> {
   private async request<M extends HttpMethod, P extends SpecPathsOf<Spec, M>>(
     method: M,
     path: P,
-    options: RequestInit,
+    options: RequestOptions,
     body?: TypedBody,
   ) {
     const response = await fetch(
@@ -55,8 +55,8 @@ class Api<Spec> {
     return this.request("POST", path, {}, body);
   }
 
-  async get<P extends SpecPathsOf<Spec, "GET">>(path: P, body?: TypedBody) {
-    return this.request("GET", path, {}, body);
+  async get<P extends SpecPathsOf<Spec, "GET">>(path: P, body?: TypedBody, opt:RequestOptions = {}) {
+    return this.request("GET", path, opt, body);
   }
 
   async put<P extends SpecPathsOf<Spec, "PUT">>(path: P, body: TypedBody) {

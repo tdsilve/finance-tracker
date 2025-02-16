@@ -36,6 +36,9 @@ export const ResetPasswordSchema = z.object({
     .min(PASSWORD_MIN.min, { message: PASSWORD_MIN.message }),
 });
 
-export const NewAccountSchema = z.object({
+export const AccountSchema = z.object({
+  id: z.string(),
   name: z.string().trim().min(1, { message: "Name is required" }),
 });
+
+export const NewAccountSchema = AccountSchema.pick({ name: true });

@@ -1,4 +1,4 @@
-import { User } from "~/model/types";
+import { User, Account } from "~/model/types";
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
 export type Endpoints = {
@@ -8,7 +8,18 @@ export type Endpoints = {
   "POST /auth/login": User;
   "POST /auth/logout": Message;
   "GET /users/me": User;
+  "GET /accounts": Paginated<Account>;
+  "POST /accounts": Message;
 };
+
+export type Paginated<T> = {
+  totalAccounts:number,
+  totalPages: number,
+  currentPage: number,
+  content: T[],
+  last: boolean,
+}
+
 
 export type Message = { message: string };
 
