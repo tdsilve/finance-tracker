@@ -16,12 +16,18 @@ export const NavigationMobile = () => {
     }
   }, [isMobile]);
   return (
-    <SheetContainer open={open} setOpen={setOpen} sheetTrigger={<Button
-      variant={"ghost"}
-      className="border-none text-white hover:bg-white/20"
+    <SheetContainer
+      open={open}
+      setOpen={setOpen}
+      sheetTrigger={
+        <Button
+          variant={"ghost"}
+          className="border-none text-white hover:bg-white/20"
+        >
+          <RiMenuLine />
+        </Button>
+      }
     >
-      <RiMenuLine />
-    </Button>}>
       <Flex col className="mt-12">
         <NavigationList />
       </Flex>

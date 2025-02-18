@@ -1,5 +1,12 @@
 import { HTTPError } from "../error";
-import { HttpMethod, TypedBody, SpecPathsOf, SpecEndpointValue, RequestOptions } from "./types";
+import {
+  HttpMethod,
+  TypedBody,
+  SpecPathsOf,
+  SpecEndpointValue,
+  RequestOptions,
+} from "./types";
+import { createSearchParams } from "../api/helpers";
 
 export const createApi = <Spec>({
   host,
@@ -26,19 +33,24 @@ class Api<Spec> {
     options: RequestOptions,
     body?: TypedBody,
   ) {
+    const { query, ...otherOptions } = options;
+    const searchParams = createSearchParams(query);
+    const fullPath = path + (query ? `?${searchParams}` : "");
     const response = await fetch(
-      `${this.host}${path}`,
+      `${this.host}${fullPath}`,
 
       {
         method: method,
+        ...otherOptions,
         headers: {
           ...this.headers,
-          ...options.headers,
+          ...otherOptions.headers,
           ...(body?.type === "json" && {
             "Content-Type": "application/json",
           }),
         },
         credentials: "include",
+        ...options,
         ...(body && {
           body: body.data,
         }),
@@ -55,7 +67,12 @@ class Api<Spec> {
     return this.request("POST", path, {}, body);
   }
 
-  async get<P extends SpecPathsOf<Spec, "GET">>(path: P, body?: TypedBody, opt:RequestOptions = {}) {
+  async get<P extends SpecPathsOf<Spec, "GET">>(
+    path: P,
+    body?: TypedBody,
+    opt: RequestOptions = {},
+  ) {
+    console.log("query", opt.query);
     return this.request("GET", path, opt, body);
   }
 

@@ -21,12 +21,15 @@ export const useDebounce = ({ value, delay = 500 }: UseDebounceArgs) => {
   return debouncedValue;
 };
 
-export const udeDebounceFunction = <T extends (...args: any[]) => void> (fn: T, delay: number  = 500) => {
+export const useDebounceFunction = <T extends (...args: any[]) => void>(
+  fn: T,
+  delay: number = 500,
+) => {
   let timeout: ReturnType<typeof setTimeout>;
-  return function(...args: Parameters<T>) {
+  return function (...args: Parameters<T>) {
     if (timeout) {
       clearTimeout(timeout);
     }
     timeout = setTimeout(() => fn(...args), delay);
   } as T;
-}
+};

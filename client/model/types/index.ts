@@ -5,7 +5,7 @@ import {
   SignUpSchema,
   ResetPasswordSchema,
   AccountSchema,
-  NewAccountSchema
+  NewAccountSchema,
 } from "~/model/schemas";
 
 export type Route = {
@@ -34,7 +34,7 @@ export type NewAccount = z.infer<typeof NewAccountSchema>;
 export type MutationCallbacks = {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
-}
+};
 
 /**
  * --------------------------------

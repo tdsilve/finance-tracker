@@ -13,13 +13,12 @@ export type Endpoints = {
 };
 
 export type Paginated<T> = {
-  totalAccounts:number,
-  totalPages: number,
-  currentPage: number,
-  content: T[],
-  last: boolean,
-}
-
+  totalAccounts: number;
+  totalPages: number;
+  currentPage: number;
+  content: T[];
+  last: boolean;
+};
 
 export type Message = { message: string };
 

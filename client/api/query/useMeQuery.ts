@@ -12,7 +12,7 @@ export const useMeQuery = () => {
   const query = useQuery({
     queryKey: ["me"],
     queryFn: () => fta.me(),
-    staleTime: 5 * 60 * 1000, 
+    staleTime: 5 * 60 * 1000,
   });
   React.useEffect(() => {
     if (query.error) {

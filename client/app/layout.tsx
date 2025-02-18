@@ -19,7 +19,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={"antialiased"}>
         <QueryProvider>
-         
           <Toaster position="top-center" />
           {children}
           <SheetProvider />

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Button } from "~/components/ui/button";
+
 import {
   Sheet,
   SheetContent,
@@ -9,8 +9,6 @@ import {
   SheetDescription,
 } from "~/components/ui/sheet";
 
-import { RiMenuLine } from "react-icons/ri";
-import { Heading } from "../heading";
 import { useNewAccountSheet } from "~/hooks/accounts/useNewAccountSheet";
 
 type SheetContainerProps = {
@@ -28,7 +26,7 @@ export const SheetContainer = ({
   children,
   sheetTitle,
   sheetDescription,
-  sheetTrigger
+  sheetTrigger,
 }: SheetContainerProps) => {
   useNewAccountSheet();
   return (
@@ -38,11 +36,7 @@ export const SheetContainer = ({
       </SheetTrigger>
       <SheetContent className="bg-white p-0">
         <div className="space-y-4 py-4 text-center">
-          {!!sheetTitle && (
-            <SheetTitle>
-              <Heading tag={"h3"}>{sheetTitle}</Heading>
-            </SheetTitle>
-          )}
+          {!!sheetTitle && <SheetTitle>{sheetTitle}</SheetTitle>}
           {!!sheetDescription && (
             <SheetDescription className="text-base font-light">
               {sheetDescription}

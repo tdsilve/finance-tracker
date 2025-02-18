@@ -13,7 +13,7 @@ export const ProtectedLayout = ({
 }>) => {
   const me = useMeQuery();
   const debounce = useDebounce({ value: me.isLoading, delay: 500 });
-  if (debounce)
+  if (!!debounce)
     return (
       <GridAbsoluteItemsCentered>
         <Loading />

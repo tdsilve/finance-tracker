@@ -15,11 +15,13 @@ export const getAccountsFromUser = async (
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
-    const fieldsSearch = req.query.fieldsSearch as string || "";
+    console.log("fieldsSearch", req.params);
+const fieldsSearch = req.query.fieldsSearch ? req.query.fieldsSearch : "";
+   
     const sessionToken = req.cookies[SESSION_TOKEN];
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const userAccounts = await getAccounts(user._id.toString(), fieldsSearch);
+    const userAccounts = await getAccounts(user._id.toString(), fieldsSearch as string);
     if (!userAccounts) {
       return res.status(404).json({ message: "No accounts found" });
     }
