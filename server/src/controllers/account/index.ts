@@ -15,7 +15,7 @@ export const getAccountsFromUser = async (
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
-    console.log("fieldsSearch", req.params);
+   
 const fieldsSearch = req.query.fieldsSearch ? req.query.fieldsSearch : "";
    
     const sessionToken = req.cookies[SESSION_TOKEN];
@@ -58,7 +58,11 @@ export const registerAccount = async (
 
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-
+    const accountExists = await getAccounts(user._id.toString(), name);
+    console.log("accountExists", accountExists);
+    if (accountExists?.accounts.length > 0) {
+      return res.status(400).json({ message: "Account with this name already exists" });
+    }
     await createAccount({ userId: user._id.toString(), name });
 
     return res.status(200).json({ message: "Account created successfully" });

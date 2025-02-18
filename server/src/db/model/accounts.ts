@@ -16,7 +16,7 @@ export const getAccounts = async (id: string, fieldsSearch?: string) => {
 
   if (fieldsSearch) {
     userAccounts.accounts = userAccounts.accounts.filter((account) =>
-    sanitizeStringToCompare(account.name).includes(sanitizeStringToCompare(fieldsSearch))
+    sanitizeStringToCompare(account.name) === (sanitizeStringToCompare(fieldsSearch))
     );
   }
 
