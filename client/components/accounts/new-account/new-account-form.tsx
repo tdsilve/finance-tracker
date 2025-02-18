@@ -1,14 +1,14 @@
 import React from "react";
-import { Form } from "../ui/form";
+import { Form } from "../..//ui/form";
 
 import { useCreateNewAccount } from "~/hooks/accounts/useCreateNewAccount";
-import { Button } from "../ui/button";
-import { Flex } from "../generic/flex";
+import { Button } from "../../ui/button";
+import { Flex } from "../../generic/flex";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-import { AutoComplete } from "../generic/auto-complete";
+import { AutoComplete } from "../../generic/auto-complete";
 
-import { FormFieldWrapper } from "../generic/form/FormFields";
+import { FormFieldWrapper } from "../../generic/form/FormFields";
 
 export const NewAccountForm = () => {
   const {
@@ -18,6 +18,7 @@ export const NewAccountForm = () => {
     accounts,
     handleDeleteAccount,
     setSelectedId,
+    deleteAccount,
   } = useCreateNewAccount();
 
   return (
@@ -45,8 +46,8 @@ export const NewAccountForm = () => {
           <Button
             type="button"
             variant={"outline"}
-            // disabled={isPending || form.getValues("name") === ""}
-            // loading={isPending}
+            disabled={deleteAccount.isPending || form.getValues("name") === ""}
+            loading={deleteAccount.isPending}
             onClick={handleDeleteAccount}
           >
             <RiDeleteBinLine /> Delete Account

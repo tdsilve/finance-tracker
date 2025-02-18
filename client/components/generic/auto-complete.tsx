@@ -70,7 +70,7 @@ export const AutoComplete = <T extends { _id: string; name: string }>({
                 className="w-full cursor-pointer rounded-md  p-2 text-black/60 hover:bg-gray-50"
                 onClick={() => {
                   setSelected(name);
-                  console.log("setSelectedId: ", filteredValues[0]._id);
+
                   setSelectedId?.(_id);
                   setClose();
                 }}

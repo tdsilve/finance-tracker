@@ -12,11 +12,11 @@ import { useDeleteAccountMutation } from "~/api/mutation/useDeleteAccountMutatio
 import { Account } from "~/model/types";
 
 export const useCreateNewAccount = () => {
-  const [selectedId, setSelectedId] = React.useState<Account["id"] | null>(
+  const [selectedId, setSelectedId] = React.useState<Account["_id"] | null>(
     null,
   );
-  const { mutate } = useNewAccountMutation({ onSuccess: () => form.reset() });
-  const { mutate: deleteAccount } = useDeleteAccountMutation({
+  const { mutate, isPending } = useNewAccountMutation({ onSuccess: () => form.reset() });
+  const deleteAccount = useDeleteAccountMutation({
     onSuccess: () => form.reset(),
   });
   const form = useForm({
@@ -37,12 +37,9 @@ export const useCreateNewAccount = () => {
   };
 
   const handleDeleteAccount = () => {
-    console.log("handleDeleteAccount", selectedId);
     if (!selectedId) return;
-    deleteAccount(selectedId);
+    deleteAccount.mutate(selectedId);
   };
-
-  const isPending = false;
 
   return {
     form,
@@ -51,5 +48,6 @@ export const useCreateNewAccount = () => {
     accounts: data?.pages?.flatMap((page) => page.content),
     handleDeleteAccount,
     setSelectedId,
+    deleteAccount,
   };
 };

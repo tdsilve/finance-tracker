@@ -72,7 +72,6 @@ class Api<Spec> {
     body?: TypedBody,
     opt: RequestOptions = {},
   ) {
-    console.log("query", opt.query);
     return this.request("GET", path, opt, body);
   }
 

@@ -12,7 +12,6 @@ export const useResetPassword = (token: string) => {
     defaultValues: { token: token, password: "" },
   });
   const onSubmit = (data: ResetPassword) => {
-    console.log("onSubmit", data);
     mutate(data);
   };
   return { form, onSubmit, isPending, isSuccess };
