@@ -54,7 +54,7 @@ export const AutoComplete = <T extends { _id: string; name: string }>({
             onChange={(e) => setSelected(e.target.value)}
             onClick={handleInputClick}
             onKeyDown={handleKeyDown}
-            onMouseEnter={() => setOpen(true)}
+       
           />
         </PopoverTrigger>
         <PopoverContent
