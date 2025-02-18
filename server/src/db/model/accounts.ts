@@ -9,7 +9,7 @@ export const UserAccountsModel = mongoose.model(
 
 export const getAccounts = async (id: string, fieldsSearch?: string) => {
   const userAccounts = await UserAccountsModel.findOne({ userId: id });
-console.log("userAccounts", fieldsSearch);
+
   if (!userAccounts) {
     return null;
   };

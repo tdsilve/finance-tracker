@@ -10,6 +10,7 @@ export type Endpoints = {
   "GET /users/me": User;
   "GET /accounts": Paginated<Account>;
   "POST /accounts": Message;
+  "DELETE /accounts": Message;
 };
 
 export type Paginated<T> = {

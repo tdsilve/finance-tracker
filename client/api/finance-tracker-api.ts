@@ -1,5 +1,5 @@
 import { createApi } from "~/lib/api/api";
-import { ResetPassword, SignIn, SignUp } from "~/model/types";
+import { Account, ResetPassword, SignIn, SignUp } from "~/model/types";
 import { toJson } from "~/lib/api/helpers";
 import { Endpoints } from "~/lib/api/types";
 
@@ -49,6 +49,10 @@ export class FinanceTrackerApi {
 
   async createAccount(name: string) {
     return await this.api.post("/accounts", toJson({ name }));
+  }
+
+  async deleteAccount(id: Account["id"]) {
+    return await this.api.delete(`/accounts`, toJson({ ids: [id] }));
   }
 }
 

@@ -8,9 +8,17 @@ import { NewAccount } from "~/model/types";
 import { useNewAccountMutation } from "~/api/mutation/useNewAccountMutation";
 import { useAccountsInfiniteQuery } from "~/api/query/useAccountsInfiniteQuery";
 import { useDebounce } from "../useDebounce";
+import { useDeleteAccountMutation } from "~/api/mutation/useDeleteAccountMutation";
+import { Account } from "~/model/types";
 
 export const useCreateNewAccount = () => {
+  const [selectedId, setSelectedId] = React.useState<Account["id"] | null>(
+    null,
+  );
   const { mutate } = useNewAccountMutation({ onSuccess: () => form.reset() });
+  const { mutate: deleteAccount } = useDeleteAccountMutation({
+    onSuccess: () => form.reset(),
+  });
   const form = useForm({
     resolver: zodResolver(NewAccountSchema),
     defaultValues: { name: "" },
@@ -28,6 +36,12 @@ export const useCreateNewAccount = () => {
     mutate(data.name);
   };
 
+  const handleDeleteAccount = () => {
+    console.log("handleDeleteAccount", selectedId);
+    if (!selectedId) return;
+    deleteAccount(selectedId);
+  };
+
   const isPending = false;
 
   return {
@@ -35,5 +49,7 @@ export const useCreateNewAccount = () => {
     onSubmit,
     isPending,
     accounts: data?.pages?.flatMap((page) => page.content),
+    handleDeleteAccount,
+    setSelectedId,
   };
 };
