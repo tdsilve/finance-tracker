@@ -2,9 +2,9 @@
 import React from "react";
 import { useNewAccountSheet } from "~/hooks/accounts/useNewAccountSheet";
 
-import { SheetContainer } from "../generic/sheet/sheet-container";
+import { SheetContainer } from "../../generic/sheet/sheet-container";
 import { NewAccountForm } from "./new-account-form";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 export const NewAccountSheet = () => {
   const { open, toggle } = useNewAccountSheet();
