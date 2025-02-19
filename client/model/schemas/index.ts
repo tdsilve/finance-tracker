@@ -42,3 +42,22 @@ export const AccountSchema = z.object({
 });
 
 export const NewAccountSchema = AccountSchema.pick({ name: true });
+
+export const PaymentStatusSchema = z.enum(["pending", "processing", "success", "failed"]);
+
+export const PaymentSchema = z.object({
+  _id: z.string(),
+  name: z.string().trim().min(1, { message: "Name is required" }),
+  amount: z.number().min(1, { message: "Amount is required" }),
+  status: PaymentStatusSchema.refine((val) => val !== undefined, {
+    message: "Status is required",
+  }),
+  email: z.string().trim().min(1, { message: "Email is required" }),
+});
+
+export const NewPaymentSchema = PaymentSchema.pick({
+  name: true,
+  amount: true,
+  status: true,
+  email: true,
+});

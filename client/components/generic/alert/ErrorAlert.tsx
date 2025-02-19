@@ -2,11 +2,12 @@
 import React from "react";
 import { RiCloseLine } from "react-icons/ri";
 import { Flex } from "../flex";
+import { Button } from "~/components/ui/button";
 
 type ErrorAlertProps = {
   message: string;
   onClose?: () => void;
-  action?: React.ReactNode;
+  action?: () => void;
 };
 export const ErrorAlert = ({ message, onClose, action }: ErrorAlertProps) => {
   const [visible, setVisible] = React.useState(true);
@@ -17,11 +18,11 @@ export const ErrorAlert = ({ message, onClose, action }: ErrorAlertProps) => {
     <Flex
       justify="between"
       items="center"
-      className="w-full max-w-md rounded-lg border border-red-400 bg-red-100 p-4 text-red-700 "
+      className="w-full max-w-md rounded-lg border border-red-400 bg-red-100 p-4  mx-auto "
     >
-      <div className="text-sm font-medium">
-        <div>{message}</div>
-        {action && <div className="mt-2">{action}</div>}
+      <div className="text-sm font-medium text-center border w-full">
+        <div className="text-red-700">{message}</div>
+        {action && <Button className="mt-2" onClick={() => action?.()} variant={"destructive"}>Try again</Button>}
       </div>
 
       {onClose && (

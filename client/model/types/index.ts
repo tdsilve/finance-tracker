@@ -6,6 +6,7 @@ import {
   ResetPasswordSchema,
   AccountSchema,
   NewAccountSchema,
+  PaymentSchema
 } from "~/model/schemas";
 
 export type Route = {
@@ -35,6 +36,7 @@ export type MutationCallbacks = {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 };
+export type Payment = z.infer<typeof PaymentSchema>;
 
 /**
  * --------------------------------

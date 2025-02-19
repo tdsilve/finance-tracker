@@ -15,7 +15,9 @@ export const useCreateNewAccount = () => {
   const [selectedId, setSelectedId] = React.useState<Account["_id"] | null>(
     null,
   );
-  const { mutate, isPending } = useNewAccountMutation({ onSuccess: () => form.reset() });
+  const { mutate, isPending } = useNewAccountMutation({
+    onSuccess: () => form.reset(),
+  });
   const deleteAccount = useDeleteAccountMutation({
     onSuccess: () => form.reset(),
   });

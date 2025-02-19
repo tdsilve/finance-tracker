@@ -15,9 +15,7 @@ export const NewAccountSheet = () => {
       sheetTitle={"New Account"}
       sheetDescription={"Create a new account to track your transactions"}
       sheetTrigger={
-        <Button className="border-none text-white hover:bg-white/20">
-          Add Account
-        </Button>
+        <Button className="border-none text-white ">Add Account</Button>
       }
     >
       <NewAccountForm />

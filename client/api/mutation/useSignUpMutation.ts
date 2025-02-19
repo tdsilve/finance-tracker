@@ -3,12 +3,10 @@ import { SignUp } from "~/model/types";
 import toast from "react-hot-toast";
 import { getMessageFromHTTPError } from "~/lib/error";
 import { fta } from "../finance-tracker-api";
+import { MutationCallbacks } from "~/model/types";
 
-type SingUpMutationProps = {
-  onSuccess?: () => void;
-};
 
-export const useSingUpMutation = (props?: SingUpMutationProps) =>
+export const useSingUpMutation = (props?: MutationCallbacks) =>
   useMutation({
     mutationFn: (data: SignUp) => fta.signUp(data),
     onError: (error) => {

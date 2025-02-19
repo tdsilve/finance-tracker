@@ -1,78 +1,78 @@
 import express from "express";
 import {
-  getAccounts,
-  createAccount,
-  deleteAccountsByIds,
-  updateAccountById,
-} from "../../db/model/accounts";
+  getPayments,
+  createPayment,
+  deletePaymentsByIds,
+  updatePaymentstById,
+} from "../../db/model/payments";
 import { SESSION_TOKEN } from "../../const";
 import { getUserBySessionToken } from "../../db/model/users";
 
-export const getAccountsFromUser = async (
+export const getPaymentsFromUser = async (
   req: express.Request,
   res: express.Response,
 ) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
-   
-const fieldsSearch = req.query.fieldsSearch ? req.query.fieldsSearch : "";
+   console.log("limit", req.query.limit);
+    const nameSearch = req.query.nameSearch ? req.query.nameSearch : "";
    
     const sessionToken = req.cookies[SESSION_TOKEN];
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const userAccounts = await getAccounts(user._id.toString(), fieldsSearch as string);
-    if (!userAccounts) {
-      return res.status(404).json({ message: "No accounts found" });
+    const userPayments = await getPayments(user._id.toString(), nameSearch as string);
+    if (!userPayments) {
+      return res.status(404).json({ message: "No payments found" });
     }
     const startIndex = (page - 1) * limit;
    
-    const paginatedAccounts = userAccounts.accounts.slice(startIndex, startIndex + limit);
+    const paginatedPayments = userPayments.payments.slice(startIndex, startIndex + limit);
 
-    const total = Math.ceil(userAccounts.accounts.length / limit)
+    const total = Math.ceil(userPayments.payments.length / limit)
 
     return res.status(200).json({
-      total: userAccounts.accounts.length,
+      total: userPayments.payments.length,
       totalPages: total,
       currentPage: page,
-      content: paginatedAccounts,
+      content: paginatedPayments,
       last: page >= total,
     });
 
   } catch (error) {
-    console.log("getAccountsFromUser error", error);
+    console.log("getPaymentsFromUser error", error);
     return res.status(500).json({ message: error });
   }
 };
 
-export const registerAccount = async (
+export const registerPayment = async (
   req: express.Request,
   res: express.Response,
 ) => {
   try {
-    const { name } = req.body;
-    if (!name) {
-      return res.status(400).json({ message: "Missing name" });
+    const { name, amount, email, status } = req.body;
+    if (!name && !amount && !email && !status) {
+      return res.status(400).json({ message: "Missing information" });
     }
     const sessionToken = req.cookies[SESSION_TOKEN];
 
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const accountExists = await getAccounts(user._id.toString(), name);
-    console.log("accountExists", accountExists);
-    if (accountExists?.accounts.length > 0) {
-      return res.status(400).json({ message: "Account with this name already exists" });
+    const paymentsExists = await getPayments(user._id.toString(), name);
+   
+    if (paymentsExists?.payments.length > 0) {
+      return res.status(400).json({ message: "Payment with this name already exists" });
     }
-    await createAccount({ userId: user._id.toString(), name });
+    await createPayment({ userId: user._id.toString(), name, amount, email, status });
 
     return res.status(200).json({ message: "Account created successfully" });
   } catch (error) {
-    console.log("registerAccount error", error);
+    console.log("registerPayment error", error);
     return res.status(500).json({ message: error });
   }
 };
 
-export const deleteAccount = async (
+export const deletePayment = async (
   req: express.Request,
   res: express.Response,
 ) => {
@@ -85,18 +85,18 @@ export const deleteAccount = async (
 
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const del = await deleteAccountsByIds(user._id.toString(), ids);
+    const del = await deletePaymentsByIds(user._id.toString(), ids);
     if (!del) {
-      return res.status(404).json({ message: "Accounts not found" });
+      return res.status(404).json({ message: "Payments not found" });
     }
-    return res.status(200).json({ message: "Accounts deleted successfully" });
+    return res.status(200).json({ message: "Payment deleted successfully" });
   } catch (error) {
-    console.log("deleteAccount error", error);
+    console.log("deletePayment error", error);
     return res.status(500).json({ message: error });
   }
 };
 
-export const updateAccount = async (
+export const updatePayment = async (
   req: express.Request,
   res: express.Response,
 ) => {
@@ -105,14 +105,14 @@ export const updateAccount = async (
 
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const { name } = req.body;
-    if (!name) {
-      return res.status(400).json({ message: "Missing  name" });
+    const { name, amount, status } = req.body;
+    if (!name || !amount || !status) {
+      return res.status(400).json({ message: "Missing  information" });
     }
-    await updateAccountById(user._id.toString(), name);
+    await updatePaymentstById(user._id.toString(), name);
     return res.status(200).json({ message: "Account updated" });
   } catch (error) {
-    console.log("updateAccount error", error);
+    console.log("updatePayment error", error);
     return res.status(500).json({ message: error });
   }
 };

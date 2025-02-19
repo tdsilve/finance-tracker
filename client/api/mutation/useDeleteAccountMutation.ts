@@ -2,17 +2,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fta } from "../finance-tracker-api";
 import { Account } from "~/model/types";
 import toast from "react-hot-toast";
-
-type UseDeleteAccountMutationArgs = {
-  onSuccess?: () => void;
-};
+import { MutationCallbacks } from "~/model/types";
 
 export const useDeleteAccountMutation = ({
   onSuccess,
-}: UseDeleteAccountMutationArgs) => {
+}: MutationCallbacks) => {
   const client = useQueryClient();
   return useMutation({
-    mutationFn: (id: Account["id"]) => fta.deleteAccount(id),
+    mutationFn: (id: Account["_id"]) => fta.deleteAccount(id),
     onSuccess: () => {
       onSuccess?.();
       toast.success("Account deleted successfully");

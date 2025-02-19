@@ -6,25 +6,30 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover";
 import { Input } from "../ui/input";
+import { sanitizeStringToCompare } from "~/utils/string";
 
-type AutoCompleteProps<T extends { _id: string; name: string }> = {
-  values?: T[];
+type Values = 
+  { _id: string; name: string }
+
+
+type AutoCompleteProps = {
+  values?: Values[];
 
   selected: string;
   setSelected: (value: string) => void;
   placeholder?: string;
-  setSelectedId?: (id: T["_id"]) => void;
+  setSelectedId?: (id: Values["_id"]) => void;
 };
 
-export const AutoComplete = <T extends { _id: string; name: string }>({
+export const AutoComplete = ({
   values,
   placeholder,
   selected = "",
   setSelected,
   setSelectedId,
-}: AutoCompleteProps<T>) => {
+}: AutoCompleteProps) => {
   const [open, setOpen] = React.useState(false);
-  const filteredValues = values?.filter(({ name }) => name.includes(selected));
+  const filteredValues = values?.filter(({ name }) => sanitizeStringToCompare(name).includes(sanitizeStringToCompare(selected)));
 
   const setClose = () => setOpen(false);
 
@@ -51,10 +56,12 @@ export const AutoComplete = <T extends { _id: string; name: string }>({
             placeholder={placeholder}
             className="w-full text-left "
             value={selected}
-            onChange={(e) => setSelected(e.target.value)}
+            onChange={(e) => {
+              setSelected(e.target.value)
+              
+            }}
             onClick={handleInputClick}
             onKeyDown={handleKeyDown}
-       
           />
         </PopoverTrigger>
         <PopoverContent
@@ -66,7 +73,7 @@ export const AutoComplete = <T extends { _id: string; name: string }>({
           <ul className="flex w-full flex-col gap-1  overflow-y-auto">
             {filteredValues?.map(({ _id, name }) => (
               <li
-                key={`${_id}_${name}`}
+                key={_id}
                 className="w-full cursor-pointer rounded-md  p-2 text-black/60 hover:bg-gray-50"
                 onClick={() => {
                   setSelected(name);
@@ -78,9 +85,9 @@ export const AutoComplete = <T extends { _id: string; name: string }>({
                 {name}
               </li>
             ))}
-            {filteredValues?.length === 0 && (
-              <li className="w-full text-gray-500">No results</li>
-            )}
+          {filteredValues?.length === 0 && (
+            <li className="w-full text-gray-500">No results</li>
+          )}
           </ul>
         </PopoverContent>
       </Popover>
