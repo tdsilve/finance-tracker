@@ -4,9 +4,7 @@ import { Account } from "~/model/types";
 import toast from "react-hot-toast";
 import { MutationCallbacks } from "~/model/types";
 
-export const useDeleteAccountMutation = ({
-  onSuccess,
-}: MutationCallbacks) => {
+export const useDeleteAccountMutation = ({ onSuccess }: MutationCallbacks) => {
   const client = useQueryClient();
   return useMutation({
     mutationFn: (id: Account["_id"]) => fta.deleteAccount(id),

@@ -5,7 +5,6 @@ import { getMessageFromHTTPError } from "~/lib/error";
 import { fta } from "../finance-tracker-api";
 import { MutationCallbacks } from "~/model/types";
 
-
 export const useSingUpMutation = (props?: MutationCallbacks) =>
   useMutation({
     mutationFn: (data: SignUp) => fta.signUp(data),

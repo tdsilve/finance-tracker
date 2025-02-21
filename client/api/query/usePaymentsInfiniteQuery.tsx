@@ -13,11 +13,10 @@ export const usePaymentsInfiniteQuery = ({
   limit = 10,
   name,
   enabeled = true,
-}: UsePaymentsInfiniteQueryProps =  {}) => {
+}: UsePaymentsInfiniteQueryProps = {}) => {
   const query = useInfiniteQuery({
     queryKey: ["infinite-payments"],
-    queryFn: ({ pageParam = 1 }) =>
-      fta.getPayments(pageParam, limit, name),
+    queryFn: ({ pageParam = 1 }) => fta.getPayments(pageParam, limit, name),
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) =>
       !lastPage.last ? lastPage.currentPage + 1 : undefined,

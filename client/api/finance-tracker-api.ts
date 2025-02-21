@@ -55,17 +55,19 @@ export class FinanceTrackerApi {
     return await this.api.delete(`/accounts`, toJson({ ids: [id] }));
   }
 
-  async getPayments( page: number = 1,
+  async getPayments(
+    page: number = 1,
     limit: number = 1,
     name: string = "",
 
-email?: string) {
+    email: string = "",
+  ) {
     return await this.api.get("/payments", undefined, {
       query: {
         page,
         limit,
         name,
-    
+        email,
       },
     });
   }

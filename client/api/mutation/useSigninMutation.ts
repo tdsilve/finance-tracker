@@ -3,7 +3,6 @@ import { SignIn, User } from "~/model/types";
 import { getMessageFromHTTPError } from "~/lib/error";
 import toast from "react-hot-toast";
 import { fta } from "~/api/finance-tracker-api";
-import { MutationCallbacks } from "~/model/types";
 
 type SingInMutationProps = {
   onSuccess?: (data?: User) => void;

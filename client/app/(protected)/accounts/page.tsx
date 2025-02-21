@@ -6,10 +6,10 @@ import { SheetProvider } from "~/provider/sheet-provider";
 export default function AccountsPage() {
   return (
     <div>
-      <CardHeader className="gap-y-2 md:flex-row md:items-center md:justify-between max-w-screen-2xl mx-auto w-full -mt-24">
+      <CardHeader className="mx-auto -mt-24 w-full max-w-screen-2xl gap-y-2 md:flex-row md:items-center md:justify-between">
         <CardTitle>Accounts Page</CardTitle> <SheetProvider />
       </CardHeader>
-      <PaymentsTable/>
+      <PaymentsTable />
     </div>
   );
 }

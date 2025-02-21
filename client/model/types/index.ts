@@ -6,7 +6,7 @@ import {
   ResetPasswordSchema,
   AccountSchema,
   NewAccountSchema,
-  PaymentSchema
+  PaymentSchema,
 } from "~/model/schemas";
 
 export type Route = {

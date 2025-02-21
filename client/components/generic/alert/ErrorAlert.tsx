@@ -18,11 +18,19 @@ export const ErrorAlert = ({ message, onClose, action }: ErrorAlertProps) => {
     <Flex
       justify="between"
       items="center"
-      className="w-full max-w-md rounded-lg border border-red-400 bg-red-100 p-4  mx-auto "
+      className="mx-auto w-full max-w-md rounded-lg border border-red-400 bg-red-100  p-4 "
     >
-      <div className="text-sm font-medium text-center border w-full">
+      <div className="w-full border text-center text-sm font-medium">
         <div className="text-red-700">{message}</div>
-        {action && <Button className="mt-2" onClick={() => action?.()} variant={"destructive"}>Try again</Button>}
+        {action && (
+          <Button
+            className="mt-2"
+            onClick={() => action?.()}
+            variant={"destructive"}
+          >
+            Try again
+          </Button>
+        )}
       </div>
 
       {onClose && (

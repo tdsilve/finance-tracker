@@ -6,6 +6,6 @@ type NewAccountSheet = {
 };
 
 export const useNewAccountSheet = create<NewAccountSheet>((set) => ({
-  open: false,
+  open: true,
   toggle: () => set((state) => ({ open: !state.open })),
 }));

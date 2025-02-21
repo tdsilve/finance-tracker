@@ -6,9 +6,11 @@ import { Button } from "../../ui/button";
 import { Flex } from "../../generic/flex";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-import { AutoComplete } from "../../generic/auto-complete";
+import { AccountsList } from "../../generic/auto-complete";
 
 import { FormFieldWrapper } from "../../generic/form/FormFields";
+import { PopoverDemo } from "~/components/generic/auto-complete copy";
+import { Input } from "~/components/ui/input";
 
 export const NewAccountForm = () => {
   const {
@@ -23,35 +25,61 @@ export const NewAccountForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
-        <Flex className="mx-auto w-full max-w-md p-4" gap={4} col>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="h-[87%] w-full">
+        <Flex
+          className="mx-auto size-full border  p-4"
+          gap={4}
+          col
+          justify="between"
+        >
           <FormFieldWrapper
             control={form.control}
             name={"name"}
             label={"Name"}
+            className="flex flex-col"
             renderInput={(field) => (
-              <AutoComplete
-                values={accounts}
-                placeholder="e.g. Cash, Credit Card"
-                selected={field.value}
-                setSelected={field.onChange}
-                setSelectedId={(id) => setSelectedId(id as string)}
-              />
+              <PopoverDemo
+                content={(props) => (
+                  <AccountsList
+                    values={accounts}
+                    selected={field.value}
+                    setSelected={field.onChange}
+                    setSelectedId={(id) => {
+                      props?.setOpen?.(false);
+                      setSelectedId(id as string);
+                    }}
+                    onMouseLeave={() => props?.setOpen?.(false)}
+                  />
+                )}
+              >
+                {({ bind, setOpen }) => (
+                  <Input
+                    {...bind}
+                    onMouseEnter={() => setOpen(true)}
+                    {...field}
+                    placeholder="e.g. Cash, Credit Card"
+                  />
+                )}
+              </PopoverDemo>
             )}
           />
 
-          <Button type="submit" disabled={isPending} loading={isPending}>
-            Create Account
-          </Button>
-          <Button
-            type="button"
-            variant={"outline"}
-            disabled={deleteAccount.isPending || form.getValues("name") === ""}
-            loading={deleteAccount.isPending}
-            onClick={handleDeleteAccount}
-          >
-            <RiDeleteBinLine /> Delete Account
-          </Button>
+          <Flex col gap={2}>
+            <Button type="submit" disabled={isPending} loading={isPending}>
+              Create Account
+            </Button>
+            <Button
+              type="button"
+              variant={"outline"}
+              disabled={
+                deleteAccount.isPending || form.getValues("name") === ""
+              }
+              loading={deleteAccount.isPending}
+              onClick={handleDeleteAccount}
+            >
+              <RiDeleteBinLine /> Delete Account
+            </Button>
+          </Flex>
         </Flex>
       </form>
     </Form>

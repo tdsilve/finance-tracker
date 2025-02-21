@@ -43,7 +43,12 @@ export const AccountSchema = z.object({
 
 export const NewAccountSchema = AccountSchema.pick({ name: true });
 
-export const PaymentStatusSchema = z.enum(["pending", "processing", "success", "failed"]);
+export const PaymentStatusSchema = z.enum([
+  "pending",
+  "processing",
+  "success",
+  "failed",
+]);
 
 export const PaymentSchema = z.object({
   _id: z.string(),
