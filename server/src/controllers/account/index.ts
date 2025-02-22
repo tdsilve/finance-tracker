@@ -4,6 +4,7 @@ import {
   createAccount,
   deleteAccountsByIds,
   updateAccountById,
+  isAccountExists
 } from "../../db/model/accounts";
 import { SESSION_TOKEN } from "../../const";
 import { getUserBySessionToken } from "../../db/model/users";
@@ -58,9 +59,9 @@ export const registerAccount = async (
 
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const accountExists = await getAccounts(user._id.toString(), name);
+    const accountExists = await isAccountExists(user._id.toString(), name);
    
-    if (accountExists?.accounts.length > 0) {
+    if (accountExists) {
       return res.status(400).json({ message: "Account with this name already exists" });
     }
     const userAmount = !amount ? 0 : amount;

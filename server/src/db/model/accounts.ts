@@ -7,6 +7,20 @@ export const UserAccountsModel = mongoose.model(
   UserAccountsSchema,
 );
 
+export const isAccountExists = async (id: string, name: string) => {
+  const userAccounts = await UserAccountsModel.findOne({ userId: id });
+
+  if (!userAccounts) {
+    return null;
+  };
+
+  const accountExists = userAccounts.accounts.some(
+    (account) => sanitizeStringToCompare(account.name) === sanitizeStringToCompare(name),
+  );
+
+  return accountExists;
+};
+
 export const getAccounts = async (id: string, fieldsSearch?: string) => {
   const userAccounts = await UserAccountsModel.findOne({ userId: id });
 

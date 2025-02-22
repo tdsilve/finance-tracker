@@ -38,7 +38,7 @@ export const useAccountForm = () => {
   }, [debouncedName, refetch]);
 
   const onSubmit = (data: NewAccount) => {
-    mutate(data.name);
+    mutate({name: data.name, amount: data.amount});
   };
 
   const handleDeleteAccount = () => {

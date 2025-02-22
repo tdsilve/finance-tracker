@@ -47,8 +47,8 @@ export class FinanceTrackerApi {
     });
   }
 
-  async createAccount(name: string) {
-    return await this.api.post("/accounts", toJson({ name }));
+  async createAccount(name: string, amount: number) {
+    return await this.api.post("/accounts", toJson({ name, amount }));
   }
 
   async deleteAccount(id: Account["_id"]) {

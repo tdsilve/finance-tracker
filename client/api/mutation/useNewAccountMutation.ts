@@ -7,8 +7,8 @@ import { getMessageFromHTTPError } from "~/lib/error";
 export const useNewAccountMutation = ({ onSuccess }: MutationCallbacks) => {
   const client = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (name: string) => {
-      return fta.createAccount(name);
+    mutationFn: ({name, amount}:{name: string, amount: number}) => {
+      return fta.createAccount(name, amount);
     },
     onSuccess: () => {
       toast.success("Account created successfully");
