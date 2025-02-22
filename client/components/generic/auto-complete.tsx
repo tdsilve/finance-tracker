@@ -1,5 +1,5 @@
 "use client";
-import React, { use } from "react";
+import React from "react";
 
 import {
   Popover,
@@ -33,37 +33,35 @@ export const Autocomplete = ({
   value,
   onChange,
   placeholder,
-}: PopoverDemoProps)  => {
+}: PopoverDemoProps) => {
   const [open, setOpen] = React.useState(false);
-  const el = React.useRef<HTMLDivElement| null >(null) ;
+  const el = React.useRef<HTMLDivElement | null>(null);
 
-  useOnClickOutside(el  as React.RefObject<HTMLElement>, () => setOpen(false));
+  useOnClickOutside(el as React.RefObject<HTMLElement>, () => setOpen(false));
 
   return (
-  <div ref={el} className="w-full">
-
-
-    <Popover open={open} >
-      <PopoverTrigger className="text-left w-full">
-        <Input
-        className="w-full"
-          onMouseEnter={() => setOpen(true)}
-          value={value}
-          onChange={(e) => {
-            onChange(e.target.value);
-            setOpen(true);
-          }}
-          placeholder={placeholder}
-        />
-      </PopoverTrigger>
-      <PopoverContent
-        className={cn("w-full ", contentClass)}
-        align={placement}
-        tabIndex={-1}
-      >
-        {content({ open, setOpen })}
-      </PopoverContent>
-    </Popover>
+    <div ref={el} className="w-full">
+      <Popover open={open}>
+        <PopoverTrigger className="w-full text-left">
+          <Input
+            className="w-full"
+            onMouseEnter={() => setOpen(true)}
+            value={value}
+            onChange={(e) => {
+              onChange(e.target.value);
+              setOpen(true);
+            }}
+            placeholder={placeholder}
+          />
+        </PopoverTrigger>
+        <PopoverContent
+          className={cn("w-full ", contentClass)}
+          align={placement}
+          tabIndex={-1}
+        >
+          {content({ open, setOpen })}
+        </PopoverContent>
+      </Popover>
     </div>
   );
-}
+};

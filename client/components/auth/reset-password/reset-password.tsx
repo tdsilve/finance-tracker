@@ -3,7 +3,7 @@ import React from "react";
 import { ResetPasswordForm } from "./reset-password-form";
 import { Flex } from "~/components/generic/flex";
 import { Header } from "../header";
-import { ErrorAlert } from "~/components/generic/alert/ErrorAlert";
+import { ErrorAlert } from "~/components/generic/alert/error-alert";
 import { PrimaryLink } from "~/components/generic/link/PrimaryLink";
 
 type ResetPasswordProps = { token?: string };

@@ -7,7 +7,7 @@ import { getMessageFromHTTPError } from "~/lib/error";
 export const useNewAccountMutation = ({ onSuccess }: MutationCallbacks) => {
   const client = useQueryClient();
   const mutation = useMutation({
-    mutationFn: ({name, amount}:{name: string, amount: number}) => {
+    mutationFn: ({ name, amount }: { name: string; amount: number }) => {
       return fta.createAccount(name, amount);
     },
     onSuccess: () => {

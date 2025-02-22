@@ -7,11 +7,11 @@ import { MutationCallbacks } from "~/model/types";
 export const useDeleteAccountMutation = ({ onSuccess }: MutationCallbacks) => {
   const client = useQueryClient();
   return useMutation({
-    mutationFn: (id: Account["_id"]) => fta.deleteAccount(id),
+    mutationFn: (ids: Account["_id"][]) => fta.deleteAccount(ids),
     onSuccess: () => {
       onSuccess?.();
       toast.success("Account deleted successfully");
-      client.invalidateQueries({ queryKey: ["accounts"] });
+      client.invalidateQueries({ queryKey: ["infinite-accounts"] });
     },
     onError: (error) => {
       toast.error(error.message);

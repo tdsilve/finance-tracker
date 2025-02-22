@@ -11,7 +11,7 @@ type UseAccountsInfiniteQueryProps = {
 
 export const useAccountsInfiniteQuery = ({
   limit = 10,
-  fieldsSearch,
+  fieldsSearch = "",
   enabeled = true,
 }: UseAccountsInfiniteQueryProps) => {
   const query = useInfiniteQuery({

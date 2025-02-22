@@ -20,5 +20,5 @@ export const ProtectedLayout = ({
       </GridAbsoluteItemsCentered>
     );
 
-  return <div>{children}</div>;
+  return <>{children}</>;
 };

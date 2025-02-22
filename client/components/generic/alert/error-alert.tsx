@@ -11,7 +11,7 @@ type ErrorAlertProps = {
 };
 export const ErrorAlert = ({ message, onClose, action }: ErrorAlertProps) => {
   const [visible, setVisible] = React.useState(true);
-
+  const msg = message ?? "Something went wrong";
   if (!visible) return null;
 
   return (
@@ -20,8 +20,8 @@ export const ErrorAlert = ({ message, onClose, action }: ErrorAlertProps) => {
       items="center"
       className="mx-auto w-full max-w-md rounded-lg border border-red-400 bg-red-100  p-4 "
     >
-      <div className="w-full border text-center text-sm font-medium">
-        <div className="text-red-700">{message}</div>
+      <div className="w-full  text-center text-sm font-medium">
+        <div className="text-red-700">{msg}</div>
         {action && (
           <Button
             className="mt-2"

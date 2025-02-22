@@ -51,8 +51,8 @@ export class FinanceTrackerApi {
     return await this.api.post("/accounts", toJson({ name, amount }));
   }
 
-  async deleteAccount(id: Account["_id"]) {
-    return await this.api.delete(`/accounts`, toJson({ ids: [id] }));
+  async deleteAccount(idsArray: Account["_id"][]) {
+    return await this.api.delete(`/accounts`, toJson({ ids: idsArray }));
   }
 
   async getPayments(

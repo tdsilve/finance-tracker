@@ -22,7 +22,7 @@ export const useAccountForm = () => {
     onSuccess: () => {
       form.reset();
       setSelectedId(null);
-    }
+    },
   });
   const form = useForm({
     resolver: zodResolver(NewAccountSchema),
@@ -38,14 +38,14 @@ export const useAccountForm = () => {
   }, [debouncedName, refetch]);
 
   const onSubmit = (data: NewAccount) => {
-    mutate({name: data.name, amount: data.amount});
+    mutate({ name: data.name, amount: data.amount });
   };
 
   const handleDeleteAccount = () => {
     if (!selectedId) return;
-    deleteAccount.mutate(selectedId);
+    deleteAccount.mutate([selectedId]);
   };
-const desableDeleteBtn = !selectedId  || deleteAccount.isPending ;
+  const desableDeleteBtn = !selectedId || deleteAccount.isPending;
   return {
     form,
     onSubmit,

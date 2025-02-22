@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { usePaymentsInfiniteQuery } from "~/api/query/usePaymentsInfiniteQuery";
-import { ErrorAlert } from "~/components/generic/alert/ErrorAlert";
+import { ErrorAlert } from "~/components/generic/alert/error-alert";
 import { Loading } from "~/components/generic/loading/loading";
 import { PaymentColumns } from "./PaymentColumns";
 import { DataTable } from "./Table";
