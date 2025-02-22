@@ -1,49 +1,60 @@
-"use client";
+"uyse client";
 import React from "react";
 
-import { sanitizeStringToCompare } from "~/utils/string";
-type Values = { _id: string; name: string };
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "~/components/ui/popover";
+import { cn } from "~/lib/css";
+import { Input } from "../ui/input";
 
-type AutoCompleteProps = {
-  values?: Values[];
+type Placement = "center" | "start" | "end";
 
-  selected: string;
-  setSelected: (value: string) => void;
-  placeholder?: string;
-  setSelectedId?: (id: Values["_id"]) => void;
-  onMouseLeave?: () => void;
+type RenderContentProps = {
+  open?: boolean;
+  setOpen?: (open: boolean) => void;
 };
-export const AccountsList = ({
-  values,
-  onMouseLeave,
-  selected = "",
-  setSelected,
-  setSelectedId,
-}: AutoCompleteProps) => {
-  const filteredValues = (values ?? [])?.filter(({ name }) =>
-    sanitizeStringToCompare(name).includes(sanitizeStringToCompare(selected)),
-  );
+type PopoverDemoProps = {
+  placement?: Placement;
+
+  content: (props?: RenderContentProps) => React.ReactNode;
+  contentClass?: string;
+  value: string | number;
+  onChange: (value: string) => void;
+  placeholder?: string;
+};
+
+export const Autocomplete = ({
+  placement = "center",
+  content,
+  contentClass,
+  value,
+  onChange,
+  placeholder,
+}: PopoverDemoProps)  => {
+  const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="w-full min-w-[300px]" onMouseLeave={onMouseLeave}>
-      {filteredValues?.map(({ _id, name }) => (
-        <div
-          className="w-full cursor-pointer rounded-md p-2 text-gray-600 hover:bg-gray-100"
-          key={_id}
-          onClick={() => {
-            setSelected(name);
-
-            setSelectedId?.(_id);
+    <Popover open={open}>
+      <PopoverTrigger className="text-left">
+        <Input
+          onMouseEnter={() => setOpen(true)}
+          value={value}
+          onChange={(e) => {
+            onChange(e.target.value);
+            setOpen(true);
           }}
-        >
-          {name}
-        </div>
-      ))}
-      {!filteredValues?.length && (
-        <div className="w-full p-2 text-center text-gray-600">
-          No results found.
-        </div>
-      )}
-    </div>
+          placeholder={placeholder}
+        />
+      </PopoverTrigger>
+      <PopoverContent
+        className={cn("w-full ", contentClass)}
+        align={placement}
+        tabIndex={-1}
+      >
+        {content({ open, setOpen })}
+      </PopoverContent>
+    </Popover>
   );
-};
+}

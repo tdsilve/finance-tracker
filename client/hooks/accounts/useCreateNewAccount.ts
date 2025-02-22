@@ -23,7 +23,7 @@ export const useCreateNewAccount = () => {
   });
   const form = useForm({
     resolver: zodResolver(NewAccountSchema),
-    defaultValues: { name: "" },
+    defaultValues: { name: "", amount: 0 },
   });
   const name = form.watch("name");
   const debouncedName = useDebounce({ value: name, delay: 500 }) as string;

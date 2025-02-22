@@ -16,7 +16,7 @@ export const getAccounts = async (id: string, fieldsSearch?: string) => {
 
   if (fieldsSearch) {
     userAccounts.accounts = userAccounts.accounts.filter((account) =>
-    sanitizeStringToCompare(account.name) === (sanitizeStringToCompare(fieldsSearch))
+    sanitizeStringToCompare(account.name).includes(sanitizeStringToCompare(fieldsSearch))
     );
   }
 
@@ -26,14 +26,17 @@ export const getAccounts = async (id: string, fieldsSearch?: string) => {
 export const createAccount = async ({
   userId,
   name,
+  amount
 }: {
   userId: string;
   name: string;
+  amount: number;
 }) => {
   try {
+    const userAmount = !amount ? 0 : amount;
     const userAccounts = await getAccounts(userId);
     if (!userAccounts) {
-      UserAccountsModel.create({ userId, accounts: [{ name }] });
+      UserAccountsModel.create({ userId, accounts: [{ name, amount: userAmount }] });
     }
     const accountExists = userAccounts.accounts.some(
       (account) => sanitizeStringToCompare(account.name) === sanitizeStringToCompare(name),
@@ -42,7 +45,8 @@ export const createAccount = async ({
       throw new Error("Account with this name already exists");
     }
 
-    userAccounts.accounts.push({ name });
+
+    userAccounts.accounts.push({ name, amount: userAmount });
     await userAccounts.save();
   } catch (error) {
     console.error("Error creating account:", error);

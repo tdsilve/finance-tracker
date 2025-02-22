@@ -39,9 +39,13 @@ export const ResetPasswordSchema = z.object({
 export const AccountSchema = z.object({
   _id: z.string(),
   name: z.string().trim().min(1, { message: "Name is required" }),
+  amount: z.number(),
 });
 
-export const NewAccountSchema = AccountSchema.pick({ name: true });
+export const NewAccountSchema = AccountSchema.pick({
+  name: true,
+  amount: true,
+});
 
 export const PaymentStatusSchema = z.enum([
   "pending",

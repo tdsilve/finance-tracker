@@ -6,6 +6,10 @@ const AccountSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  amount: {
+    type: Number,
+    required: true,
+  }
 });
 
 export const UserAccountsSchema = new mongoose.Schema({

@@ -50,8 +50,8 @@ export const registerAccount = async (
   res: express.Response,
 ) => {
   try {
-    const { name } = req.body;
-    if (!name) {
+    const { name , amount} = req.body;
+    if (!name ) {
       return res.status(400).json({ message: "Missing name" });
     }
     const sessionToken = req.cookies[SESSION_TOKEN];
@@ -59,11 +59,12 @@ export const registerAccount = async (
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
     const accountExists = await getAccounts(user._id.toString(), name);
-    console.log("accountExists", accountExists);
+   
     if (accountExists?.accounts.length > 0) {
       return res.status(400).json({ message: "Account with this name already exists" });
     }
-    await createAccount({ userId: user._id.toString(), name });
+    const userAmount = !amount ? 0 : amount;
+    await createAccount({ userId: user._id.toString(), name, amount: userAmount });
 
     return res.status(200).json({ message: "Account created successfully" });
   } catch (error) {

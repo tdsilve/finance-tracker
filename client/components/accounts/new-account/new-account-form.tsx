@@ -6,11 +6,10 @@ import { Button } from "../../ui/button";
 import { Flex } from "../../generic/flex";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-import { AccountsList } from "../../generic/auto-complete";
+import { AccountsList } from "../accounts-list";
 
 import { FormFieldWrapper } from "../../generic/form/FormFields";
-import { PopoverDemo } from "~/components/generic/auto-complete copy";
-import { Input } from "~/components/ui/input";
+import { Autocomplete } from "~/components/generic/auto-complete";
 
 export const NewAccountForm = () => {
   const {
@@ -38,11 +37,12 @@ export const NewAccountForm = () => {
             label={"Name"}
             className="flex flex-col"
             renderInput={(field) => (
-              <PopoverDemo
+              <Autocomplete
+                {...field}
                 content={(props) => (
                   <AccountsList
                     values={accounts}
-                    selected={field.value}
+                    selected={field.value as string}
                     setSelected={field.onChange}
                     setSelectedId={(id) => {
                       props?.setOpen?.(false);
@@ -51,16 +51,7 @@ export const NewAccountForm = () => {
                     onMouseLeave={() => props?.setOpen?.(false)}
                   />
                 )}
-              >
-                {({ bind, setOpen }) => (
-                  <Input
-                    {...bind}
-                    onMouseEnter={() => setOpen(true)}
-                    {...field}
-                    placeholder="e.g. Cash, Credit Card"
-                  />
-                )}
-              </PopoverDemo>
+              />
             )}
           />
 
