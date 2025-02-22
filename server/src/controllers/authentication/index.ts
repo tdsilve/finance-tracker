@@ -31,7 +31,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     }
     const salt = random();
     if (!salt) {
-      return res.status(500).json({ message: "No salt" });
+      return res.status(400).json({ message: "No salt" });
     }
 
     await createUser({
@@ -45,7 +45,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: "User created" });
   } catch (error) {
     console.log("register error: ", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -69,7 +69,7 @@ export const login = async (req: express.Request, res: express.Response) => {
 
     const salt = random();
     if (!salt) {
-      return res.status(500).json({ message: "No salt" });
+      return res.status(400).json({ message: "No salt" });
     }
     user.authentication.sessionToken = authentication(
       salt,
@@ -92,7 +92,7 @@ export const login = async (req: express.Request, res: express.Response) => {
     });
   } catch (error) {
     console.log("login error: ", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -120,7 +120,7 @@ export const logout = async (req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.error("Logout error:", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -148,7 +148,7 @@ export const sendResetPasswordEmail = async (
 
     const salt = random();
     if (!salt) {
-      return res.status(500).json({ message: "No salt" });
+      return res.status(400).json({ message: "No salt" });
     }
     user.authentication.sessionToken = authentication(
       salt,
@@ -169,7 +169,7 @@ export const sendResetPasswordEmail = async (
     return res.status(200).json({ message: "Password reset email sent" });
   } catch (error) {
     console.error("sendResetPasswordEmail error:", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -189,7 +189,7 @@ export const resetPassword = async (
     }
     const salt = random();
     if (!salt) {
-      return res.status(500).json({ message: "No salt" });
+      return res.status(400).json({ message: "No salt" });
     }
     user.authentication.salt = salt;
     user.authentication.password = authentication(password, salt);
@@ -199,6 +199,6 @@ export const resetPassword = async (
     return res.status(200).json({ message: "Password reset successfully" });
   } catch (error) {
     console.error("resetPassword error:", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };

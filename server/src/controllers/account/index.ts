@@ -42,7 +42,7 @@ const fieldsSearch = req.query.fieldsSearch ? req.query.fieldsSearch : "";
 
   } catch (error) {
     console.log("getAccountsFromUser error", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message });
   }
 };
 
@@ -70,7 +70,7 @@ export const registerAccount = async (
     return res.status(200).json({ message: "Account created successfully" });
   } catch (error) {
     console.log("registerAccount error", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -87,16 +87,15 @@ export const deleteAccount = async (
 
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const accounts = await getAccounts(user._id.toString());
+   
   
-    const del = await deleteAccountsByIds(user._id.toString(), ids);
-    if (!del) {
-      return res.status(404).json({ message: "Accounts not found" });
-    }
+     await deleteAccountsByIds(user._id.toString(), ids);
+ 
+    
     return res.status(200).json({ message: "Accounts deleted successfully" });
   } catch (error) {
     console.log("deleteAccount error", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message });
   }
 };
 
@@ -117,6 +116,6 @@ export const updateAccount = async (
     return res.status(200).json({ message: "Account updated" });
   } catch (error) {
     console.log("updateAccount error", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message });
   }
 };

@@ -78,9 +78,18 @@ export const deleteAccountsByIds = async (userId: string, ids: string[]) => {
     throw new Error("User accounts not found");
   }
 
+  const isAccountExists = ids.some((id) =>
+    userAccounts.accounts.some((account) => account._id.toString() === id),
+  );
+
+  if (!isAccountExists) {
+    throw new Error("Account not found");
+  }
+
   userAccounts.accounts = userAccounts.accounts.filter(
     (account) => !ids.includes(account._id.toString()),
   );
+  
 
   await userAccounts.save();
   return userAccounts;

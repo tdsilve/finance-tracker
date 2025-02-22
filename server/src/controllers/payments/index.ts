@@ -41,7 +41,7 @@ export const getPaymentsFromUser = async (
 
   } catch (error) {
     console.log("getPaymentsFromUser error", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -68,7 +68,8 @@ export const registerPayment = async (
     return res.status(200).json({ message: "Account created successfully" });
   } catch (error) {
     console.log("registerPayment error", error);
-    return res.status(500).json({ message: error });
+
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -92,7 +93,7 @@ export const deletePayment = async (
     return res.status(200).json({ message: "Payment deleted successfully" });
   } catch (error) {
     console.log("deletePayment error", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -113,6 +114,6 @@ export const updatePayment = async (
     return res.status(200).json({ message: "Account updated" });
   } catch (error) {
     console.log("updatePayment error", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };

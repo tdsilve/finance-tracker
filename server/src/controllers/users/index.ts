@@ -19,7 +19,7 @@ export const getAllUsers = async (
     return res.status(200).json(users);
   } catch (error) {
     console.log("getAllUsers error: ", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -33,7 +33,7 @@ export const deleteUser = async (
     return res.json(deleteUser);
   } catch (error) {
     console.log("deleteUser error", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -50,7 +50,7 @@ export const updateUser = async (
     return res.status(200).json(updatedUser);
   } catch (error) {
     console.log("updateUser error", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
 
@@ -66,6 +66,6 @@ export const getMe = async (req: express.Request, res: express.Response) => {
       .json({ email: user.email, username: user.username, id: user._id });
   } catch (error) {
     console.log("updateUser error", error);
-    return res.status(500).json({ message: error });
+    return res.status(400).json({ message: error?.message  });
   }
 };
