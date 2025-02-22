@@ -7,7 +7,6 @@ import { SheetContainer } from "../../sheet/sheet-container";
 import { RiMenuLine } from "react-icons/ri";
 import { Button } from "~/components/ui/button";
 
-
 export const NavigationMobile = () => {
   const isMobile = useIsMobileScreen(1024);
   const [open, setOpen] = React.useState(false);
@@ -17,7 +16,6 @@ export const NavigationMobile = () => {
       setOpen(false);
     }
   }, [isMobile]);
-
 
   return (
     <SheetContainer
@@ -33,7 +31,7 @@ export const NavigationMobile = () => {
       }
     >
       <Flex col className="mt-12">
-        <NavigationList onClick={() => setOpen(false)}/>
+        <NavigationList onClick={() => setOpen(false)} />
       </Flex>
     </SheetContainer>
   );

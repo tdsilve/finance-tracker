@@ -3,7 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import React from "react";
 import { Account } from "~/model/types";
-import { RiArrowUpLine} from "react-icons/ri";
+import { RiArrowUpLine } from "react-icons/ri";
 import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
 
@@ -76,7 +76,9 @@ export const columns: ColumnDef<Account>[] = [
       </Column>
     ),
     cell: ({ row }) => (
-      <div className="max-w-[150px] overflow-hidden text-ellipsis capitalize ">{row.original.name}</div>
+      <div className="max-w-[150px] overflow-hidden text-ellipsis capitalize ">
+        {row.original.name}
+      </div>
     ),
   },
   {
@@ -110,11 +112,9 @@ export const columns: ColumnDef<Account>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const account = row.original
- 
-      return (
-       <AccountsActions id={account._id} name={account.name}/>
-      )
+      const account = row.original;
+
+      return <AccountsActions id={account._id} name={account.name} />;
     },
   },
 ];

@@ -29,7 +29,7 @@ export const AccountsTable = ({ data }: DataTableProps) => {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
-  const [rowSelection, setRowSelection] = React.useState({})
+  const [rowSelection, setRowSelection] = React.useState({});
   const table = useReactTable({
     data,
     columns,
@@ -43,13 +43,17 @@ export const AccountsTable = ({ data }: DataTableProps) => {
     state: {
       sorting,
       columnFilters,
-      rowSelection
+      rowSelection,
     },
   });
-  const deleteAccounts = useDeleteAccountMutation({onSuccess: () => table.reset()});
+  const deleteAccounts = useDeleteAccountMutation({
+    onSuccess: () => table.reset(),
+  });
   const handleClickDeleteAccounts = () => {
-    deleteAccounts.mutate(table.getSelectedRowModel().rows.map((row) => row.original._id));
-  }
+    deleteAccounts.mutate(
+      table.getSelectedRowModel().rows.map((row) => row.original._id),
+    );
+  };
   return (
     <>
       <Flex items="center" justify="between" className=" p-4">
@@ -58,7 +62,10 @@ export const AccountsTable = ({ data }: DataTableProps) => {
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(val) => table.getColumn("name")?.setFilterValue(val)}
         />
-        <DataTableDeleteRowsButton label={`Delete account(s) (${table.getFilteredSelectedRowModel().rows.length})`} onClick={handleClickDeleteAccounts}/>
+        <DataTableDeleteRowsButton
+          label={`Delete account(s) (${table.getFilteredSelectedRowModel().rows.length})`}
+          onClick={handleClickDeleteAccounts}
+        />
       </Flex>
 
       <DataTable table={table} columns={columns} />

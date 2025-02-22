@@ -37,11 +37,10 @@ export const SheetContainer = ({
       <SheetContent className="bg-white p-0">
         <div className="space-y-4 py-4 text-center">
           <SheetTitle>{sheetTitle}</SheetTitle>
-    
-            <SheetDescription className="text-base font-light">
-              {sheetDescription}
-            </SheetDescription>
-         
+
+          <SheetDescription className="text-base font-light">
+            {sheetDescription}
+          </SheetDescription>
         </div>
 
         {children}
