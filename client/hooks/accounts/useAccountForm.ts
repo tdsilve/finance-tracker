@@ -11,7 +11,7 @@ import { useDebounce } from "../useDebounce";
 import { useDeleteAccountMutation } from "~/api/mutation/useDeleteAccountMutation";
 import { Account } from "~/model/types";
 
-export const useCreateNewAccount = () => {
+export const useAccountForm = () => {
   const [selectedId, setSelectedId] = React.useState<Account["_id"] | null>(
     null,
   );
@@ -19,7 +19,10 @@ export const useCreateNewAccount = () => {
     onSuccess: () => form.reset(),
   });
   const deleteAccount = useDeleteAccountMutation({
-    onSuccess: () => form.reset(),
+    onSuccess: () => {
+      form.reset();
+      setSelectedId(null);
+    }
   });
   const form = useForm({
     resolver: zodResolver(NewAccountSchema),
@@ -42,7 +45,7 @@ export const useCreateNewAccount = () => {
     if (!selectedId) return;
     deleteAccount.mutate(selectedId);
   };
-
+const desableDeleteBtn = !selectedId  || deleteAccount.isPending ;
   return {
     form,
     onSubmit,
@@ -51,5 +54,6 @@ export const useCreateNewAccount = () => {
     handleDeleteAccount,
     setSelectedId,
     deleteAccount,
+    desableDeleteBtn,
   };
 };

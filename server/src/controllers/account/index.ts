@@ -86,6 +86,8 @@ export const deleteAccount = async (
 
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
+    const accounts = await getAccounts(user._id.toString());
+  
     const del = await deleteAccountsByIds(user._id.toString(), ids);
     if (!del) {
       return res.status(404).json({ message: "Accounts not found" });

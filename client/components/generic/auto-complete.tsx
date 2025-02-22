@@ -1,5 +1,5 @@
-"uyse client";
-import React from "react";
+"use client";
+import React, { use } from "react";
 
 import {
   Popover,
@@ -8,6 +8,7 @@ import {
 } from "~/components/ui/popover";
 import { cn } from "~/lib/css";
 import { Input } from "../ui/input";
+import { useOnClickOutside } from "usehooks-ts";
 
 type Placement = "center" | "start" | "end";
 
@@ -34,11 +35,18 @@ export const Autocomplete = ({
   placeholder,
 }: PopoverDemoProps)  => {
   const [open, setOpen] = React.useState(false);
+  const el = React.useRef<HTMLDivElement| null >(null) ;
+
+  useOnClickOutside(el  as React.RefObject<HTMLElement>, () => setOpen(false));
 
   return (
-    <Popover open={open}>
-      <PopoverTrigger className="text-left">
+  <div ref={el} className="w-full">
+
+
+    <Popover open={open} >
+      <PopoverTrigger className="text-left w-full">
         <Input
+        className="w-full"
           onMouseEnter={() => setOpen(true)}
           value={value}
           onChange={(e) => {
@@ -56,5 +64,6 @@ export const Autocomplete = ({
         {content({ open, setOpen })}
       </PopoverContent>
     </Popover>
+    </div>
   );
 }
