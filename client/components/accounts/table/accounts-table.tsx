@@ -46,7 +46,7 @@ export const AccountsTable = ({ data }: DataTableProps) => {
       rowSelection
     },
   });
-  const deleteAccounts = useDeleteAccountMutation({onSuccess: () => table.resetRowSelection()});
+  const deleteAccounts = useDeleteAccountMutation({onSuccess: () => table.reset()});
   const handleClickDeleteAccounts = () => {
     deleteAccounts.mutate(table.getSelectedRowModel().rows.map((row) => row.original._id));
   }
@@ -58,7 +58,7 @@ export const AccountsTable = ({ data }: DataTableProps) => {
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(val) => table.getColumn("name")?.setFilterValue(val)}
         />
-        <DataTableDeleteRowsButton label={`Delete accounts (${table.getFilteredSelectedRowModel().rows.length})`} onClick={handleClickDeleteAccounts}/>
+        <DataTableDeleteRowsButton label={`Delete account(s) (${table.getFilteredSelectedRowModel().rows.length})`} onClick={handleClickDeleteAccounts}/>
       </Flex>
 
       <DataTable table={table} columns={columns} />

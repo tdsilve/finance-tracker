@@ -3,11 +3,12 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import React from "react";
 import { Account } from "~/model/types";
-import { RiArrowUpLine } from "react-icons/ri";
+import { RiArrowUpLine} from "react-icons/ri";
 import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
 
 import { cn } from "~/lib/css";
+import { AccountsActions } from "./accounts-actions";
 
 enum BankAccountStatus {
   Negative = "🔴",
@@ -104,6 +105,16 @@ export const columns: ColumnDef<Account>[] = [
     cell: ({ row }) => {
       const status = getStatus(row.original.amount);
       return <div>{status}</div>;
+    },
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const account = row.original
+ 
+      return (
+       <AccountsActions id={account._id} name={account.name}/>
+      )
     },
   },
 ];

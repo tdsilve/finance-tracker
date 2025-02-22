@@ -95,7 +95,33 @@ export const deleteAccountsByIds = async (userId: string, ids: string[]) => {
   return userAccounts;
 };
 
-export const updateAccountById = (id: string, values: Record<string, any>) =>
-  UserAccountsModel.findByIdAndUpdate(id, values, { new: true }).then((user) =>
-    user.toObject(),
-  );
+export const updateAccountById = async (userId: string, id: string, name?: string, amount?: number) => {
+  const userAccounts = await getAccounts(userId);
+
+  if (!userAccounts) {
+    throw new Error("User accounts not found");
+  }
+
+  if (!id) {
+    throw new Error("No account id provided");
+  }
+
+  const index = userAccounts.accounts.findIndex((account) => account._id.toString() === id);
+
+
+  if (index === -1) {
+    throw new Error("Account not found");
+  }
+
+  if (name) {
+    userAccounts.accounts[index].name = name;
+  }
+
+  if (amount) {
+    userAccounts.accounts[index].amount = amount;
+  }
+
+  await userAccounts.save();
+  return userAccounts;
+}
+ 

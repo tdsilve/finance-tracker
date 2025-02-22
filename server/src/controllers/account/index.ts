@@ -108,11 +108,14 @@ export const updateAccount = async (
 
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const { name } = req.body;
-    if (!name) {
-      return res.status(400).json({ message: "Missing  name" });
+    const { name, _id, amount } = req.body;
+    if (!_id) {
+      return res.status(400).json({ message: "Missing  id" });
     }
-    await updateAccountById(user._id.toString(), name);
+    if  (!name || !amount) {
+      return res.status(400).json({ message: "Missing  info" });
+    }
+    await updateAccountById(user._id.toString(), _id, name, amount);
     return res.status(200).json({ message: "Account updated" });
   } catch (error) {
     console.log("updateAccount error", error);

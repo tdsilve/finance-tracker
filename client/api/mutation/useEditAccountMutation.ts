@@ -4,14 +4,14 @@ import toast from "react-hot-toast";
 import { Account, MutationCallbacks } from "~/model/types";
 import { getMessageFromHTTPError } from "~/lib/error";
 
-export const useNewAccountMutation = ({ onSuccess }: MutationCallbacks) => {
+export const useEditAccountMutation = ({ onSuccess }: MutationCallbacks) => {
   const client = useQueryClient();
   const mutation = useMutation({
-    mutationFn: ({ name, amount }: { name: Account["name"]; amount: Account["amount"] }) => {
-      return fta.createAccount(name, amount);
+    mutationFn: ({_id, name, amount }: Account) => {
+      return fta.editAccount({_id, name, amount});
     },
     onSuccess: () => {
-      toast.success("Account created successfully");
+      toast.success("Account edited 111 successfully");
       onSuccess?.();
       client.invalidateQueries({ queryKey: "infinite-accounts" });
     },

@@ -11,6 +11,7 @@ export type Endpoints = {
   "GET /accounts": Paginated<Account>;
   "POST /accounts": Message;
   "DELETE /accounts": Message;
+  "PUT /accounts": Message;
   "GET /payments": Paginated<Payment>;
 };
 
