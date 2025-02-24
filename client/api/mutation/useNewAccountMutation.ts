@@ -19,7 +19,7 @@ export const useNewAccountMutation = ({ onSuccess }: MutationCallbacks) => {
     onSuccess: () => {
       toast.success("Account created successfully");
       onSuccess?.();
-      client.invalidateQueries({ queryKey: "infinite-accounts" });
+      client.invalidateQueries({ queryKey: ["infinite-accounts", { fieldsSearch: "" }] });
     },
     onError: (error) => {
       const message = getMessageFromHTTPError(error);

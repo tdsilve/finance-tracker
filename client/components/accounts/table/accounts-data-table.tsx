@@ -22,5 +22,6 @@ export const AccountsDataTable = () => {
   if (!data)
     return <NoDataAlert message="No accounts found" action={refetch} />;
   const flatData = data?.pages?.flatMap((page) => page.content);
-  return <AccountsTable data={flatData} />;
+  console.log("data", data);
+  return <AccountsTable data={flatData} totalPages={data?.pages[0].totalPages} currentPage={data?.pages[0].currentPage} />;
 };

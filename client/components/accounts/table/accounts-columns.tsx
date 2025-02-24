@@ -76,7 +76,7 @@ export const columns: ColumnDef<Account>[] = [
       </Column>
     ),
     cell: ({ row }) => (
-      <div className="max-w-[150px] overflow-hidden text-ellipsis capitalize ">
+      <div className="max-w-[150px] overflow-hidden text-ellipsis pl-3 capitalize">
         {row.original.name}
       </div>
     ),
@@ -94,7 +94,7 @@ export const columns: ColumnDef<Account>[] = [
     cell: ({ row }) => {
       const amount = row.original.amount;
       return (
-        <div>
+        <div className="pl-3">
           <span className="mr-1">$</span>
           {amount}
         </div>
@@ -106,7 +106,7 @@ export const columns: ColumnDef<Account>[] = [
     header: "Status",
     cell: ({ row }) => {
       const status = getStatus(row.original.amount);
-      return <div>{status}</div>;
+      return <div className="px-3">{status}</div>;
     },
   },
   {

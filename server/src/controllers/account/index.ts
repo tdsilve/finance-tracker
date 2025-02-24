@@ -16,6 +16,8 @@ export const getAccountsFromUser = async (
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
+    const sorted = parseInt(req.query.sorted as string) || "true";
+    
    
 const fieldsSearch = req.query.fieldsSearch ? req.query.fieldsSearch : "";
    
@@ -27,17 +29,21 @@ const fieldsSearch = req.query.fieldsSearch ? req.query.fieldsSearch : "";
       return res.status(404).json({ message: "No accounts found" });
     }
     const startIndex = (page - 1) * limit;
-   
-    const paginatedAccounts = userAccounts.accounts.slice(startIndex, startIndex + limit);
+    let accounts = userAccounts.accounts;
+    if (sorted === "true") {
+      accounts = accounts.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    const paginatedAccounts = accounts.slice(startIndex, startIndex + limit);
 
-    const total = Math.ceil(userAccounts.accounts.length / limit)
+    const total = Math.ceil(accounts.length / limit)
 
     return res.status(200).json({
-      total: userAccounts.accounts.length,
+      total: accounts.length,
       totalPages: total,
       currentPage: page,
       content: paginatedAccounts,
       last: page >= total,
+      sorted: sorted === "true",
     });
 
   } catch (error) {
@@ -112,7 +118,7 @@ export const updateAccount = async (
     if (!_id) {
       return res.status(400).json({ message: "Missing  id" });
     }
-    if  (!name || !amount) {
+    if  (!name || amount == undefined || amount == null) {
       return res.status(400).json({ message: "Missing  info" });
     }
     await updateAccountById(user._id.toString(), _id, name, amount);

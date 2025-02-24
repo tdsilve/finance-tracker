@@ -22,13 +22,16 @@ import { useDeleteAccountMutation } from "~/api/mutation/useDeleteAccountMutatio
 
 interface DataTableProps {
   data: Account[];
+  totalPages: number;
+  currentPage: number;
 }
 
-export const AccountsTable = ({ data }: DataTableProps) => {
+export const AccountsTable = ({ data , totalPages, currentPage}: DataTableProps) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
+
   const [rowSelection, setRowSelection] = React.useState({});
   const table = useReactTable({
     data,
@@ -46,14 +49,22 @@ export const AccountsTable = ({ data }: DataTableProps) => {
       rowSelection,
     },
   });
+  const resetTable = () => {
+    table.reset();
+    setSorting([]);
+    setColumnFilters([]);
+    setRowSelection({});
+  };
   const deleteAccounts = useDeleteAccountMutation({
-    onSuccess: () => table.reset(),
+    onSuccess: () => resetTable(),
+    onError: () => resetTable(),
   });
   const handleClickDeleteAccounts = () => {
     deleteAccounts.mutate(
       table.getSelectedRowModel().rows.map((row) => row.original._id),
     );
   };
+
   return (
     <>
       <Flex items="center" justify="between" className=" p-4">
@@ -65,11 +76,12 @@ export const AccountsTable = ({ data }: DataTableProps) => {
         <DataTableDeleteRowsButton
           label={`Delete account(s) (${table.getFilteredSelectedRowModel().rows.length})`}
           onClick={handleClickDeleteAccounts}
+          disabled={table.getFilteredSelectedRowModel().rows.length == 0}
         />
       </Flex>
 
       <DataTable table={table} columns={columns} />
-      <DataTablePagination table={table} showSelection={true} />
+      <DataTablePagination table={table} />
     </>
   );
 };

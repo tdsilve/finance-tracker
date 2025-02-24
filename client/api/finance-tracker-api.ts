@@ -37,12 +37,14 @@ export class FinanceTrackerApi {
     page: number = 1,
     limit: number = 10,
     fieldsSearch: string = "",
+    sorted: boolean = true,
   ) {
     return await this.api.get("/accounts", undefined, {
       query: {
         page,
         limit,
         fieldsSearch,
+        sorted,
       },
     });
   }

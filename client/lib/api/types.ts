@@ -15,6 +15,11 @@ export type Endpoints = {
   "GET /payments": Paginated<Payment>;
 };
 
+export type InfiniteData<T> = {
+  pages: { content: T[] }[];
+  pageParams: unknown[];
+};
+
 export type Paginated<T> = {
   total: number;
   totalPages: number;

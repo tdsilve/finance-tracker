@@ -11,18 +11,7 @@ type ResetPasswordProps = { token?: string };
 export const ResetPassword = ({ token }: ResetPasswordProps) => {
   if (!token) {
     return (
-      <ErrorAlert
-        message="An error has occurred. Your reset link may be invalid or expired."
-        action={
-          <div className="text-center">
-            Go back to
-            <PrimaryLink href="/sign-in" className=" mx-1">
-              sign in
-            </PrimaryLink>
-            page
-          </div>
-        }
-      />
+      <ErrorAlert message="An error has occurred. Your reset link may be invalid or expired." />
     );
   }
   return (

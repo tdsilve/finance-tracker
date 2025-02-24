@@ -27,6 +27,7 @@ const eslintConfig = [
       "@typescript-eslint/no-explicit-any": "off",
       "tailwindcss/no-custom-classname": "off",
       "@typescript-eslint/no-require-imports": "off",
+      "react/display-name": "off",
     },
   },
 ];

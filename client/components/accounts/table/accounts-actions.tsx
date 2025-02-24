@@ -17,11 +17,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
-import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { Flex } from "~/components/generic/flex";
 import { useEditAccountMutation } from "~/api/mutation/useEditAccountMutation";
-import { useAccountForm } from "~/hooks/accounts/useAccountForm";
 import { FormFieldWrapper } from "~/components/generic/form/FormFields";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,45 +35,43 @@ type EditAmountDialogProps = {
   handleActionsClose: () => void;
 } & AccountsActionsProps;
 
-const EditAccountDialog = ({
-  id,
-  name,
-  handleActionsClose,
-}: EditAmountDialogProps) => {
-  const [open, setOpen] = React.useState(true);
+const EditAccountDialog = React.forwardRef<
+  HTMLDivElement,
+  EditAmountDialogProps
+>(({ id, name, handleActionsClose }, ref) => {
+  const [open, setOpen] = React.useState(false);
 
   const updateAccount = useEditAccountMutation({
     onSuccess: () => handleActionsClose(),
   });
+
   const handleClose = () => {
     setOpen(false);
   };
-  const {} = useAccountForm();
+
   const form = useForm({
     resolver: zodResolver(AccountSchema),
     defaultValues: { name, _id: id, amount: 0 },
   });
+
   const onSubmit = (data: Account) => {
-    console.log("data", data);
     updateAccount.mutate(data);
   };
-  //if success call handleActionsClose
+
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="ghost" onClick={() => setOpen(true)}>
-          Edit Profile
+          Edit
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-white lg:max-w-[425px]">
+      <DialogContent ref={ref} className="bg-white lg:max-w-[425px]">
         <DialogHeader>
           <DialogTitle> Edit the amount of {name}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <Flex gap={4} items="center">
-              <Label htmlFor="name">New amount</Label>
-
               <FormFieldWrapper
                 control={form.control}
                 name={"amount"}
@@ -88,21 +84,23 @@ const EditAccountDialog = ({
             </Flex>
 
             <DialogFooter className="gap-2">
-              <Button type="submit">Save changes</Button>
-              <Button
-                type="button"
-                variant={"destructive"}
-                onClick={handleClose}
-              >
-                Cancel
-              </Button>
+              <Flex gap={2} items="center" className="m-2">
+                <Button type="submit">Save changes</Button>
+                <Button
+                  type="button"
+                  variant="destructive"
+                  onClick={handleClose}
+                >
+                  Cancel
+                </Button>
+              </Flex>
             </DialogFooter>
           </form>
         </Form>
       </DialogContent>
     </Dialog>
   );
-};
+});
 
 export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
   const [open, setOpen] = React.useState(false);
@@ -132,12 +130,16 @@ export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
             handleActionsClose={handleClose}
           />
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => {
-            deleteAccount.mutate([id]);
-          }}
-        >
-          Delete account
+        <DropdownMenuItem asChild>
+          <Button
+            variant="ghost"
+            onClick={() => {
+              deleteAccount.mutate([id]);
+            }}
+            className="w-full"
+          >
+            Delete
+          </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

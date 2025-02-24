@@ -16,7 +16,7 @@ type RenderContentProps = {
   open?: boolean;
   setOpen?: (open: boolean) => void;
 };
-type PopoverDemoProps = {
+type AutocompleteProps = {
   placement?: Placement;
 
   content: (props?: RenderContentProps) => React.ReactNode;
@@ -26,42 +26,49 @@ type PopoverDemoProps = {
   placeholder?: string;
 };
 
-export const Autocomplete = ({
-  placement = "center",
-  content,
-  contentClass,
-  value,
-  onChange,
-  placeholder,
-}: PopoverDemoProps) => {
-  const [open, setOpen] = React.useState(false);
-  const el = React.useRef<HTMLDivElement | null>(null);
+export const Autocomplete = React.forwardRef<HTMLDivElement, AutocompleteProps>(
+  (
+    {
+      placement = "center",
+      content,
+      contentClass,
+      value,
+      onChange,
+      placeholder,
+    },
+    ref,
+  ) => {
+    const [open, setOpen] = React.useState(false);
+    const el = React.useRef<HTMLDivElement | null>(null);
 
-  useOnClickOutside(el as React.RefObject<HTMLElement>, () => setOpen(false));
+    useOnClickOutside(el as React.RefObject<HTMLElement>, () => setOpen(false));
 
-  return (
-    <div ref={el} className="w-full">
-      <Popover open={open}>
-        <PopoverTrigger className="w-full text-left">
-          <Input
-            className="w-full"
-            onMouseEnter={() => setOpen(true)}
-            value={value}
-            onChange={(e) => {
-              onChange(e.target.value);
-              setOpen(true);
-            }}
-            placeholder={placeholder}
-          />
-        </PopoverTrigger>
-        <PopoverContent
-          className={cn("w-full ", contentClass)}
-          align={placement}
-          tabIndex={-1}
-        >
-          {content({ open, setOpen })}
-        </PopoverContent>
-      </Popover>
-    </div>
-  );
-};
+    return (
+      <div ref={ref} className="w-full">
+        <Popover open={open}>
+          <PopoverTrigger className="w-full text-left">
+            <div ref={el} className="w-full">
+              <Input
+                className="w-full"
+                onMouseEnter={() => setOpen(true)}
+                value={value}
+                onChange={(e) => {
+                  onChange(e.target.value);
+                  setOpen(true);
+                }}
+                placeholder={placeholder}
+              />
+            </div>
+          </PopoverTrigger>
+          <PopoverContent
+            className={cn("w-full ", contentClass)}
+            align={placement}
+            tabIndex={-1}
+          >
+            {content({ open, setOpen })}
+          </PopoverContent>
+        </Popover>
+      </div>
+    );
+  },
+);
