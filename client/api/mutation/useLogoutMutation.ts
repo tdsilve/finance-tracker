@@ -15,7 +15,7 @@ export const useLogoutMutation = () => {
     onError: (error) => {
       toast.error(getMessageFromHTTPError(error));
     },
-    onSuccess:  async () => {
+    onSuccess: async () => {
       try {
         await handleDeleteCookiesAndRedirect();
         client.clear();

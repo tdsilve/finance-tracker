@@ -16,7 +16,7 @@ const BottomLink = () => {
   );
 };
 
-export const RecoverPasswordContainer = () => {
+export const RecoverPassword = () => {
   const [isSuccess, setIsSuccess] = React.useState(false);
 
   if (isSuccess) {

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "~/components/ui/button";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 type DataTableDeleteRowsButtonProps = {
   label?: string;
@@ -14,8 +15,8 @@ export const DataTableDeleteRowsButton = ({
 }: DataTableDeleteRowsButtonProps) => {
   const content = label ?? "Delete";
   return (
-    <Button variant={"destructive"} onClick={onClick} disabled={disabled}>
-      {content}
+    <Button variant={"outline"} onClick={onClick} disabled={disabled}>
+      <RiDeleteBinLine /> {content}
     </Button>
   );
 };

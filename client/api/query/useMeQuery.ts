@@ -15,7 +15,7 @@ export const useMeQuery = () => {
     queryFn: () => fta.me(),
     staleTime: ms("1 hour"),
   });
-  React.useEffect( () => {
+  React.useEffect(() => {
     if (query.error) {
       if (query.error.status === HTTPErrorCode.UNAUTHORIZED) {
         handleDeleteCookiesAndRedirect();

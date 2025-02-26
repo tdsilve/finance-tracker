@@ -7,7 +7,7 @@ import {
   getSortedRowModel,
   ColumnFiltersState,
   getFilteredRowModel,
-  PaginationState
+  PaginationState,
 } from "@tanstack/react-table";
 
 import React from "react";
@@ -20,36 +20,36 @@ import { DataTablePagination } from "~/components/generic/table/data-table-pagin
 import { Flex } from "~/components/generic/flex";
 import { DataTableDeleteRowsButton } from "~/components/generic/table/data-table-delete-rows-button";
 import { useDeleteAccountMutation } from "~/api/mutation/useDeleteAccountMutation";
-import { set } from "zod";
-import { Aux } from "./accounts-data-table";
+
+import { Params } from "./accounts-data-table";
 
 interface DataTableProps {
   data: Account[];
   totalPages: number;
-  currentPage: number;
-  aux: Aux;
-  setAux: (val: Aux) => void;
- 
+  params: Params;
+  setParams: (val: Params) => void;
 }
 
-export const AccountsTable = ({ data , totalPages,  currentPage, aux, setAux}: DataTableProps) => {
+export const AccountsTable = ({
+  data,
+  totalPages,
+  params,
+  setParams,
+}: DataTableProps) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
 
- const [pagination, setPagination] = React.useState<PaginationState>({
-    pageIndex:  aux.pageParam - 1,
-    pageSize: aux.limit,
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex: params.pageParam - 1,
+    pageSize: params.limit,
   });
 
-  React.useEffect(() => {
-    console.log(pagination);  
-  }, [pagination]);
 
-    React.useEffect(() => {
-      setAux({ limit: pagination.pageSize, pageParam: pagination.pageIndex + 1 });
-    }, [pagination]);
+  React.useEffect(() => {
+    setParams({ limit: pagination.pageSize, pageParam: pagination.pageIndex + 1 });
+  }, [pagination]);
 
   const [rowSelection, setRowSelection] = React.useState({});
   const table = useReactTable({
@@ -66,28 +66,19 @@ export const AccountsTable = ({ data , totalPages,  currentPage, aux, setAux}: D
       setPagination((prevPagination) => {
         const newPagination =
           typeof updater === "function" ? updater(prevPagination) : updater;
-          // setPageParam(newPagination.pageIndex + 1);
-          // if (prevPagination.pageIndex < newPagination.pageIndex) {
-          //   fetchNextPage();
-          // }
-        console.log("Previous Pagination:", prevPagination);
-        console.log("New Pagination:", newPagination);
-        
+
         return newPagination;
-      })},
-    // onPaginationChange: (pagination) => {
-    //   const aux = pagination;
-    //   console.log("aux", aux);
-    //   setPagination(pagination);
-    // },
+      });
+    },
+
     manualPagination: true,
-   pageCount: totalPages,
-   rowCount: data.length,
+    pageCount: totalPages,
+    rowCount: data.length,
     state: {
       sorting,
       columnFilters,
       rowSelection,
-      pagination
+      pagination,
     },
   });
   const resetTable = () => {

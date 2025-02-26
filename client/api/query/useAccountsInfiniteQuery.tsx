@@ -21,8 +21,8 @@ export const useAccountsInfiniteQuery = ({
   pageParam = 1,
 }: UseAccountsInfiniteQueryProps) => {
   const query = useInfiniteQuery({
-    queryKey: ["infinite-accounts", { fieldsSearch }, {limit}, {pageParam}],
-    queryFn: ({ pageParam  }) =>
+    queryKey: ["infinite-accounts", { fieldsSearch }, { limit }, { pageParam }],
+    queryFn: ({ pageParam }) =>
       fta.getAccounts(pageParam, limit, fieldsSearch, sorted),
     initialPageParam: pageParam,
     getNextPageParam: (lastPage, pages) =>

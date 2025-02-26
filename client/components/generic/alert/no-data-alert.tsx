@@ -8,8 +8,9 @@ type ErrorAlertProps = {
   message: string;
   onClose?: () => void;
   action?: () => void;
+  isLoading?: boolean;
 };
-export const NoDataAlert = ({ message, onClose, action }: ErrorAlertProps) => {
+export const NoDataAlert = ({ message, onClose, action, isLoading }: ErrorAlertProps) => {
   const [visible, setVisible] = React.useState(true);
 
   if (!visible) return null;
@@ -24,6 +25,7 @@ export const NoDataAlert = ({ message, onClose, action }: ErrorAlertProps) => {
         <div>{message}</div>
         {action && (
           <Button
+          loading={isLoading}
             className="mt-2"
             onClick={() => action?.()}
             variant={"outline"}

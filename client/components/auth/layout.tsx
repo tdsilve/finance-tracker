@@ -14,7 +14,7 @@ export const AuthLayout = ({ image, children }: AuthLayoutProps) => {
       <Grid className="hidden bg-primary-100  lg:grid " placeItems="center">
         {image}
       </Grid>
-     
+
       <Flex
         col
         justify="center"
@@ -22,16 +22,12 @@ export const AuthLayout = ({ image, children }: AuthLayoutProps) => {
         gap={4}
         className="m-auto w-full max-w-md  "
       >
-      
         <div className=" text-center text-2xl font-bold text-primary-500 ">
           <Logo width="80" height="80" />
         </div>
-  
-        {children}
 
-  
+        {children}
       </Flex>
-     
     </>
   );
 };

@@ -7,31 +7,37 @@ import { ErrorAlert } from "~/components/generic/alert/error-alert";
 import { NoDataAlert } from "~/components/generic/alert/no-data-alert";
 import { HTTPErrorCode } from "~/lib/error";
 import { AccountsTable } from "./accounts-table";
-import { PaginationState } from "@tanstack/react-table";
 
-export type  Aux= {
+export type Params = {
   limit: number;
   pageParam: number;
-}
+};
 
 export const AccountsDataTable = () => {
- const [aux, setAux] = React.useState<Aux>({ limit: 5, pageParam: 1 });
-  const { data, isLoading, isError, refetch, error, fetchNextPage } = useAccountsInfiniteQuery(
-    { limit: aux.limit, pageParam: aux.pageParam },
+  const [params, setParams] = React.useState<Params>({ limit: 5, pageParam: 1 });
+  const { data, isLoading, isError, refetch, error, isFetching } = useAccountsInfiniteQuery(
+    { limit: params.limit, pageParam: params.pageParam },
   );
 
-
-  if (isLoading) return <Loading />;
+  if (isLoading) return <div className="h-full min-h-[300px] w-full grid place-items-center">
+    <Loading size={50}/>
+  </div> ;
   if (isError) {
     if (error?.status === HTTPErrorCode.NOT_FOUND) {
-      return <NoDataAlert message="No accounts found" action={refetch} />;
+      return <NoDataAlert message="No accounts found" action={refetch} isLoading={isFetching} />;
     }
-    return <ErrorAlert message="Something went wrong" action={refetch} />;
+    return <ErrorAlert message="Something went wrong" action={refetch} isLoading={isFetching} />;
   }
   if (!data)
     return <NoDataAlert message="No accounts found" action={refetch} />;
   const flatData = data?.pages?.flatMap((page) => page.content);
-  const lastPageIndex = data.pages.length -1 ;
 
-  return <AccountsTable data={flatData} totalPages={data?.pages[0].totalPages} currentPage={data.pages[lastPageIndex].currentPage}  aux={aux} setAux={setAux}  />;
+  return (
+    <AccountsTable
+      data={flatData}
+      totalPages={data?.pages[0].totalPages}
+      params={params}
+      setParams={setParams}
+    />
+  );
 };

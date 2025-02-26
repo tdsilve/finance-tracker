@@ -5,8 +5,8 @@ import { AccountSheetProvider } from "~/provider/account-sheet-provider";
 
 export default function AccountsPage() {
   return (
-    <div>
-      <CardHeader className="mx-auto -mt-24 w-full max-w-screen-2xl gap-y-2 md:flex-row md:items-center md:justify-between">
+    <div className="h-full">
+      <CardHeader className="mx-auto -mt-24 w-full max-w-screen-2xl gap-y-2 md:flex-row md:items-center md:justify-between h-full">
         <CardTitle>Accounts Page</CardTitle> <AccountSheetProvider />
       </CardHeader>
       <AccountsDataTable />
