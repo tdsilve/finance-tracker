@@ -39,7 +39,7 @@ export const DataTablePagination = <TData,>({
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">Rows per page</p>
-          <Select
+          {/* <Select
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
               table.setPageSize(Number(value));
@@ -49,7 +49,7 @@ export const DataTablePagination = <TData,>({
               <SelectValue placeholder={table.getState().pagination.pageSize} />
             </SelectTrigger>
             <SelectContent side="top">
-              {[5, 10, 20, 30, 40, 50].map((pageSize) => {
+              {[5, 5, 20, 30, 40, 50].map((pageSize) => {
                 setRowsPerPage(pageSize);
                 return (
                   <SelectItem key={pageSize} value={`${pageSize}`}>
@@ -58,7 +58,7 @@ export const DataTablePagination = <TData,>({
                 );
               })}
             </SelectContent>
-          </Select>
+          </Select> */}
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
           Page {table.getState().pagination.pageIndex + 1} of{" "}

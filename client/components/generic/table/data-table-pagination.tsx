@@ -24,7 +24,7 @@ interface DataTablePaginationProps<TData> {
 
 export const DataTablePagination = <TData,>({
   table,
-  pageSizes = [10, 20, 30, 40, 50],
+  pageSizes = [5, 10, 20, 30, 40, 50],
 
 }: DataTablePaginationProps<TData>) => {
   return (

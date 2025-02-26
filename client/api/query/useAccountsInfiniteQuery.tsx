@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, keepPreviousData } from "@tanstack/react-query";
 import { fta } from "../finance-tracker-api";
 import ms from "ms";
 
@@ -10,6 +10,7 @@ type UseAccountsInfiniteQueryProps = {
   enabeled?: boolean;
   onSuccess?: () => void;
   sorted?: boolean;
+  pageParam?: number;
 };
 
 export const useAccountsInfiniteQuery = ({
@@ -17,12 +18,13 @@ export const useAccountsInfiniteQuery = ({
   fieldsSearch = "",
   enabeled = true,
   sorted = true,
+  pageParam = 1,
 }: UseAccountsInfiniteQueryProps) => {
   const query = useInfiniteQuery({
-    queryKey: ["infinite-accounts", { fieldsSearch }],
-    queryFn: ({ pageParam = 1 }) =>
+    queryKey: ["infinite-accounts", { fieldsSearch }, {limit}, {pageParam}],
+    queryFn: ({ pageParam  }) =>
       fta.getAccounts(pageParam, limit, fieldsSearch, sorted),
-    initialPageParam: 1,
+    initialPageParam: pageParam,
     getNextPageParam: (lastPage, pages) =>
       !lastPage.last ? lastPage.currentPage + 1 : undefined,
     getPreviousPageParam: (firstPage, allPages, firstPageParam) => {
@@ -32,7 +34,7 @@ export const useAccountsInfiniteQuery = ({
       return firstPageParam - 1;
     },
     enabled: enabeled,
-    placeholderData: (prev) => prev,
+    placeholderData: keepPreviousData,
     staleTime: ms("10 minutes"),
   });
 

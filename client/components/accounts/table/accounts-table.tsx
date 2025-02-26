@@ -7,6 +7,7 @@ import {
   getSortedRowModel,
   ColumnFiltersState,
   getFilteredRowModel,
+  PaginationState
 } from "@tanstack/react-table";
 
 import React from "react";
@@ -19,18 +20,36 @@ import { DataTablePagination } from "~/components/generic/table/data-table-pagin
 import { Flex } from "~/components/generic/flex";
 import { DataTableDeleteRowsButton } from "~/components/generic/table/data-table-delete-rows-button";
 import { useDeleteAccountMutation } from "~/api/mutation/useDeleteAccountMutation";
+import { set } from "zod";
+import { Aux } from "./accounts-data-table";
 
 interface DataTableProps {
   data: Account[];
   totalPages: number;
   currentPage: number;
+  aux: Aux;
+  setAux: (val: Aux) => void;
+ 
 }
 
-export const AccountsTable = ({ data , totalPages, currentPage}: DataTableProps) => {
+export const AccountsTable = ({ data , totalPages,  currentPage, aux, setAux}: DataTableProps) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
+
+ const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex:  aux.pageParam - 1,
+    pageSize: aux.limit,
+  });
+
+  React.useEffect(() => {
+    console.log(pagination);  
+  }, [pagination]);
+
+    React.useEffect(() => {
+      setAux({ limit: pagination.pageSize, pageParam: pagination.pageIndex + 1 });
+    }, [pagination]);
 
   const [rowSelection, setRowSelection] = React.useState({});
   const table = useReactTable({
@@ -43,10 +62,32 @@ export const AccountsTable = ({ data , totalPages, currentPage}: DataTableProps)
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: (updater) => {
+      setPagination((prevPagination) => {
+        const newPagination =
+          typeof updater === "function" ? updater(prevPagination) : updater;
+          // setPageParam(newPagination.pageIndex + 1);
+          // if (prevPagination.pageIndex < newPagination.pageIndex) {
+          //   fetchNextPage();
+          // }
+        console.log("Previous Pagination:", prevPagination);
+        console.log("New Pagination:", newPagination);
+        
+        return newPagination;
+      })},
+    // onPaginationChange: (pagination) => {
+    //   const aux = pagination;
+    //   console.log("aux", aux);
+    //   setPagination(pagination);
+    // },
+    manualPagination: true,
+   pageCount: totalPages,
+   rowCount: data.length,
     state: {
       sorting,
       columnFilters,
       rowSelection,
+      pagination
     },
   });
   const resetTable = () => {
