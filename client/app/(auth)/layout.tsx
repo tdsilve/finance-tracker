@@ -7,11 +7,11 @@ export default function Layout({
 }>) {
   return (
     <Grid
-      className="min-h-screen w-full px-4 lg:grid-cols-2 lg:p-2"
+      className="min-h-screen w-full lg:grid-cols-2 "
       cols={1}
-      gap={12}
+      // gap={12}
       col
-      justify="center"
+      // justify="center"
     >
       {children}
     </Grid>

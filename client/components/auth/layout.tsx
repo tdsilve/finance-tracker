@@ -14,17 +14,24 @@ export const AuthLayout = ({ image, children }: AuthLayoutProps) => {
       <Grid className="hidden bg-primary-100  lg:grid " placeItems="center">
         {image}
       </Grid>
+     
       <Flex
         col
         justify="center"
+        items="center"
         gap={4}
-        className="mx-auto w-full max-w-md lg:mx-0"
+        className="m-auto w-full max-w-md  "
       >
-        <div className="mx-auto text-center text-2xl font-bold text-primary-500 ">
+      
+        <div className=" text-center text-2xl font-bold text-primary-500 ">
           <Logo width="80" height="80" />
         </div>
+  
         {children}
+
+  
       </Flex>
+     
     </>
   );
 };

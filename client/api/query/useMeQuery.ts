@@ -6,15 +6,16 @@ import { getMessageFromHTTPError, HTTPError, HTTPErrorCode } from "~/lib/error";
 
 import { handleDeleteCookiesAndRedirect } from "~/utils/auth";
 import { userStore } from "~/store/user";
+import ms from "ms";
 
 export const useMeQuery = () => {
   const { setUser } = userStore();
   const query = useQuery({
     queryKey: ["me"],
     queryFn: () => fta.me(),
-    staleTime: 5 * 60 * 1000,
+    staleTime: ms("1 hour"),
   });
-  React.useEffect(() => {
+  React.useEffect( () => {
     if (query.error) {
       if (query.error.status === HTTPErrorCode.UNAUTHORIZED) {
         handleDeleteCookiesAndRedirect();

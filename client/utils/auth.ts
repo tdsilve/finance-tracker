@@ -1,10 +1,10 @@
 import { deleteCookies } from "~/api/server-actions/delete-cookies";
 import { HTTPError } from "~/lib/error";
-export const handleDeleteCookiesAndRedirect = async (
+export const handleDeleteCookiesAndRedirect =  async (
   redirectUrl: string = "/sign-in",
 ) => {
   try {
-    await deleteCookies();
+  await deleteCookies();
     if (typeof window !== "undefined") {
       window.location.href = redirectUrl;
     }

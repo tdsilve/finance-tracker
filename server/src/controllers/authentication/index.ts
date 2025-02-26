@@ -156,7 +156,7 @@ export const sendResetPasswordEmail = async (
     );
 
     await user.save();
-    const resetLink = `http://${process.env.domain}/reset-password?token=${user.authentication.sessionToken}`;
+    const resetLink = `http://localhost:3000/reset-password?token=${user.authentication.sessionToken}`;
     const mailOptions = {
       from: "Finance Tracker Support",
       to: email,
