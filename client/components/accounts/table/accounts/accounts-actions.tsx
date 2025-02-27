@@ -38,7 +38,7 @@ export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
           <RiMoreLine className="size-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="text-center font-medium">
+      <DropdownMenuContent align="center" className="text-center font-medium flex flex-col">
         <DropdownMenuItem asChild>
           <EditAccountDialog
             name={name}
