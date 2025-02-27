@@ -19,7 +19,7 @@ export const AccountsDataTable = () => {
     { limit: params.limit, pageParam: params.pageParam },
   );
 
-  if (isLoading) return <div className="h-full min-h-[300px] w-full grid place-items-center">
+  if (isLoading) return <div className="grid size-full min-h-[300px] place-items-center">
     <Loading size={50}/>
   </div> ;
   if (isError) {

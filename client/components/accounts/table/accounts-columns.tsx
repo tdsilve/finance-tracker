@@ -8,7 +8,7 @@ import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
 
 import { cn } from "~/lib/css";
-import { AccountsActions } from "./accounts-actions";
+import { AccountsActions } from "./accounts/accounts-actions";
 
 enum BankAccountStatus {
   Negative = "🔴",

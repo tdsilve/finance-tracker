@@ -1,14 +1,10 @@
+"use client";
 import React from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
+
 import { Button } from "~/components/ui/button";
-import { RiMoreLine } from "react-icons/ri";
+
 import { Account } from "~/model/types";
-import { useDeleteAccountMutation } from "~/api/mutation/useDeleteAccountMutation";
+
 import {
   Dialog,
   DialogContent,
@@ -24,18 +20,15 @@ import { FormFieldWrapper } from "~/components/generic/form/FormFields";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AccountSchema } from "~/model/schemas";
-import { Form } from "../../ui/form";
+import { Form } from "../../../ui/form";
 
-type AccountsActionsProps = {
-  id: Account["_id"];
-  name: Account["name"];
-};
+import { AccountsActionsProps } from './accounts-actions';
 
 type EditAmountDialogProps = {
   handleActionsClose: () => void;
 } & AccountsActionsProps;
 
-const EditAccountDialog = React.forwardRef<
+export const EditAccountDialog = React.forwardRef<
   HTMLDivElement,
   EditAmountDialogProps
 >(({ id, name, handleActionsClose }, ref) => {
@@ -47,6 +40,7 @@ const EditAccountDialog = React.forwardRef<
 
   const handleClose = () => {
     setOpen(false);
+    handleActionsClose();
   };
 
   const form = useForm({
@@ -101,47 +95,3 @@ const EditAccountDialog = React.forwardRef<
     </Dialog>
   );
 });
-
-export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const deleteAccount = useDeleteAccountMutation({
-    onSuccess: () => handleClose(),
-  });
-  return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="size-8 p-0" onClick={handleOpen}>
-          <span className="sr-only">Open menu</span>
-          <RiMoreLine className="size-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="text-center font-medium">
-        <DropdownMenuItem asChild>
-          <EditAccountDialog
-            name={name}
-            id={id}
-            handleActionsClose={handleClose}
-          />
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Button
-            variant="ghost"
-            onClick={() => {
-              deleteAccount.mutate([id]);
-            }}
-            className="w-full"
-          >
-            Delete
-          </Button>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-};
