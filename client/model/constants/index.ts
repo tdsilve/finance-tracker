@@ -19,8 +19,8 @@ export const routes: Route[] = [
     href: "/accounts",
   },
   {
-    label: "Categories",
-    href: "/categories",
+    label: "Income & Expenses",
+    href: "/finances",
   },
   {
     label: "Settings",

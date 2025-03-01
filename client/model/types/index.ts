@@ -6,7 +6,8 @@ import {
   ResetPasswordSchema,
   AccountSchema,
   NewAccountSchema,
-  PaymentSchema,
+  FinanceSchema,
+  NewFinanceSchema,
 } from "~/model/schemas";
 
 export type Route = {
@@ -14,6 +15,11 @@ export type Route = {
   href: string;
 };
 export type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+
+export type Params = {
+  limit: number;
+  pageParam: number;
+};
 
 /**
  * --------------------------------
@@ -36,7 +42,8 @@ export type MutationCallbacks = {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 };
-export type Payment = z.infer<typeof PaymentSchema>;
+export type Finance = z.infer<typeof FinanceSchema>;
+export type NewFinance = z.infer<typeof NewFinanceSchema>;
 
 /**
  * --------------------------------

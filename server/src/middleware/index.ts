@@ -23,7 +23,7 @@ export const isAuthenticated = async (
 
     return next();
   } catch (error) {
-    console.log("isAuthenticated error:", error);
+
     return res.status(401).json({ message: `Authentication error: ${error}` });
   }
 };
@@ -43,7 +43,7 @@ export const isOwner = async (
       return res.status(403).json({ message: "No current user" });
     next();
   } catch (error) {
-    console.log("isOwner error:", error);
+
     return res.status(401).json({ message: `isOwner error: ${error}` });
   }
 };

@@ -18,7 +18,7 @@ export const getAllUsers = async (
       return res.status(404).json({ message: "Could not find users" });
     return res.status(200).json(users);
   } catch (error) {
-    console.log("getAllUsers error: ", error);
+
     return res.status(400).json({ message: error?.message  });
   }
 };
@@ -32,7 +32,7 @@ export const deleteUser = async (
     const deleteUser = await deleteUserById(id);
     return res.json(deleteUser);
   } catch (error) {
-    console.log("deleteUser error", error);
+
     return res.status(400).json({ message: error?.message  });
   }
 };
@@ -49,7 +49,7 @@ export const updateUser = async (
     const updatedUser = await updateUserById(id, { username });
     return res.status(200).json(updatedUser);
   } catch (error) {
-    console.log("updateUser error", error);
+
     return res.status(400).json({ message: error?.message  });
   }
 };
@@ -65,7 +65,7 @@ export const getMe = async (req: express.Request, res: express.Response) => {
       .status(200)
       .json({ email: user.email, username: user.username, id: user._id });
   } catch (error) {
-    console.log("updateUser error", error);
+
     return res.status(400).json({ message: error?.message  });
   }
 };

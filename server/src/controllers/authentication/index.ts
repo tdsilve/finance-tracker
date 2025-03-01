@@ -44,7 +44,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     });
     return res.status(200).json({ message: "User created" });
   } catch (error) {
-    console.log("register error: ", error);
+
     return res.status(400).json({ message: error?.message  });
   }
 };
@@ -91,7 +91,7 @@ export const login = async (req: express.Request, res: express.Response) => {
       },
     });
   } catch (error) {
-    console.log("login error: ", error);
+
     return res.status(400).json({ message: error?.message  });
   }
 };

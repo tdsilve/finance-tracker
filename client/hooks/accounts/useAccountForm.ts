@@ -42,7 +42,7 @@ export const useAccountForm = () => {
   React.useEffect(() => {
     if (debouncedName.length === 0) return;
     refetch();
-  }, [debouncedName]);
+  }, [debouncedName, refetch]);
 
   const onSubmit = (data: NewAccount) => {
     mutate({ name: data.name, amount: data.amount });

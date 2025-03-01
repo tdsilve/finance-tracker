@@ -3,7 +3,6 @@ import React from "react";
 
 import { Button } from "~/components/ui/button";
 
-
 import {
   Dialog,
   DialogContent,
@@ -12,8 +11,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 
-
-import { AccountsActionsProps } from './accounts-actions';
+import { AccountsActionsProps } from "./accounts-actions";
 import { useDeleteAccountMutation } from "~/api/mutation/useDeleteAccountMutation";
 
 type DeleteAmountDialogProps = {
@@ -49,7 +47,11 @@ export const DeleteAccountDialog = React.forwardRef<
       <DialogContent ref={ref} className="bg-white lg:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Delete account</DialogTitle>
-          <p>Are you sure you want to delete the account <span className="font-semibold">{name}?</span>  This action cannot be undone. </p>
+          <p>
+            Are you sure you want to delete the account{" "}
+            <span className="font-semibold">{name}?</span> This action cannot be
+            undone.{" "}
+          </p>
         </DialogHeader>
         <Button variant="destructive" onClick={handleDeleteAndClose}>
           Delete

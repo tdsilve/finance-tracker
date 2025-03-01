@@ -9,8 +9,6 @@ import { Button } from "~/components/ui/button";
 import { RiMoreLine } from "react-icons/ri";
 import { Account } from "~/model/types";
 
-
-
 import { EditAccountDialog } from "./edit-accounts-dialog";
 import { DeleteAccountDialog } from "./delete-accounts-dialog";
 
@@ -18,7 +16,6 @@ export type AccountsActionsProps = {
   id: Account["_id"];
   name: Account["name"];
 };
-
 
 export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
   const [open, setOpen] = React.useState(false);
@@ -29,7 +26,6 @@ export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
     setOpen(true);
   };
 
- 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
@@ -38,7 +34,10 @@ export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
           <RiMoreLine className="size-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="text-center font-medium flex flex-col">
+      <DropdownMenuContent
+        align="center"
+        className="flex flex-col text-center font-medium"
+      >
         <DropdownMenuItem asChild>
           <EditAccountDialog
             name={name}
@@ -47,8 +46,11 @@ export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
           />
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <DeleteAccountDialog id={id} name={name} handleActionsClose={handleClose} />
-       
+          <DeleteAccountDialog
+            id={id}
+            name={name}
+            handleActionsClose={handleClose}
+          />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

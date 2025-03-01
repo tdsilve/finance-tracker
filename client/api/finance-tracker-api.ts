@@ -1,5 +1,13 @@
 import { createApi } from "~/lib/api/api";
-import { Account, ResetPassword, SignIn, SignUp } from "~/model/types";
+import {
+  Account,
+  Finance,
+  NewAccount,
+  NewFinance,
+  ResetPassword,
+  SignIn,
+  SignUp,
+} from "~/model/types";
 import { toJson } from "~/lib/api/helpers";
 import { Endpoints } from "~/lib/api/types";
 
@@ -49,7 +57,7 @@ export class FinanceTrackerApi {
     });
   }
 
-  async createAccount(name: string, amount: number) {
+  async createAccount({ name, amount }: NewAccount) {
     return await this.api.post("/accounts", toJson({ name, amount }));
   }
 
@@ -61,21 +69,35 @@ export class FinanceTrackerApi {
     return await this.api.put(`/accounts`, toJson({ _id, name, amount }));
   }
 
-  async getPayments(
+  async getFinance(
     page: number = 1,
-    limit: number = 1,
-    name: string = "",
-
-    email: string = "",
+    limit: number = 10,
+    fieldsSearch: string = "",
+    sorted: boolean = true,
   ) {
-    return await this.api.get("/payments", undefined, {
+    return await this.api.get("/finance", undefined, {
       query: {
         page,
         limit,
-        name,
-        email,
+        fieldsSearch,
+        sorted,
       },
     });
+  }
+
+  async createFinance({ name, amount, category }: NewFinance) {
+    return await this.api.post("/finance", toJson({ name, amount, category }));
+  }
+
+  async deleteFinance(idsArray: Account["_id"][]) {
+    return await this.api.delete(`/finance`, toJson({ ids: idsArray }));
+  }
+
+  async editFinance({ _id, name, amount, category, date, notes }: Finance) {
+    return await this.api.put(
+      `/finance`,
+      toJson({ _id, name, amount, category, date, notes }),
+    );
   }
 }
 

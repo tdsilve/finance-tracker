@@ -22,7 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AccountSchema } from "~/model/schemas";
 import { Form } from "../../../ui/form";
 
-import { AccountsActionsProps } from './accounts-actions';
+import { AccountsActionsProps } from "./accounts-actions";
 
 type EditAmountDialogProps = {
   handleActionsClose: () => void;

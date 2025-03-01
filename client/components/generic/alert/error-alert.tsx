@@ -10,7 +10,12 @@ type ErrorAlertProps = {
   action?: () => void;
   isLoading?: boolean;
 };
-export const ErrorAlert = ({ message, onClose, action, isLoading }: ErrorAlertProps) => {
+export const ErrorAlert = ({
+  message,
+  onClose,
+  action,
+  isLoading,
+}: ErrorAlertProps) => {
   const [visible, setVisible] = React.useState(true);
   const msg = message ?? "Something went wrong";
   if (!visible) return null;
@@ -25,7 +30,7 @@ export const ErrorAlert = ({ message, onClose, action, isLoading }: ErrorAlertPr
         <div className="text-red-700">{msg}</div>
         {action && (
           <Button
-          loading={isLoading}
+            loading={isLoading}
             className="mt-2"
             onClick={() => action?.()}
             variant={"destructive"}

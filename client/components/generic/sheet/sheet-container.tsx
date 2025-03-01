@@ -9,8 +9,6 @@ import {
   SheetDescription,
 } from "~/components/ui/sheet";
 
-import { useNewAccountSheet } from "~/hooks/accounts/useNewAccountSheet";
-
 type SheetContainerProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,7 +26,6 @@ export const SheetContainer = ({
   sheetDescription,
   sheetTrigger,
 }: SheetContainerProps) => {
-  useNewAccountSheet();
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild className="border">
