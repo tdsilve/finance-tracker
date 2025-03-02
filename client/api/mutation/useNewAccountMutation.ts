@@ -1,26 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fta } from "../finance-tracker-api";
 import toast from "react-hot-toast";
-import { Account, MutationCallbacks } from "~/model/types";
+import { NewAccount, MutationCallbacks } from "~/model/types";
 import { getMessageFromHTTPError } from "~/lib/error";
 
 export const useNewAccountMutation = ({ onSuccess }: MutationCallbacks) => {
   const client = useQueryClient();
   const mutation = useMutation({
-    mutationFn: ({
-      name,
-      amount,
-    }: {
-      name: Account["name"];
-      amount: Account["amount"];
-    }) => {
-      return fta.createAccount(name, amount);
+    mutationFn: ({ name, amount }: NewAccount) => {
+      return fta.createAccount({ name, amount });
     },
     onSuccess: () => {
       toast.success("Account created successfully");
       onSuccess?.();
       client.invalidateQueries({
-        queryKey: ["infinite-accounts", { fieldsSearch: "" }],
+        queryKey: ["infinite-accounts"],
       });
     },
     onError: (error) => {

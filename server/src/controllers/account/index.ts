@@ -9,6 +9,20 @@ import {
 import { SESSION_TOKEN } from "../../const";
 import { getUserBySessionToken } from "../../db/model/users";
 
+function getAmount(amount?: string | number | null) {
+  if (!amount) {
+    return { amount: 0, isValid: true };
+  }
+
+  const num = typeof amount === "string" ? parseFloat(amount) : amount;
+
+  if (isNaN(num) || !isFinite(num)) {
+    return { amount: 0, isValid: false };
+  }
+
+  return { amount: Math.round(num * 100) / 100, isValid: true }; 
+}
+
 export const getAccountsFromUser = async (
   req: express.Request,
   res: express.Response,
@@ -70,8 +84,12 @@ export const registerAccount = async (
     if (accountExists) {
       return res.status(400).json({ message: "Account with this name already exists" });
     }
-    const userAmount = !amount ? 0 : amount;
-    await createAccount({ userId: user._id.toString(), name, amount: userAmount });
+    const useAmount = getAmount(amount);
+    if (!useAmount.isValid) {
+      return res.status(400).json({ message: "Invalid amount" });
+    }
+
+    await createAccount({ userId: user._id.toString(), name,  amount: useAmount.amount });
 
     return res.status(200).json({ message: "Account created successfully" });
   } catch (error) {

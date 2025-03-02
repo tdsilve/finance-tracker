@@ -11,8 +11,9 @@ const mongoose = require("mongoose");
       required: true,
     },
     date: {
-      type: Date,
+      type: Number,
       required: true,
+      default: Date.now, 
     },
     notes: {
       type: String,

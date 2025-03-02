@@ -39,11 +39,7 @@ export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
         className="flex flex-col text-center font-medium"
       >
         <DropdownMenuItem asChild>
-          <EditAccountDialog
-            name={name}
-            id={id}
-            handleActionsClose={handleClose}
-          />
+          <EditAccountDialog id={id} handleActionsClose={handleClose} />
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <DeleteAccountDialog

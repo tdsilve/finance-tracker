@@ -1,6 +1,7 @@
 import { createApi } from "~/lib/api/api";
 import {
   Account,
+  EditAccount,
   Finance,
   NewAccount,
   NewFinance,
@@ -65,7 +66,7 @@ export class FinanceTrackerApi {
     return await this.api.delete(`/accounts`, toJson({ ids: idsArray }));
   }
 
-  async editAccount({ _id, name, amount }: Account) {
+  async editAccount({ _id, name, amount }: EditAccount) {
     return await this.api.put(`/accounts`, toJson({ _id, name, amount }));
   }
 

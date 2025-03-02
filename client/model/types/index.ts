@@ -8,6 +8,7 @@ import {
   NewAccountSchema,
   FinanceSchema,
   NewFinanceSchema,
+  EditAccountSchema,
 } from "~/model/schemas";
 
 export type Route = {
@@ -38,6 +39,7 @@ export type User = {
 };
 export type Account = z.infer<typeof AccountSchema>;
 export type NewAccount = z.infer<typeof NewAccountSchema>;
+export type EditAccount = z.infer<typeof EditAccountSchema>;
 export type MutationCallbacks = {
   onSuccess?: () => void;
   onError?: (error: Error) => void;

@@ -107,7 +107,16 @@ export const columns: ColumnDef<Finance>[] = [
   },
   {
     accessorKey: "notes",
-    header: "Notes",
+    header: ({ column }) => {
+      return (
+        <DataTableColumnSorted
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          isDesc={column.getIsSorted() === "desc"}
+        >
+          Notes
+        </DataTableColumnSorted>
+      );
+    },
     cell: ({ row }) => {
       return <div>{row.original.notes}</div>;
     },

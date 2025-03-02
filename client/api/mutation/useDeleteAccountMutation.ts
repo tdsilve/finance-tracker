@@ -11,7 +11,9 @@ export const useDeleteAccountMutation = ({ onSuccess }: MutationCallbacks) => {
     onSuccess: () => {
       onSuccess?.();
       toast.success("Account deleted successfully");
-      client.invalidateQueries({ queryKey: ["infinite-accounts"] });
+      client.invalidateQueries({
+        queryKey: ["infinite-accounts"],
+      });
     },
     onError: (error) => {
       toast.error(error.message);

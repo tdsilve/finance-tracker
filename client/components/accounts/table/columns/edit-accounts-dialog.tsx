@@ -3,7 +3,7 @@ import React from "react";
 
 import { Button } from "~/components/ui/button";
 
-import { Account } from "~/model/types";
+import { EditAccount } from "~/model/types";
 
 import {
   Dialog,
@@ -19,19 +19,19 @@ import { useEditAccountMutation } from "~/api/mutation/useEditAccountMutation";
 import { FormFieldWrapper } from "~/components/generic/form/FormFields";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AccountSchema } from "~/model/schemas";
+import { EditAccountSchema } from "~/model/schemas";
 import { Form } from "../../../ui/form";
-
-import { AccountsActionsProps } from "./accounts-actions";
+import { Account } from "~/model/types";
 
 type EditAmountDialogProps = {
   handleActionsClose: () => void;
-} & AccountsActionsProps;
+  id: Account["_id"];
+};
 
 export const EditAccountDialog = React.forwardRef<
   HTMLDivElement,
   EditAmountDialogProps
->(({ id, name, handleActionsClose }, ref) => {
+>(({ id, handleActionsClose }, ref) => {
   const [open, setOpen] = React.useState(false);
 
   const updateAccount = useEditAccountMutation({
@@ -44,11 +44,11 @@ export const EditAccountDialog = React.forwardRef<
   };
 
   const form = useForm({
-    resolver: zodResolver(AccountSchema),
-    defaultValues: { name, _id: id, amount: 0 },
+    resolver: zodResolver(EditAccountSchema),
+    defaultValues: { name: "", _id: id, amount: "" },
   });
 
-  const onSubmit = (data: Account) => {
+  const onSubmit = (data: EditAccount) => {
     updateAccount.mutate(data);
   };
 
@@ -61,15 +61,24 @@ export const EditAccountDialog = React.forwardRef<
       </DialogTrigger>
       <DialogContent ref={ref} className="bg-white lg:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle> Edit the amount of {name}</DialogTitle>
+          <DialogTitle> Edit account </DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <Flex gap={4} items="center">
+            <Flex gap={4} items="center" col>
+              <FormFieldWrapper
+                control={form.control}
+                name={"name"}
+                label={"New name"}
+                className="flex flex-col"
+                renderInput={(field) => (
+                  <Input {...field} placeholder={"Enter name"} />
+                )}
+              />
               <FormFieldWrapper
                 control={form.control}
                 name={"amount"}
-                label={"Amount"}
+                label={"New amount"}
                 className="flex flex-col"
                 renderInput={(field) => (
                   <Input {...field} type="number" placeholder="e.g. 100" />

@@ -52,13 +52,13 @@ export const AccountsTable = ({
       pageParam: pagination.pageIndex + 1,
     });
   }, [pagination, setParams]);
-
+  const totalPg = totalPages === 0 ? 1 : totalPages;
   const [rowSelection, setRowSelection] = React.useState({});
   const table = useReactTable({
     data,
     columns,
     manualPagination: true,
-    pageCount: totalPages,
+    pageCount: totalPg,
     rowCount: data.length,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
