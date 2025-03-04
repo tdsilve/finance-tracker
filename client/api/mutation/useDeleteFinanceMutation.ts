@@ -12,6 +12,7 @@ export const useDeleteFinanceMutation = ({ onSuccess }: MutationCallbacks) => {
       onSuccess?.();
       toast.success("Finance deleted successfully");
       client.invalidateQueries({ queryKey: ["infinite-finance"] });
+      client.invalidateQueries({ queryKey: ["balance"] });
     },
     onError: (error) => {
       toast.error(error.message);

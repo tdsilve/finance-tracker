@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   DropdownMenu,
@@ -7,17 +8,20 @@ import {
 } from "~/components/ui/dropdown-menu";
 import { Button } from "~/components/ui/button";
 import { RiMoreLine } from "react-icons/ri";
-import { Account } from "~/model/types";
 
-import { EditAccountDialog } from "./edit-accounts-dialog";
-import { DeleteAccountDialog } from "./delete-accounts-dialog";
-
-export type AccountsActionsProps = {
-  id: Account["_id"];
-  name: Account["name"];
+type DataTableColumnActionProps = {
+  items: ({
+    handleClose,
+    handleOpen,
+  }: {
+    handleClose: () => void;
+    handleOpen: () => void;
+  }) => React.ReactNode[];
 };
 
-export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
+export const DataTableColumnAction = ({
+  items,
+}: DataTableColumnActionProps) => {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -25,7 +29,6 @@ export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
   const handleOpen = () => {
     setOpen(true);
   };
-
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
@@ -36,18 +39,13 @@ export const AccountsActions = ({ id, name }: AccountsActionsProps) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="center"
-        className="flex flex-col text-center font-medium"
+        className="flex flex-col text-center font-medium "
       >
-        <DropdownMenuItem asChild>
-          <EditAccountDialog id={id} handleActionsClose={handleClose} />
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <DeleteAccountDialog
-            id={id}
-            name={name}
-            handleActionsClose={handleClose}
-          />
-        </DropdownMenuItem>
+        {items({ handleClose, handleOpen })?.map((item, index) => (
+          <DropdownMenuItem key={index} asChild>
+            {item}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

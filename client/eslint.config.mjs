@@ -28,6 +28,7 @@ const eslintConfig = [
       "tailwindcss/no-custom-classname": "off",
       "@typescript-eslint/no-require-imports": "off",
       "react/display-name": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
     },
   },
 ];

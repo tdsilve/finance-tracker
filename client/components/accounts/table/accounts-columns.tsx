@@ -5,7 +5,7 @@ import React from "react";
 import { Account } from "~/model/types";
 import { Checkbox } from "~/components/ui/checkbox";
 
-import { AccountsActions } from "./columns/accounts-actions";
+import { AccountsActions } from "./columns/column-actions";
 import { ColumnStatus } from "./columns/column-status";
 import { DataTableColumnSorted } from "~/components/generic/table/data-table-column-sorted";
 

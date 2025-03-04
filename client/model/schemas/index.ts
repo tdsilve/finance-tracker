@@ -39,7 +39,11 @@ export const ResetPasswordSchema = z.object({
 export const AccountSchema = z.object({
   _id: z.string(),
   name: z.string().trim().min(1, { message: "Name is required" }),
-  amount: z.union([z.string(), z.number()]),
+  amount: z
+    .union([z.string(), z.number()])
+    .refine((v) => typeof v === "string" && !isNaN(+v), {
+      message: "Amount must be a number",
+    }),
 });
 
 export const NewAccountSchema = AccountSchema.pick({
@@ -52,9 +56,13 @@ export const EditAccountSchema = AccountSchema;
 export const FinanceSchema = z.object({
   _id: z.string(),
   name: z.string().trim().min(1, { message: "Name is required" }),
-  amount: z.union([z.string(), z.number()]),
-  date: z.number(),
-  notes: z.string().trim().min(1, { message: "Notes is required" }),
+  amount: z
+    .union([z.string(), z.number()])
+    .refine((v) => typeof v === "string" && !isNaN(+v), {
+      message: "Amount must be a number",
+    }),
+  date: z.union([z.string(), z.number()]),
+  notes: z.string().trim(),
   category: z.enum(["Income", "Expense"]),
 });
 
@@ -65,3 +73,5 @@ export const NewFinanceSchema = FinanceSchema.pick({
   notes: true,
   category: true,
 });
+
+export const EditFinanceSchema = FinanceSchema;

@@ -102,7 +102,7 @@ export const updateFinanceById = async (userId: string, id: string, name?: strin
   const userFinance = await getFinance(userId);
 
   if (!userFinance) {
-    throw new Error("User accounts not found");
+    throw new Error("User finance not found");
   }
 
   if (!id) {
@@ -113,7 +113,7 @@ export const updateFinanceById = async (userId: string, id: string, name?: strin
 
 
   if (index === -1) {
-    throw new Error("Account not found");
+    throw new Error("Finance not found");
   }
 
   if (name) {
@@ -121,21 +121,44 @@ export const updateFinanceById = async (userId: string, id: string, name?: strin
   }
 
   if (amount) {
-    userFinance.accounts[index].amount = amount;
+    userFinance.finance[index].amount = amount;
   }
 
   if (category) {
-    userFinance.accounts[index].category = category;
+    userFinance.finance[index].category = category;
   }
 
   if (date) {
-    userFinance.accounts[index].date = date;
+    userFinance.finance[index].date = date;
   }
   if (notes) {
-    userFinance.accounts[index].notes = notes;
+    userFinance.finance[index].notes = notes;
   }
 
   await userFinance.save();
   return userFinance;
 }
+
+export const getBalance = async (userId: string) => {
+  const userFinance = await getFinance(userId);
+
+  if (!userFinance) {
+    throw new Error("User not found");
+  }
+
+ 
+
+  const totalIncome = userFinance.finance.reduce((acc, item) => {
+    return item.category === "Income" ? acc + item.amount : acc + 0;
+  }, 0);
+
+  const totalExpense = userFinance.finance.reduce((acc, item) => {
+    return item.category === "Expense" ? acc + item.amount : acc + 0;
+  }, 0);
+
+  const totalBalance = totalIncome - totalExpense;
+
+  return {totalBalance, totalIncome, totalExpense};
+};
+
  

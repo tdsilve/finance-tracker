@@ -14,6 +14,9 @@ export const useEditFinanceMutation = ({ onSuccess }: MutationCallbacks) => {
     },
     onSuccess: () => {
       toast.success("Finance edited successfully");
+      client.invalidateQueries({
+        queryKey: ["balance"],
+      });
       onSuccess?.();
     },
     onError: (error) => {

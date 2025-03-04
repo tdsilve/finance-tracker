@@ -4,7 +4,9 @@ import toast from "react-hot-toast";
 import { MutationCallbacks, NewFinance } from "~/model/types";
 import { getMessageFromHTTPError } from "~/lib/error";
 
-export const useNewFinanceMutation = ({ onSuccess }: MutationCallbacks) => {
+type Props = MutationCallbacks;
+
+export const useNewFinanceMutation = (props?: Props) => {
   const client = useQueryClient();
   const mutation = useMutation({
     mutationFn: ({ name, amount, notes, category, date }: NewFinance) => {
@@ -12,9 +14,12 @@ export const useNewFinanceMutation = ({ onSuccess }: MutationCallbacks) => {
     },
     onSuccess: () => {
       toast.success("Finance created successfully");
-      onSuccess?.();
+      props?.onSuccess?.();
       client.invalidateQueries({
         queryKey: ["infinite-finance", { fieldsSearch: "" }],
+      });
+      client.invalidateQueries({
+        queryKey: ["balance"],
       });
     },
     onError: (error) => {

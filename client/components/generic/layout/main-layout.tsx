@@ -13,7 +13,7 @@ export const MainLayout = ({
 }>) => {
   return (
     <div className="h-full">
-      <CardHeader className="mx-auto -mt-24 size-full max-w-screen-2xl gap-y-2 md:flex-row md:items-center md:justify-between">
+      <CardHeader className="mx-auto -mt-24 size-full max-w-screen-2xl flex-wrap gap-y-2 md:flex-row md:items-center md:justify-between">
         <CardTitle>{title}</CardTitle> {headerContent}
       </CardHeader>
       {children}

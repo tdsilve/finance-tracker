@@ -14,7 +14,7 @@ import React from "react";
 
 import { DataTableSearchInput } from "../../generic/table/data-table-search-input";
 import { Account } from "~/model/types";
-import { columns } from "./columns/accounts-columns";
+import { columns } from "./columns/columns";
 import { DataTable } from "~/components/generic/table/data-table";
 import { DataTablePagination } from "~/components/generic/table/data-table-pagination";
 import { Flex } from "~/components/generic/flex";
@@ -100,7 +100,7 @@ export const AccountsTable = ({
 
   return (
     <>
-      <Flex items="center" justify="between" className=" p-4">
+      <Flex items="center" justify="between" className=" p-4" wrap>
         <DataTableSearchInput
           placeholder="Search account..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}

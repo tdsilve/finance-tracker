@@ -6,6 +6,8 @@ import { ColumnCategory } from "./column-category";
 import { Checkbox } from "~/components/ui/checkbox";
 
 import { DataTableColumnSorted } from "~/components/generic/table/data-table-column-sorted";
+import { getStringOrNumberToDate } from "~/lib/date";
+import { ColumnActions } from "./column-actions";
 
 export const columns: ColumnDef<Finance>[] = [
   {
@@ -44,7 +46,7 @@ export const columns: ColumnDef<Finance>[] = [
       const date = row.original.date;
       return (
         <div className="px-3">
-          <ColumnDate date={date} />
+          <ColumnDate date={getStringOrNumberToDate(date)} />
         </div>
       );
     },
@@ -124,8 +126,9 @@ export const columns: ColumnDef<Finance>[] = [
   {
     id: "actions",
     header: "Actions",
-    cell: () => {
-      return <div>hey</div>;
+    cell: ({ row }) => {
+      const finance = row.original;
+      return <ColumnActions finance={finance} />;
     },
   },
 ];

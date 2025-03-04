@@ -4,7 +4,7 @@ import {
   createFinance,
   deleteFinanceByIds,
   updateFinanceById,
-  isFinancetExists
+  getBalance,
 } from "../../db/model/finance";
 import { SESSION_TOKEN } from "../../const";
 import { getUserBySessionToken } from "../../db/model/users";
@@ -58,6 +58,7 @@ export const registerAccount = async (
 ) => {
   try {
     const { name , amount, notes, category, date} = req.body;
+
     if (!name){
       return res.status(400).json({ message: "Missing name" });
     }
@@ -121,15 +122,33 @@ export const updateFinance = async (
 
     const user = await getUserBySessionToken(sessionToken);
     if (!user) return res.status(404).json({ message: "User not found" });
-    const { name, _id, amount, category, date } = req.body;
+    const { name, _id, amount, category, date, notes } = req.body;
+    console.log(name, _id, amount, category, date, notes)
     if (!_id) {
       return res.status(400).json({ message: "Missing  id" });
     }
     if  (!name && (amount == undefined || amount == null) && (category == undefined || category == null) && (date == undefined || date == null)) {
       return res.status(400).json({ message: "Missing  info" });
     }
-    await updateFinanceById(user._id.toString(), _id, name, amount, category, date);
+    await updateFinanceById(user._id.toString(), _id, name, amount, date, notes,  category);
     return res.status(200).json({ message: "Finance updated" });
+  } catch (error) {
+
+    return res.status(400).json({ message: error?.message });
+  }
+};
+
+export const balance = async (
+  req: express.Request,
+  res: express.Response,
+) => {
+  try {
+    const sessionToken = req.cookies[SESSION_TOKEN];
+
+    const user = await getUserBySessionToken(sessionToken);
+    if (!user) return res.status(404).json({ message: "User not found" });
+    const balance = await getBalance(user._id.toString());
+    return res.status(200).json({ ...balance });  
   } catch (error) {
 
     return res.status(400).json({ message: error?.message });

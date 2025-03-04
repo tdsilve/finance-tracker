@@ -11,6 +11,7 @@ import {
 } from "~/model/types";
 import { toJson } from "~/lib/api/helpers";
 import { Endpoints } from "~/lib/api/types";
+import { getTime } from "date-fns";
 
 export class FinanceTrackerApi {
   api = createApi<Endpoints>({
@@ -86,19 +87,26 @@ export class FinanceTrackerApi {
     });
   }
 
-  async createFinance({ name, amount, category }: NewFinance) {
-    return await this.api.post("/finance", toJson({ name, amount, category }));
+  async createFinance({ name, amount, category, date, notes }: NewFinance) {
+    return await this.api.post(
+      "/finance",
+      toJson({ name, amount, category, date: getTime(date), notes }),
+    );
   }
 
-  async deleteFinance(idsArray: Account["_id"][]) {
+  async deleteFinance(idsArray: Finance["_id"][]) {
     return await this.api.delete(`/finance`, toJson({ ids: idsArray }));
   }
 
   async editFinance({ _id, name, amount, category, date, notes }: Finance) {
     return await this.api.put(
       `/finance`,
-      toJson({ _id, name, amount, category, date, notes }),
+      toJson({ _id, name, amount, category, date: getTime(date), notes }),
     );
+  }
+
+  async balance() {
+    return await this.api.get("/finance/balance");
   }
 }
 

@@ -16,6 +16,7 @@ import { Flex } from "~/components/generic/flex";
 import { DataTableSearchInput } from "~/components/generic/table/data-table-search-input";
 import { DataTableDeleteRowsButton } from "~/components/generic/table/data-table-delete-rows-button";
 import { useDeleteFinanceMutation } from "~/api/mutation/useDeleteFinanceMutation";
+import { DataTablePagination } from "~/components/generic/table/data-table-pagination";
 
 type FinanceTableProps = {
   data: Finance[];
@@ -92,7 +93,7 @@ export const FinanceTable = ({
   };
   return (
     <>
-      <Flex items="center" justify="between" className=" p-4">
+      <Flex items="center" justify="between" className=" p-4" wrap>
         <DataTableSearchInput
           placeholder="Search finance..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
@@ -105,6 +106,7 @@ export const FinanceTable = ({
         />
       </Flex>
       <DataTable table={table} columns={columns} />
+      <DataTablePagination table={table} />
     </>
   );
 };

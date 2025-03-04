@@ -11,25 +11,26 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 
-import { AccountsActionsProps } from "./column-actions";
-import { useDeleteAccountMutation } from "~/api/mutation/useDeleteAccountMutation";
+import { useDeleteFinanceMutation } from "~/api/mutation/useDeleteFinanceMutation";
+import { Finance } from "~/model/types";
 
 type DeleteAmountDialogProps = {
   handleActionsClose: () => void;
-} & AccountsActionsProps;
+  finance: Finance;
+};
 
-export const DeleteAccountDialog = React.forwardRef<
+export const DeleteFinanceDialog = React.forwardRef<
   HTMLDivElement,
   DeleteAmountDialogProps
->(({ id, name, handleActionsClose }, ref) => {
+>(({ finance, handleActionsClose }, ref) => {
   const [open, setOpen] = React.useState(false);
 
-  const deleteAccount = useDeleteAccountMutation({
+  const deleteAccount = useDeleteFinanceMutation({
     onSuccess: () => handleActionsClose(),
   });
 
   const handleDeleteAndClose = () => {
-    deleteAccount.mutate([id]);
+    deleteAccount.mutate([finance._id]);
     handleClose();
   };
   const handleClose = () => {
@@ -49,8 +50,8 @@ export const DeleteAccountDialog = React.forwardRef<
           <DialogTitle>Delete account</DialogTitle>
           <p>
             Are you sure you want to delete the account{" "}
-            <span className="font-semibold">{name}?</span> This action cannot be
-            undone.{" "}
+            <span className="font-semibold">{finance.name}?</span> This action
+            cannot be undone.{" "}
           </p>
         </DialogHeader>
         <Button variant="destructive" onClick={handleDeleteAndClose}>

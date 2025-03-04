@@ -9,6 +9,7 @@ import {
   FinanceSchema,
   NewFinanceSchema,
   EditAccountSchema,
+  EditFinanceSchema,
 } from "~/model/schemas";
 
 export type Route = {
@@ -46,6 +47,12 @@ export type MutationCallbacks = {
 };
 export type Finance = z.infer<typeof FinanceSchema>;
 export type NewFinance = z.infer<typeof NewFinanceSchema>;
+export type EditFinance = z.infer<typeof EditFinanceSchema>;
+export type Balance = {
+  totalBalance: number;
+  totalIncome: number;
+  totalExpense: number;
+};
 
 /**
  * --------------------------------
