@@ -2,9 +2,9 @@ import { createApi } from "~/lib/api/api";
 import {
   Account,
   EditAccount,
-  Finance,
+  Transaction,
   NewAccount,
-  NewFinance,
+  NewTransaction,
   ResetPassword,
   SignIn,
   SignUp,
@@ -71,7 +71,7 @@ export class FinanceTrackerApi {
     return await this.api.put(`/accounts`, toJson({ _id, name, amount }));
   }
 
-  async getFinance(
+  async getTransaction(
     page: number = 1,
     limit: number = 10,
     fieldsSearch: string = "",
@@ -87,18 +87,31 @@ export class FinanceTrackerApi {
     });
   }
 
-  async createFinance({ name, amount, category, date, notes }: NewFinance) {
+  async createTransaction({
+    name,
+    amount,
+    category,
+    date,
+    notes,
+  }: NewTransaction) {
     return await this.api.post(
       "/finance",
       toJson({ name, amount, category, date: getTime(date), notes }),
     );
   }
 
-  async deleteFinance(idsArray: Finance["_id"][]) {
+  async deleteTransaction(idsArray: Transaction["_id"][]) {
     return await this.api.delete(`/finance`, toJson({ ids: idsArray }));
   }
 
-  async editFinance({ _id, name, amount, category, date, notes }: Finance) {
+  async editTransaction({
+    _id,
+    name,
+    amount,
+    category,
+    date,
+    notes,
+  }: Transaction) {
     return await this.api.put(
       `/finance`,
       toJson({ _id, name, amount, category, date: getTime(date), notes }),

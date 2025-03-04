@@ -1,19 +1,21 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fta } from "../finance-tracker-api";
 import toast from "react-hot-toast";
-import { Finance, MutationCallbacks } from "~/model/types";
+import { Transaction, MutationCallbacks } from "~/model/types";
 import { getMessageFromHTTPError } from "~/lib/error";
 import { InfiniteData } from "~/lib/api/types";
 import { optimistic } from "~/lib/react-query";
 
-export const useEditFinanceMutation = ({ onSuccess }: MutationCallbacks) => {
+export const useEditTransactionMutation = ({
+  onSuccess,
+}: MutationCallbacks) => {
   const client = useQueryClient();
   const mutation = useMutation({
-    mutationFn: ({ _id, name, amount, notes, category, date }: Finance) => {
-      return fta.editFinance({ _id, name, amount, notes, category, date });
+    mutationFn: ({ _id, name, amount, notes, category, date }: Transaction) => {
+      return fta.editTransaction({ _id, name, amount, notes, category, date });
     },
     onSuccess: () => {
-      toast.success("Finance edited successfully");
+      toast.success("Transaction edited successfully");
       client.invalidateQueries({
         queryKey: ["balance"],
       });
@@ -23,7 +25,7 @@ export const useEditFinanceMutation = ({ onSuccess }: MutationCallbacks) => {
       const message = getMessageFromHTTPError(error);
       toast.error(message);
     },
-    ...optimistic<InfiniteData<Finance>, Finance>(
+    ...optimistic<InfiniteData<Transaction>, Transaction>(
       client,
       ["infinite-finance", { fieldsSearch: "" }],
       (oldData, vars) => {

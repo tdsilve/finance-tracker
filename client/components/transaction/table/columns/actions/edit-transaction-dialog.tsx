@@ -9,32 +9,32 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
-import { useEditFinanceMutation } from "~/api/mutation/useEditFinanceMutation";
+import { useEditTransactionMutation } from "~/api/mutation/useEditTransactionMutation";
 import { useForm } from "react-hook-form";
-import { EditFinance } from "~/model/types";
+import { EditTransaction, Transaction } from "~/model/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EditFinanceSchema } from "~/model/schemas";
 import { Form } from "~/components/ui/form";
 import { Flex } from "~/components/generic/flex";
 import { FormFieldWrapper } from "~/components/generic/form/FormFields";
 import { Input } from "~/components/ui/input";
 import { DatePickerWithPresets } from "~/components/generic/date/date-picker-presets";
 import { Textarea } from "~/components/ui/textarea";
-import { SelectCategories } from "~/components/finance/form/SelectCategories";
+import { SelectCategories } from "~/components/transaction/form/category-select";
 import { format } from "date-fns";
+import { EditTransactionSchema } from "~/model/schemas";
 
-type EditFinanceDialogProps = {
+type EditTransactionDialogProps = {
   handleActionsClose: () => void;
-  id: EditFinance["_id"];
+  id: Transaction["_id"];
 };
 
-export const EditFinanceDialog = React.forwardRef<
+export const EditTransactionDialog = React.forwardRef<
   HTMLDivElement,
-  EditFinanceDialogProps
->(({ handleActionsClose, id }: EditFinanceDialogProps, ref) => {
+  EditTransactionDialogProps
+>(({ handleActionsClose, id }: EditTransactionDialogProps, ref) => {
   const [open, setOpen] = React.useState(false);
 
-  const updateFinance = useEditFinanceMutation({
+  const updateFinance = useEditTransactionMutation({
     onSuccess: () => handleActionsClose(),
   });
 
@@ -43,12 +43,12 @@ export const EditFinanceDialog = React.forwardRef<
     handleActionsClose();
   };
 
-  const onSubmit = (data: EditFinance) => {
+  const onSubmit = (data: EditTransaction) => {
     updateFinance.mutate(data);
   };
 
   const form = useForm({
-    resolver: zodResolver(EditFinanceSchema),
+    resolver: zodResolver(EditTransactionSchema),
     defaultValues: {
       name: "",
       _id: id,
@@ -119,7 +119,7 @@ export const EditFinanceDialog = React.forwardRef<
                 className="flex flex-col"
                 renderInput={(field) => (
                   <SelectCategories
-                    category={field.value as EditFinance["category"]}
+                    category={field.value as EditTransaction["category"]}
                     setCategory={field.onChange}
                   />
                 )}

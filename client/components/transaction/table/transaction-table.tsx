@@ -1,7 +1,7 @@
 import React from "react";
-import { Finance } from "~/model/types";
+import { Transaction } from "~/model/types";
 import { Params } from "~/model/types";
-import { columns } from "./columns/finance-columns";
+import { columns } from "./columns/transaction-columns";
 import {
   useReactTable,
   SortingState,
@@ -15,23 +15,23 @@ import { PaginationState } from "@tanstack/react-table";
 import { Flex } from "~/components/generic/flex";
 import { DataTableSearchInput } from "~/components/generic/table/data-table-search-input";
 import { DataTableDeleteRowsButton } from "~/components/generic/table/data-table-delete-rows-button";
-import { useDeleteFinanceMutation } from "~/api/mutation/useDeleteFinanceMutation";
+import { useDeleteTransactionMutation } from "~/api/mutation/useDeleteTransactionMutation";
 import { DataTablePagination } from "~/components/generic/table/data-table-pagination";
 
-type FinanceTableProps = {
-  data: Finance[];
+type TransactionTableProps = {
+  data: Transaction[];
   totalPages: number;
   params: Params;
   setParams: (val: Params) => void;
 };
 
-export const FinanceTable = ({
+export const TransactionTable = ({
   data,
   totalPages,
   params,
   setParams,
-}: FinanceTableProps) => {
-  const deleteFinance = useDeleteFinanceMutation({
+}: TransactionTableProps) => {
+  const deleteTransaction = useDeleteTransactionMutation({
     onSuccess: () => resetTable(),
     onError: () => resetTable(),
   });
@@ -80,8 +80,8 @@ export const FinanceTable = ({
       pagination,
     },
   });
-  const handleClickDeleteFinance = () => {
-    deleteFinance.mutate(
+  const handleClickDeleteTransaction = () => {
+    deleteTransaction.mutate(
       table.getSelectedRowModel().rows.map((row) => row.original._id),
     );
   };
@@ -95,13 +95,13 @@ export const FinanceTable = ({
     <>
       <Flex items="center" justify="between" className=" p-4" wrap>
         <DataTableSearchInput
-          placeholder="Search finance..."
+          placeholder="Search Transaction..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(val) => table.getColumn("name")?.setFilterValue(val)}
         />
         <DataTableDeleteRowsButton
-          label={`Delete finance(s) (${table.getFilteredSelectedRowModel().rows.length})`}
-          onClick={handleClickDeleteFinance}
+          label={`Delete Transaction(s) (${table.getFilteredSelectedRowModel().rows.length})`}
+          onClick={handleClickDeleteTransaction}
           disabled={table.getFilteredSelectedRowModel().rows.length == 0}
         />
       </Flex>

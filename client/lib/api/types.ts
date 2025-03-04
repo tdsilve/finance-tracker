@@ -1,4 +1,4 @@
-import { User, Account, Finance, Balance } from "~/model/types";
+import { User, Account, Transaction, Balance } from "~/model/types";
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
 export type Endpoints = {
@@ -12,7 +12,7 @@ export type Endpoints = {
   "POST /accounts": Message;
   "DELETE /accounts": Message;
   "PUT /accounts": Message;
-  "GET /finance": Paginated<Finance>;
+  "GET /finance": Paginated<Transaction>;
   "GET /finance/balance": Balance;
   "POST /finance": Message;
   "DELETE /finance": Message;

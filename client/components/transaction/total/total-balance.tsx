@@ -44,7 +44,6 @@ const BalanceCard = ({
 
 export const TotalBalance = () => {
   const { data } = useBalanceQuery();
-  console.log(data);
 
   return (
     <div>

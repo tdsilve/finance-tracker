@@ -6,10 +6,10 @@ import {
   ResetPasswordSchema,
   AccountSchema,
   NewAccountSchema,
-  FinanceSchema,
-  NewFinanceSchema,
+  TransactionSchema,
+  NewTransactionSchema,
   EditAccountSchema,
-  EditFinanceSchema,
+  EditTransactionSchema,
 } from "~/model/schemas";
 
 export type Route = {
@@ -45,9 +45,9 @@ export type MutationCallbacks = {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 };
-export type Finance = z.infer<typeof FinanceSchema>;
-export type NewFinance = z.infer<typeof NewFinanceSchema>;
-export type EditFinance = z.infer<typeof EditFinanceSchema>;
+export type Transaction = z.infer<typeof TransactionSchema>;
+export type NewTransaction = z.infer<typeof NewTransactionSchema>;
+export type EditTransaction = z.infer<typeof EditTransactionSchema>;
 export type Balance = {
   totalBalance: number;
   totalIncome: number;

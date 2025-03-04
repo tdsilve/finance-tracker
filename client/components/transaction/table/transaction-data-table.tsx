@@ -1,21 +1,21 @@
 "use client";
 import React from "react";
-import { useFinanceInfiniteQuery } from "~/api/query/useFinanceInfiniteQuery";
+import { useTransactionInfiniteQuery } from "~/api/query/useTransactionInfiniteQuery";
 import { Loading } from "~/components/generic/loading/loading";
 import { ErrorAlert } from "~/components/generic/alert/error-alert";
 import { NoDataAlert } from "~/components/generic/alert/no-data-alert";
 import { HTTPErrorCode } from "~/lib/error";
-import { FinanceTable } from "./finance-table";
+import { TransactionTable } from "./transaction-table";
 
 import { Params } from "~/model/types";
 
-export const FinanceDataTable = () => {
+export const TransactionDataTable = () => {
   const [params, setParams] = React.useState<Params>({
     limit: 5,
     pageParam: 1,
   });
   const { data, isLoading, isError, refetch, error, isFetching } =
-    useFinanceInfiniteQuery({
+    useTransactionInfiniteQuery({
       limit: params.limit,
       pageParam: params.pageParam,
     });
@@ -30,7 +30,7 @@ export const FinanceDataTable = () => {
     if (error?.status === HTTPErrorCode.NOT_FOUND) {
       return (
         <NoDataAlert
-          message="No accounts found"
+          message="No transactions found"
           action={refetch}
           isLoading={isFetching}
         />
@@ -45,10 +45,10 @@ export const FinanceDataTable = () => {
     );
   }
   if (!data)
-    return <NoDataAlert message="No accounts found" action={refetch} />;
+    return <NoDataAlert message="No transactions found" action={refetch} />;
   const flatData = data?.pages?.flatMap((page) => page.content);
   return (
-    <FinanceTable
+    <TransactionTable
       data={flatData}
       totalPages={data?.pages[0].totalPages}
       params={params}

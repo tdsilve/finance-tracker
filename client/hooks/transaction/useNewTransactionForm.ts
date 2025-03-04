@@ -1,15 +1,15 @@
 "use client";
-import { NewFinanceSchema } from "~/model/schemas";
-import { NewFinance } from "~/model/types";
+import { NewTransactionSchema } from "~/model/schemas";
+import { NewTransaction } from "~/model/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { format } from "date-fns";
-import { useNewFinanceMutation } from "~/api/mutation/useNewFinanceMutation";
+import { useNewTransactionMutation } from "~/api/mutation/useNewTransactionMutation";
 
-export const useNewFinance = () => {
+export const useNewTransactionForm = () => {
   const form = useForm({
     mode: "onChange",
-    resolver: zodResolver(NewFinanceSchema),
+    resolver: zodResolver(NewTransactionSchema),
     defaultValues: {
       name: "",
       amount: "",
@@ -18,11 +18,11 @@ export const useNewFinance = () => {
       notes: "",
     },
   });
-  const { mutate, isPending } = useNewFinanceMutation({
+  const { mutate, isPending } = useNewTransactionMutation({
     onSuccess: () => form.reset(),
   });
 
-  function onSubmit(data: NewFinance) {
+  function onSubmit(data: NewTransaction) {
     mutate(data);
   }
   return {

@@ -1,16 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fta } from "../finance-tracker-api";
-import { Finance } from "~/model/types";
+import { Transaction } from "~/model/types";
 import toast from "react-hot-toast";
 import { MutationCallbacks } from "~/model/types";
 
-export const useDeleteFinanceMutation = ({ onSuccess }: MutationCallbacks) => {
+export const useDeleteTransactionMutation = ({
+  onSuccess,
+}: MutationCallbacks) => {
   const client = useQueryClient();
   return useMutation({
-    mutationFn: (ids: Finance["_id"][]) => fta.deleteFinance(ids),
+    mutationFn: (ids: Transaction["_id"][]) => fta.deleteTransaction(ids),
     onSuccess: () => {
       onSuccess?.();
-      toast.success("Finance deleted successfully");
+      toast.success("Transaction deleted successfully");
       client.invalidateQueries({ queryKey: ["infinite-finance"] });
       client.invalidateQueries({ queryKey: ["balance"] });
     },

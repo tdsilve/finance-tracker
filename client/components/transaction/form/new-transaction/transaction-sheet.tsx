@@ -1,26 +1,26 @@
 "use client";
 import React from "react";
 import { RiAddLine } from "react-icons/ri";
-import { useNewFinanceSheet } from "~/hooks/finance/useNewFinanceSheet";
+import { useNewTransactionSheet } from "~/hooks/transaction/useNewTrasanctionSheet";
 import { SheetProvider } from "~/components/generic/sheet/sheet-provider";
 import { Flex } from "~/components/generic/flex";
-import { NewFinanceForm } from "./new-finance-form";
+import { NewTransactionForm } from "./new-transaction-form";
 
-export const FinanceSheet = () => {
-  const { open, toggle } = useNewFinanceSheet();
+export const TransactionSheet = () => {
+  const { open, toggle } = useNewTransactionSheet();
   return (
     <SheetProvider
       open={open}
       setOpen={toggle}
-      title={"New Finance"}
+      title={"New Transaction"}
       description={"Create a new income or expense"}
       triggerLabel={
         <Flex items="center" gap={2}>
-          <RiAddLine /> Add Finance
+          <RiAddLine /> Add Transaction
         </Flex>
       }
     >
-      <NewFinanceForm />
+      <NewTransactionForm />
     </SheetProvider>
   );
 };

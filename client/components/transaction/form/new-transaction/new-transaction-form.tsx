@@ -1,17 +1,17 @@
 "use client";
 import { Form } from "~/components/ui/form";
-import { useNewFinance } from "~/hooks/finance/useNewFinanceForm";
+import { useNewTransactionForm } from "~/hooks/transaction/useNewTransactionForm";
 import { FormFieldWrapper } from "~/components/generic/form/FormFields";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 
-import { FinanceDatePicker } from "../FinanceDatePicker";
+import { TransactionDatePicker } from "../transaction-date-picker";
 import { Textarea } from "~/components/ui/textarea";
-import { SelectCategories } from "../SelectCategories";
-import { Finance } from "~/model/types";
+import { SelectCategories } from "../category-select";
+import { Transaction } from "~/model/types";
 
-export const NewFinanceForm = () => {
-  const { form, onSubmit, isPending } = useNewFinance();
+export const NewTransactionForm = () => {
+  const { form, onSubmit, isPending } = useNewTransactionForm();
 
   return (
     <Form {...form}>
@@ -42,7 +42,7 @@ export const NewFinanceForm = () => {
           label="Date"
           className="flex flex-col"
           renderInput={(field) => (
-            <FinanceDatePicker
+            <TransactionDatePicker
               date={new Date(field.value)}
               setDate={(val) => {
                 const date = !!val ? val.toISOString() : new Date().getTime();
@@ -57,7 +57,7 @@ export const NewFinanceForm = () => {
           label="Category"
           renderInput={(field) => (
             <SelectCategories
-              category={field.value as Finance["category"]}
+              category={field.value as Transaction["category"]}
               setCategory={field.onChange}
             />
           )}
@@ -76,7 +76,7 @@ export const NewFinanceForm = () => {
         />
 
         <Button type="submit" loading={isPending} disabled={isPending}>
-          Create Finance
+          Create Transaction
         </Button>
       </form>
     </Form>

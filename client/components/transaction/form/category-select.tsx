@@ -6,14 +6,14 @@ import {
   SelectItem,
 } from "~/components/ui/select";
 import React from "react";
-import { Finance } from "~/model/types";
+import { Transaction } from "~/model/types";
 
 type SelectCategoriesProps = {
-  category: Finance["category"];
-  setCategory: (val: Finance["category"]) => void;
+  category: Transaction["category"];
+  setCategory: (val: Transaction["category"]) => void;
 };
 
-const defaultCategories: Finance["category"][] = ["Income", "Expense"];
+const defaultCategories: Transaction["category"][] = ["Income", "Expense"];
 
 export const SelectCategories = ({
   category,

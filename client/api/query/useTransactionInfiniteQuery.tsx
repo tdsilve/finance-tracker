@@ -4,7 +4,7 @@ import { useInfiniteQuery, keepPreviousData } from "@tanstack/react-query";
 import { fta } from "../finance-tracker-api";
 import ms from "ms";
 
-type UseFinanceInfiniteQueryProps = {
+type UseTransactionInfiniteQueryProps = {
   limit?: number;
   fieldsSearch?: string;
   enabeled?: boolean;
@@ -13,17 +13,17 @@ type UseFinanceInfiniteQueryProps = {
   pageParam?: number;
 };
 
-export const useFinanceInfiniteQuery = ({
+export const useTransactionInfiniteQuery = ({
   limit = 10,
   fieldsSearch = "",
   enabeled = true,
   sorted = true,
   pageParam = 1,
-}: UseFinanceInfiniteQueryProps) => {
+}: UseTransactionInfiniteQueryProps) => {
   const query = useInfiniteQuery({
     queryKey: ["infinite-finance", { fieldsSearch }, { limit }, { pageParam }],
     queryFn: ({ pageParam }) =>
-      fta.getFinance(pageParam, limit, fieldsSearch, sorted),
+      fta.getTransaction(pageParam, limit, fieldsSearch, sorted),
     initialPageParam: pageParam,
     getNextPageParam: (lastPage, pages) =>
       !lastPage.last ? lastPage.currentPage + 1 : undefined,

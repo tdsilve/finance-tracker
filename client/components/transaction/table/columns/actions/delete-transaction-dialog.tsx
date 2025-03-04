@@ -10,27 +10,26 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
-
-import { useDeleteFinanceMutation } from "~/api/mutation/useDeleteFinanceMutation";
-import { Finance } from "~/model/types";
+import { useDeleteTransactionMutation } from "~/api/mutation/useDeleteTransactionMutation";
+import { Transaction } from "~/model/types";
 
 type DeleteAmountDialogProps = {
   handleActionsClose: () => void;
-  finance: Finance;
+  transaction: Transaction;
 };
 
-export const DeleteFinanceDialog = React.forwardRef<
+export const DeleteTransactionDialog = React.forwardRef<
   HTMLDivElement,
   DeleteAmountDialogProps
->(({ finance, handleActionsClose }, ref) => {
+>(({ transaction, handleActionsClose }, ref) => {
   const [open, setOpen] = React.useState(false);
 
-  const deleteAccount = useDeleteFinanceMutation({
+  const deleteAccount = useDeleteTransactionMutation({
     onSuccess: () => handleActionsClose(),
   });
 
   const handleDeleteAndClose = () => {
-    deleteAccount.mutate([finance._id]);
+    deleteAccount.mutate([transaction._id]);
     handleClose();
   };
   const handleClose = () => {
@@ -47,11 +46,11 @@ export const DeleteFinanceDialog = React.forwardRef<
       </DialogTrigger>
       <DialogContent ref={ref} className="bg-white lg:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Delete account</DialogTitle>
+          <DialogTitle>Delete transaction</DialogTitle>
           <p>
-            Are you sure you want to delete the account{" "}
-            <span className="font-semibold">{finance.name}?</span> This action
-            cannot be undone.{" "}
+            Are you sure you want to delete the transaction{" "}
+            <span className="font-semibold">{transaction.name}?</span> This
+            action cannot be undone.{" "}
           </p>
         </DialogHeader>
         <Button variant="destructive" onClick={handleDeleteAndClose}>

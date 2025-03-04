@@ -53,7 +53,7 @@ export const NewAccountSchema = AccountSchema.pick({
 
 export const EditAccountSchema = AccountSchema;
 
-export const FinanceSchema = z.object({
+export const TransactionSchema = z.object({
   _id: z.string(),
   name: z.string().trim().min(1, { message: "Name is required" }),
   amount: z
@@ -66,7 +66,7 @@ export const FinanceSchema = z.object({
   category: z.enum(["Income", "Expense"]),
 });
 
-export const NewFinanceSchema = FinanceSchema.pick({
+export const NewTransactionSchema = TransactionSchema.pick({
   name: true,
   amount: true,
   date: true,
@@ -74,4 +74,4 @@ export const NewFinanceSchema = FinanceSchema.pick({
   category: true,
 });
 
-export const EditFinanceSchema = FinanceSchema;
+export const EditTransactionSchema = TransactionSchema;

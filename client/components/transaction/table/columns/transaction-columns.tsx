@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
-import { Finance } from "~/model/types";
+import { Transaction } from "~/model/types";
 import { ColumnDate } from "./column-date";
 import { ColumnCategory } from "./column-category";
 import { Checkbox } from "~/components/ui/checkbox";
@@ -9,7 +9,7 @@ import { DataTableColumnSorted } from "~/components/generic/table/data-table-col
 import { getStringOrNumberToDate } from "~/lib/date";
 import { ColumnActions } from "./column-actions";
 
-export const columns: ColumnDef<Finance>[] = [
+export const columns: ColumnDef<Transaction>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -127,8 +127,8 @@ export const columns: ColumnDef<Finance>[] = [
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
-      const finance = row.original;
-      return <ColumnActions finance={finance} />;
+      const Transaction = row.original;
+      return <ColumnActions transaction={Transaction} />;
     },
   },
 ];

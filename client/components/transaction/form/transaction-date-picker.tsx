@@ -7,7 +7,7 @@ type FinanceDatePickerProps = {
   setDate: (val: Date | undefined) => void;
 };
 
-export const FinanceDatePicker = ({
+export const TransactionDatePicker = ({
   date,
   setDate,
 }: FinanceDatePickerProps) => {

@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-type NewFinanceSheet = {
+type NewTransactionSheet = {
   open: boolean;
   toggle: () => void;
 };
 
-export const useNewFinanceSheet = create<NewFinanceSheet>((set) => ({
+export const useNewTransactionSheet = create<NewTransactionSheet>((set) => ({
   open: false,
   toggle: () => set((state) => ({ open: !state.open })),
 }));

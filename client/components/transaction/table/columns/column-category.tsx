@@ -1,10 +1,10 @@
 import React from "react";
-import { Finance } from "~/model/types";
+import { Transaction } from "~/model/types";
 
 export const ColumnCategory = ({
   category,
 }: {
-  category: Finance["category"];
+  category: Transaction["category"];
 }) => {
   const icon = category === "Income" ? "💰" : "💸";
   return (

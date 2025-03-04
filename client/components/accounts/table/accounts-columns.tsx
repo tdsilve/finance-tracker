@@ -5,7 +5,7 @@ import React from "react";
 import { Account } from "~/model/types";
 import { Checkbox } from "~/components/ui/checkbox";
 
-import { AccountsActions } from "./columns/column-actions";
+import { ColumnActions } from "./columns/column-actions";
 import { ColumnStatus } from "./columns/column-status";
 import { DataTableColumnSorted } from "~/components/generic/table/data-table-column-sorted";
 
@@ -80,7 +80,7 @@ export const columns: ColumnDef<Account>[] = [
     cell: ({ row }) => {
       const account = row.original;
 
-      return <AccountsActions id={account._id} name={account.name} />;
+      return <ColumnActions id={account._id} name={account.name} />;
     },
   },
 ];
