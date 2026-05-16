@@ -1,41 +1,42 @@
-# Personal Finance Tracker
+# Finance Tracker
 
-## Main goal
-The goal of this project is to build a Personal Finance Tracker that helps users manage their income and expenses while allowing me, as a frontend developer, to gain hands-on experience with backend development, including authentication, API design, and database management.
+Bun workspace monorepo for a personal finance application.
 
-## Updating this project:
+## Structure
 
-    -> Server:
-        - Add typescript
-        - Update node
-        - Add login/auth 
+- `apps/client` - Next.js frontend
+- `apps/server` - lightweight Hono API running on Bun
+- `packages/shared` - shared TypeScript utilities and types
 
-    -> Front:
-        - Change React to Next
-        - Add Typescript
-        - Improve code file system
-        - Add login/auth
+## Project Characteristics
 
-This application helps to manage the income and expenses of the user. The transactions are saved on the backend using a HTTP restful API. 
+### Client
 
-## Info
+- Built with Next.js App Router.
+- Uses React Server Components by default.
+- Intended for dashboards, transactions, budgets, reports, and user-facing finance workflows.
+- Reads server data through HTTP APIs exposed by the Hono server.
+- Runs locally on `http://localhost:3000`.
 
-![image](https://user-images.githubusercontent.com/92559600/161407445-943b8dc1-e45d-4106-b7fb-73c83b14a2b8.png)
+### Server
 
+- Built with Hono and executed with Bun.
+- Exposes a lightweight HTTP API for the client.
+- Includes health checks, CORS, request logging, and centralized error handling.
+- Uses shared TypeScript utilities from `packages/shared`.
+- Runs locally on `http://localhost:3001`.
 
-- Fronend: 
-    - Nextjs 15
-    - Node 18
+## Commands
 
-- Backend: 
-    - ExpressJS
-    - MongoDB (Mongoose)
+```sh
+bun install
+bun run dev:server
+bun run dev:client
+bun run check
+```
 
- ## How to run this APP?
- 1. On client folder, run `yarn install` to install all dependencies and `yarn dev` to start the client.
- 2. On server folder, run `yarn install` to install all dependencies and `yarn start` to start the server.
+## Architecture Notes
 
- ## About the API
- ### API Reference
- The Personal Finance Tracker API is organized around REST. It has a resource-oriented URLs, accept form request body, return JSON response, and uses standard HTTP response to indicate the success or failure of an API request.
+Deployable applications live under `apps/*`, while reusable libraries live under `packages/*`. This is the common monorepo convention used by many Turborepo/Nx-style projects.
 
+A CLI should only be added when the project needs one, for example data imports, migrations, scheduled jobs, or admin scripts. If added later, `apps/cli` would be the right place.

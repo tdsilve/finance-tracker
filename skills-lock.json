@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "skills": {
+    "bun": {
+      "source": "bun.sh",
+      "sourceType": "well-known",
+      "computedHash": "0360e16797cc5cc2578b3ad915a169fecfe2ba7ca07f96885a77f190347bffcb"
+    },
+    "clerk-nextjs-patterns": {
+      "source": "clerk/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frameworks/clerk-nextjs-patterns/SKILL.md",
+      "computedHash": "6c5b897dcef62550436b24b3cc9087658dd97c9ca88272ab48a5c094276d72fb"
+    },
+    "hono": {
+      "source": "yusukebe/hono-skill",
+      "sourceType": "github",
+      "skillPath": "skills/hono/SKILL.md",
+      "computedHash": "220e5e1b12bbaeec49ec362b6e2262d77632d0536e9758bba9acbbc323fef990"
+    },
+    "nextjs-best-practices": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/nextjs-best-practices/SKILL.md",
+      "computedHash": "5344522f15f544513456e77b858377368f24e680732af5efeb5a67bbab021bc1"
+    }
+  }
+}

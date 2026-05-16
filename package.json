@@ -1,0 +1,23 @@
+{
+  "name": "finance-tracker",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "bun --filter '*' dev",
+    "dev:client": "bun --filter @finance-tracker/client dev",
+    "dev:server": "bun --filter @finance-tracker/server dev",
+    "start:server": "bun --filter @finance-tracker/server start",
+    "test": "bun test --workspaces",
+    "typecheck": "bunx tsc -b",
+    "check": "bun run typecheck && bun run test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-types": "latest",
+    "typescript": "^5.9.3"
+  }
+}

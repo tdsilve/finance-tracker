@@ -1,0 +1,18 @@
+{
+  "name": "@finance-tracker/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc -b"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-types": "latest",
+    "typescript": "^5.9.3"
+  }
+}

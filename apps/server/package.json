@@ -1,0 +1,21 @@
+{
+  "name": "@finance-tracker/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "test": "bun test",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "@finance-tracker/shared": "workspace:*",
+    "hono": "^4.10.7"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-types": "latest",
+    "typescript": "^5.9.3"
+  }
+}
