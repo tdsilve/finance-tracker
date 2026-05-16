@@ -18,6 +18,11 @@
         "name": "next"
       }
     ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,

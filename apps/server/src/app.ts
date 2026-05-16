@@ -1,9 +1,17 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import { buildHealthResponse } from "@finance-tracker/shared";
+import type { HealthResponse } from "@finance-tracker/shared";
 
 export const app = new Hono();
+
+function build_health_response(name: string): HealthResponse {
+  return {
+    name,
+    ok: true,
+    timestamp: new Date().toISOString()
+  };
+}
 
 app.use("*", logger());
 app.use(
@@ -14,7 +22,7 @@ app.use(
 );
 
 app.get("/", (c) => c.json({ message: "Finance Tracker API" }));
-app.get("/health", (c) => c.json(buildHealthResponse("finance-tracker-server")));
+app.get("/health", (c) => c.json(build_health_response("finance-tracker-server")));
 
 app.notFound((c) => c.json({ message: "Not Found" }, 404));
 
